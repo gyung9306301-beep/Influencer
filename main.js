@@ -156,7 +156,6 @@ function renderTable() {
 
   tableBody.innerHTML = pageRows.map(row => `
     <tr>
-      <td>${renderCell('A', row.A)}</td>
       <td>${renderCell('B', row.B)}</td>
       <td>${renderCell('D', row.D)}</td>
       <td>${renderCell('E', row.E)}</td>
