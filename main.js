@@ -77,7 +77,8 @@ async function fetchSheetData() {
 
     const headerNames = cols.map((c, i) => c.label || String.fromCharCode(65 + i));
 
-    state.rawRows = rows.map((row, idx) => {
+    // Skip the first data row using .slice(1)
+    state.rawRows = rows.slice(1).map((row, idx) => {
       const cells = row.c || [];
       const getValue = (i) => {
         const cell = cells[i];
@@ -156,6 +157,7 @@ function renderTable() {
 
   tableBody.innerHTML = pageRows.map(row => `
     <tr>
+      <td>${renderCell('A', row.A)}</td>
       <td>${renderCell('B', row.B)}</td>
       <td>${renderCell('D', row.D)}</td>
       <td>${renderCell('E', row.E)}</td>
