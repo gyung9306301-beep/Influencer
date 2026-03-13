@@ -1,14 +1,91 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ko">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+  <title>TikTok Influencer Rankings</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+  <div class="wrap">
+    <section class="hero">
+      <div class="eyebrow">Live Google Sheet Dashboard</div>
+      <h1>
+        <span class="cyan">TikTok Influencer</span>
+        <span class="white">Ranking</span>
+        <span class="green">List</span>
+      </h1>
+      <p class="sub">
+        Google Sheets의 <strong>Influencer list</strong> 시트를 실시간으로 불러와 보여주는 웹페이지입니다.
+        A, B, D, E열만 표에 표시하고, C열은 상단 전용 필터로 분리했습니다.
+        시트가 업데이트되면 웹페이지도 다시 불러올 때 최신 데이터가 반영됩니다.
+      </p>
+
+      <div class="toolbar">
+        <div class="field">
+          <label for="searchInput">Search</label>
+          <input id="searchInput" class="input" type="text" placeholder="A / B / D / E 열 기준 검색" />
+        </div>
+
+        <div class="field">
+          <label for="categoryFilter">C Column Filter</label>
+          <select id="categoryFilter" class="select">
+            <option value="">전체</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="pageSize">Rows Per Page</label>
+          <select id="pageSize" class="select">
+            <option value="10">10</option>
+            <option value="20" selected>20</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select>
+        </div>
+
+        <button id="refreshBtn" class="btn">새로고침</button>
+        <button id="resetBtn" class="btn">필터 초기화</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="meta">
+        <div class="meta-left">
+          <div class="pill">표시 열: A / B / D / E</div>
+          <div class="pill">상단 필터: C</div>
+          <div class="pill" id="countPill">0 rows</div>
+        </div>
+        <div class="pill" id="updatedPill">Updated: -</div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th data-key="A">A</th>
+              <th data-key="B">B</th>
+              <th data-key="D">D</th>
+              <th data-key="E">E</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <tr><td colspan="4" class="loading">데이터를 불러오는 중입니다...</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="meta" style="margin-top:14px; margin-bottom:0;">
+        <div class="meta-left">
+          <button id="prevBtn" class="btn">이전</button>
+          <button id="nextBtn" class="btn">다음</button>
+          <div class="pill" id="pagePill">Page 1 / 1</div>
+        </div>
+        <div class="status" id="statusText">준비 중...</div>
+      </div>
+    </section>
+  </div>
+
+  <script src="main.js"></script>
 </body>
 </html>

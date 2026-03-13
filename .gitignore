@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.vscode/
+firebase-debug.log
+.idx/
+package-lock.json
