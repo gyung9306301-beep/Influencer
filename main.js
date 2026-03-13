@@ -32,7 +32,7 @@ const state = {
   sortKey: 'A',
   sortDir: 'asc',
   page: 1,
-  pageSize: 20,
+  pageSize: 11,
   lastLoadedAt: null
 };
 
