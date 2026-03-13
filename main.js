@@ -280,8 +280,6 @@ $('resetBtn').addEventListener('click', () => {
   applyFilters();
 });
 
-$('refreshBtn').addEventListener('click', fetchSheetData);
-
 fetchSheetData();
 
 // 선택: 5분마다 자동 갱신
