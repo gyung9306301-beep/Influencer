@@ -15,11 +15,6 @@
         <span class="white">Ranking</span>
         <span class="green">List</span>
       </h1>
-      <p class="sub">
-        Google Sheets의 <strong>Influencer list</strong> 시트를 실시간으로 불러와 보여주는 웹페이지입니다.
-        A, B, D, E열만 표에 표시하고, C열은 상단 전용 필터로 분리했습니다.
-        시트가 업데이트되면 웹페이지도 다시 불러올 때 최신 데이터가 반영됩니다.
-      </p>
 
       <div class="toolbar">
         <div class="field">
@@ -52,8 +47,6 @@
     <section class="panel">
       <div class="meta">
         <div class="meta-left">
-          <div class="pill">표시 열: A / B / D / E</div>
-          <div class="pill">상단 필터: C</div>
           <div class="pill" id="countPill">0 rows</div>
         </div>
         <div class="pill" id="updatedPill">Updated: -</div>
@@ -63,10 +56,10 @@
         <table>
           <thead>
             <tr>
-              <th data-key="A">A</th>
-              <th data-key="B">B</th>
-              <th data-key="D">D</th>
-              <th data-key="E">E</th>
+              <th data-key="A">Rank</th>
+              <th data-key="B">닉네임</th>
+              <th data-key="D">팔로워수</th>
+              <th data-key="E">등급</th>
             </tr>
           </thead>
           <tbody id="tableBody">
