@@ -238,6 +238,30 @@ a.link {
 
 a.link:hover { text-decoration: underline; }
 
+.link-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 84px;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(55, 217, 255, 0.28);
+  background: linear-gradient(135deg, rgba(55, 217, 255, 0.16), rgba(39, 228, 108, 0.14));
+  color: var(--cyan-soft);
+  text-decoration: none;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+  transition: 0.2s ease;
+}
+
+.link-btn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(55, 217, 255, 0.5);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
+}
+
 .status {
   margin-top: 12px;
   color: var(--muted);

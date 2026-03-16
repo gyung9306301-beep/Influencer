@@ -17,13 +17,14 @@ const CONFIG = {
   REFRESH_CACHE_BUSTER: true
 };
 
-// A, B, D, E만 표시 / C는 별도 필터 전용
+// A, B, C, D, E, F 표시
 const columnMap = {
   A: 0,
   B: 1,
   C: 2,
   D: 3,
-  E: 4
+  E: 4,
+  F: 5
 };
 
 const state = {
@@ -32,7 +33,7 @@ const state = {
   sortKey: 'A',
   sortDir: 'asc',
   page: 1,
-  pageSize: 11,
+  pageSize: 20,
   lastLoadedAt: null
 };
 
@@ -61,7 +62,7 @@ function buildSheetUrl() {
 
 async function fetchSheetData() {
   setStatus('Google Sheets 데이터를 불러오는 중...');
-  tableBody.innerHTML = `<tr><td colspan="4" class="loading">데이터를 불러오는 중입니다...</td></tr>`;
+  tableBody.innerHTML = `<tr><td colspan="6" class="loading">데이터를 불러오는 중입니다...</td></tr>`;
 
   try {
     const res = await fetch(buildSheetUrl());
@@ -77,8 +78,7 @@ async function fetchSheetData() {
 
     const headerNames = cols.map((c, i) => c.label || String.fromCharCode(65 + i));
 
-    // Skip the first data row using .slice(1)
-    state.rawRows = rows.slice(1).map((row, idx) => {
+    state.rawRows = rows.map((row, idx) => {
       const cells = row.c || [];
       const getValue = (i) => {
         const cell = cells[i];
@@ -95,6 +95,7 @@ async function fetchSheetData() {
         C: getValue(columnMap.C),
         D: getValue(columnMap.D),
         E: getValue(columnMap.E),
+        F: getValue(columnMap.F),
         _headers: headerNames
       };
     }).filter(item => Object.values(item).some(v => typeof v === 'string' && v !== ''));
@@ -106,7 +107,7 @@ async function fetchSheetData() {
     setStatus('최신 시트 데이터를 불러왔습니다.');
   } catch (error) {
     console.error(error);
-    tableBody.innerHTML = `<tr><td colspan="4" class="empty">데이터를 불러오지 못했습니다.<br>시트가 공개 상태인지, 시트명이 정확히 <strong>Influencer list</strong>인지 확인해주세요.</td></tr>`;
+    tableBody.innerHTML = `<tr><td colspan="6" class="empty">데이터를 불러오지 못했습니다.<br>시트가 공개 상태인지, 시트명이 정확히 <strong>Influencer list</strong>인지 확인해주세요.</td></tr>`;
     setStatus(`오류: ${error.message}`);
   }
 }
@@ -130,7 +131,7 @@ function applyFilters() {
   }
 
   if (keyword) {
-    rows = rows.filter(r => [r.A, r.B, r.D, r.E].some(v => String(v).toLowerCase().includes(keyword)));
+    rows = rows.filter(r => [r.A, r.B, r.C, r.D, r.E, r.F].some(v => String(v).toLowerCase().includes(keyword)));
   }
 
   rows.sort((a, b) => compareValues(a[state.sortKey], b[state.sortKey], state.sortDir));
@@ -151,16 +152,18 @@ function renderTable() {
   pagePill.textContent = `Page ${state.page} / ${totalPages}`;
 
   if (!pageRows.length) {
-    tableBody.innerHTML = `<tr><td colspan="4" class="empty">조건에 맞는 데이터가 없습니다.</td></tr>`;
+    tableBody.innerHTML = `<tr><td colspan="6" class="empty">조건에 맞는 데이터가 없습니다.</td></tr>`;
     return;
   }
 
-  tableBody.innerHTML = pageRows.map(row => `
+  tableBody.innerHTML = pageRows.map((row, idx) => `
     <tr>
       <td>${renderCell('A', row.A)}</td>
       <td>${renderCell('B', row.B)}</td>
+      <td>${renderCell('C', row.C)}</td>
       <td>${renderCell('D', row.D)}</td>
       <td>${renderCell('E', row.E)}</td>
+      <td>${renderCell('F', row.F)}</td>
     </tr>
   `).join('');
 }
@@ -170,6 +173,11 @@ function renderCell(key, value) {
 
   if (key === 'A' && /^\d+$/.test(String(value))) {
     return `<span class="rank">${escapeHtml(value)}</span>`;
+  }
+
+  if (key === 'F') {
+    const url = isUrl(value) ? normalizeUrl(value) : `https://${String(value).trim()}`;
+    return `<a class="link-btn" href="${escapeAttr(url)}" target="_blank" rel="noopener noreferrer">Link</a>`;
   }
 
   if (isUrl(value)) {
@@ -280,6 +288,8 @@ $('resetBtn').addEventListener('click', () => {
   state.sortDir = 'asc';
   applyFilters();
 });
+
+$('refreshBtn').addEventListener('click', fetchSheetData);
 
 fetchSheetData();
 

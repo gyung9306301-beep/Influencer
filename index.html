@@ -9,6 +9,7 @@
 <body>
   <div class="wrap">
     <section class="hero">
+      <div class="eyebrow">Live Google Sheet Dashboard</div>
       <h1>
         <span class="cyan">TikTok Influencer</span>
         <span class="white">Ranking</span>
@@ -22,19 +23,23 @@
         </div>
 
         <div class="field">
-          <label for="categoryFilter">카테고리</label>
+          <label for="categoryFilter">C Column Filter</label>
           <select id="categoryFilter" class="select">
             <option value="">전체</option>
           </select>
         </div>
 
-        <div class="field" style="display: none;">
+        <div class="field">
           <label for="pageSize">Rows Per Page</label>
           <select id="pageSize" class="select">
-            <option value="11" selected>11</option>
+            <option value="10">10</option>
+            <option value="20" selected>20</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
           </select>
         </div>
 
+        <button id="refreshBtn" class="btn">새로고침</button>
         <button id="resetBtn" class="btn">필터 초기화</button>
       </div>
     </section>
@@ -53,12 +58,14 @@
             <tr>
               <th data-key="A">Rank</th>
               <th data-key="B">닉네임</th>
+              <th data-key="C">카테고리</th>
               <th data-key="D">팔로워수</th>
               <th data-key="E">등급</th>
+              <th data-key="F">링크</th>
             </tr>
           </thead>
           <tbody id="tableBody">
-            <tr><td colspan="4" class="loading">데이터를 불러오는 중입니다...</td></tr>
+            <tr><td colspan="6" class="loading">데이터를 불러오는 중입니다...</td></tr>
           </tbody>
         </table>
       </div>
