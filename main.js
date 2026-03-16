@@ -33,7 +33,7 @@ const state = {
   sortKey: 'A',
   sortDir: 'asc',
   page: 1,
-  pageSize: 20,
+  pageSize: 10,
   lastLoadedAt: null
 };
 
@@ -127,7 +127,7 @@ function populateCategoryFilter() {
 function applyFilters() {
   const keyword = searchInput.value.trim().toLowerCase();
   const category = categoryFilter.value;
-  state.pageSize = Number(pageSize.value || 20);
+  state.pageSize = Number(pageSize.value || 10);
 
   let rows = [...state.rawRows];
 
@@ -287,7 +287,7 @@ $('nextBtn').addEventListener('click', () => {
 $('resetBtn').addEventListener('click', () => {
   searchInput.value = '';
   categoryFilter.value = '';
-  pageSize.value = '20';
+  pageSize.value = '10';
   state.page = 1;
   state.sortKey = 'A';
   state.sortDir = 'asc';
@@ -300,3 +300,13 @@ fetchSheetData();
 
 // 선택: 5분마다 자동 갱신
 setInterval(fetchSheetData, 5 * 60 * 1000);
+
+/**
+ * Disqus Comments
+ */
+(function() {
+  const d = document, s = d.createElement('script');
+  s.src = 'https://thai-influencer.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();
