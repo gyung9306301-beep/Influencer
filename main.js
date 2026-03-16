@@ -176,7 +176,7 @@ function renderTable() {
 function renderCell(key, value) {
   if (!value) return '-';
 
-  if (key === 'A' && /^\d+$/.test(String(value))) {
+  if (key === 'A') {
     return `<span class="rank">${escapeHtml(value)}</span>`;
   }
 
