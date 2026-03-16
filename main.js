@@ -89,7 +89,7 @@ async function fetchSheetData() {
       };
 
       return {
-        _idx: idx + 1,
+        _sheetIdx: idx + 2, // Sheet row number (Row 1 is header, Row 2 is idx 0)
         A: getValue(columnMap.A),
         B: getValue(columnMap.B),
         C: getValue(columnMap.C),
@@ -98,7 +98,12 @@ async function fetchSheetData() {
         F: getValue(columnMap.F),
         _headers: headerNames
       };
-    }).filter(item => Object.values(item).some(v => typeof v === 'string' && v !== ''));
+    }).filter(item => {
+      // Exclude sheet row 2 and empty rows
+      const isNotSheetRow2 = item._sheetIdx !== 2;
+      const isNotEmpty = Object.values(item).some(v => typeof v === 'string' && v !== '');
+      return isNotSheetRow2 && isNotEmpty;
+    });
 
     state.lastLoadedAt = new Date();
     populateCategoryFilter();
