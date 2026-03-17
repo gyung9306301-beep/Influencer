@@ -161,16 +161,19 @@ function renderTable() {
     return;
   }
 
-  tableBody.innerHTML = pageRows.map((row, idx) => `
-    <tr>
-      <td>${renderCell('A', row.A)}</td>
-      <td>${renderCell('B', row.B)}</td>
-      <td>${renderCell('C', row.C)}</td>
-      <td>${renderCell('D', row.D)}</td>
-      <td>${renderCell('E', row.E)}</td>
-      <td>${renderCell('F', row.F)}</td>
-    </tr>
-  `).join('');
+  tableBody.innerHTML = pageRows.map((row, idx) => {
+    const currentRank = start + idx + 1;
+    return `
+      <tr>
+        <td>${renderCell('A', currentRank)}</td>
+        <td>${renderCell('B', row.B)}</td>
+        <td>${renderCell('C', row.C)}</td>
+        <td>${renderCell('D', row.D)}</td>
+        <td>${renderCell('E', row.E)}</td>
+        <td>${renderCell('F', row.F)}</td>
+      </tr>
+    `;
+  }).join('');
 }
 
 function renderCell(key, value) {

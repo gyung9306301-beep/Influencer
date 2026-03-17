@@ -6,6 +6,7 @@ A real-time dashboard that fetches and displays TikTok influencer rankings from 
 ## Features & Implementation
 - **Google Sheets Integration:** Fetches data via the `gviz` API for real-time updates.
 - **Dynamic Filtering:** Supports keyword searches across multiple columns (A, B, D, E) and category-specific filtering based on Column C.
+- **Dynamic Ranking:** Automatically re-calculates the rank (1, 2, 3...) based on the currently filtered and sorted results, ensuring a fresh ranking for any view.
 - **Responsive Design:** Utilizes modern CSS (Baseline) features including radial gradients, backdrop filters, and container-aware layouts.
 - **Performance:** Implements client-side pagination and sorting to handle large datasets efficiently.
 - **Interactive UI:** Includes a live refresh button, page size selection, and sorting by column headers.
