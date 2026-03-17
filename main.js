@@ -319,6 +319,39 @@ fetchSheetData();
 setInterval(fetchSheetData, 5 * 60 * 1000);
 
 /**
+ * Visitor Counter
+ */
+(function initVisitorCounter() {
+  const todayKey = 'visit_today';
+  const totalKey = 'visit_total';
+  const dateKey = 'visit_date';
+
+  const todayEl = $('todayCount');
+  const totalEl = $('totalCount');
+  if (!todayEl || !totalEl) return;
+
+  const todayStr = new Date().toISOString().slice(0, 10);
+  const savedDate = localStorage.getItem(dateKey);
+
+  let todayCount = parseInt(localStorage.getItem(todayKey) || '0', 10);
+  let totalCount = parseInt(localStorage.getItem(totalKey) || '0', 10);
+
+  if (savedDate !== todayStr) {
+    todayCount = 0;
+    localStorage.setItem(dateKey, todayStr);
+  }
+
+  todayCount += 1;
+  totalCount += 1;
+
+  localStorage.setItem(todayKey, todayCount);
+  localStorage.setItem(totalKey, totalCount);
+
+  todayEl.textContent = todayCount;
+  totalEl.textContent = totalCount;
+})();
+
+/**
  * Disqus Comments
  */
 (function() {
