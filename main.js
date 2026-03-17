@@ -1,31 +1,25 @@
-/*
-  =============================
-  반드시 수정해야 하는 부분
-  =============================
-  1) 아래 SHEET_ID 확인
-  2) Google Sheet를 웹에 공개(Publish 또는 Anyone with the link can view)해야 합니다.
-  3) 시트 이름이 정확히 "Influencer list" 이어야 합니다.
-
-  현재 사용자 링크 기준 SHEET_ID:
-  1WULcOtmX-UoH5huTAr6umW0rs27QeIYrEs8eDszT-JA
-*/
-
 const CONFIG = {
   SHEET_ID: '1WULcOtmX-UoH5huTAr6umW0rs27QeIYrEs8eDszT-JA',
   SHEET_NAME: 'Influencer list',
   HEADER_ROW: 1,
-  REFRESH_CACHE_BUSTER: true
+  REFRESH_CACHE_BUSTER: true,
+  PREMIUM_PREVIEW_DEFAULT: false
 };
 
-// A, B, C, D, E, F 표시
 const columnMap = {
   A: 0,
   B: 1,
   C: 2,
   D: 3,
   E: 4,
-  F: 5
+  F: 5,
+  G: 6,
+  H: 7,
+  I: 8,
+  J: 9
 };
+
+const premiumHeaders = ['G', 'H', 'I', 'J'];
 
 const state = {
   rawRows: [],
@@ -33,8 +27,9 @@ const state = {
   sortKey: 'A',
   sortDir: 'asc',
   page: 1,
-  pageSize: 10,
-  lastLoadedAt: null
+  pageSize: 20,
+  lastLoadedAt: null,
+  premiumPreview: CONFIG.PREMIUM_PREVIEW_DEFAULT
 };
 
 const $ = (id) => document.getElementById(id);
@@ -46,6 +41,9 @@ const statusText = $('statusText');
 const updatedPill = $('updatedPill');
 const countPill = $('countPill');
 const pagePill = $('pagePill');
+const planPill = $('planPill');
+const lockChip = $('lockChip');
+const previewPremiumBtn = $('previewPremiumBtn');
 
 function buildSheetUrl() {
   const base = `https://docs.google.com/spreadsheets/d/${CONFIG.SHEET_ID}/gviz/tq`;
@@ -62,21 +60,16 @@ function buildSheetUrl() {
 
 async function fetchSheetData() {
   setStatus('Google Sheets 데이터를 불러오는 중...');
-  tableBody.innerHTML = `<tr><td colspan="6" class="loading">데이터를 불러오는 중입니다...</td></tr>`;
+  tableBody.innerHTML = `<tr><td colspan="10" class="loading">데이터를 불러오는 중입니다...</td></tr>`;
 
   try {
     const res = await fetch(buildSheetUrl());
     const text = await res.text();
-
-    // gviz 응답은 JS 래퍼 형태이므로 JSON 부분만 추출
     const jsonText = text.match(/google\.visualization\.Query\.setResponse\((.*)\);?$/s)?.[1];
     if (!jsonText) throw new Error('Google Sheets 응답을 해석할 수 없습니다.');
 
     const json = JSON.parse(jsonText);
     const rows = json.table.rows || [];
-    const cols = json.table.cols || [];
-
-    const headerNames = cols.map((c, i) => c.label || String.fromCharCode(65 + i));
 
     state.rawRows = rows.map((row, idx) => {
       const cells = row.c || [];
@@ -89,21 +82,19 @@ async function fetchSheetData() {
       };
 
       return {
-        _sheetIdx: idx + 2, // Sheet row number (Row 1 is header, Row 2 is idx 0)
+        _idx: idx + 1,
         A: getValue(columnMap.A),
         B: getValue(columnMap.B),
         C: getValue(columnMap.C),
         D: getValue(columnMap.D),
         E: getValue(columnMap.E),
         F: getValue(columnMap.F),
-        _headers: headerNames
+        G: getValue(columnMap.G),
+        H: getValue(columnMap.H),
+        I: getValue(columnMap.I),
+        J: getValue(columnMap.J)
       };
-    }).filter(item => {
-      // Exclude sheet row 2 and empty rows
-      const isNotSheetRow2 = item._sheetIdx !== 2;
-      const isNotEmpty = Object.values(item).some(v => typeof v === 'string' && v !== '');
-      return isNotSheetRow2 && isNotEmpty;
-    });
+    }).filter(item => [item.B, item.C, item.D, item.E, item.F].some(v => String(v).trim() !== ''));
 
     state.lastLoadedAt = new Date();
     populateCategoryFilter();
@@ -112,7 +103,7 @@ async function fetchSheetData() {
     setStatus('최신 시트 데이터를 불러왔습니다.');
   } catch (error) {
     console.error(error);
-    tableBody.innerHTML = `<tr><td colspan="6" class="empty">데이터를 불러오지 못했습니다.<br>시트가 공개 상태인지, 시트명이 정확히 <strong>Influencer list</strong>인지 확인해주세요.</td></tr>`;
+    tableBody.innerHTML = `<tr><td colspan="10" class="empty">데이터를 불러오지 못했습니다.<br>시트가 공개 상태인지, 시트명이 정확히 <strong>Influencer list</strong>인지 확인해주세요.</td></tr>`;
     setStatus(`오류: ${error.message}`);
   }
 }
@@ -127,7 +118,7 @@ function populateCategoryFilter() {
 function applyFilters() {
   const keyword = searchInput.value.trim().toLowerCase();
   const category = categoryFilter.value;
-  state.pageSize = Number(pageSize.value || 10);
+  state.pageSize = Number(pageSize.value || 20);
 
   let rows = [...state.rawRows];
 
@@ -136,15 +127,20 @@ function applyFilters() {
   }
 
   if (keyword) {
-    rows = rows.filter(r => [r.A, r.B, r.C, r.D, r.E, r.F].some(v => String(v).toLowerCase().includes(keyword)));
+    rows = rows.filter(r => [r.B, r.C, r.D, r.E, r.F, r.G, r.H, r.I, r.J].some(v => String(v).toLowerCase().includes(keyword)));
   }
 
-  rows.sort((a, b) => compareValues(a[state.sortKey], b[state.sortKey], state.sortDir));
-
+  rows.sort((a, b) => compareValues(getSortValue(a), getSortValue(b), state.sortDir));
   state.filteredRows = rows;
+
   const totalPages = Math.max(1, Math.ceil(rows.length / state.pageSize));
   if (state.page > totalPages) state.page = totalPages;
   renderTable();
+}
+
+function getSortValue(row) {
+  if (state.sortKey === 'A') return row._idx;
+  return row[state.sortKey] ?? '';
 }
 
 function renderTable() {
@@ -155,39 +151,46 @@ function renderTable() {
 
   countPill.textContent = `${total} rows`;
   pagePill.textContent = `Page ${state.page} / ${totalPages}`;
+  planPill.textContent = `Current View: ${state.premiumPreview ? 'Premium Preview' : 'Free'}`;
+  lockChip.textContent = state.premiumPreview ? 'Unlocked Preview' : 'Locked';
 
   if (!pageRows.length) {
-    tableBody.innerHTML = `<tr><td colspan="6" class="empty">조건에 맞는 데이터가 없습니다.</td></tr>`;
+    tableBody.innerHTML = `<tr><td colspan="10" class="empty">조건에 맞는 데이터가 없습니다.</td></tr>`;
     return;
   }
 
-  tableBody.innerHTML = pageRows.map((row, idx) => {
-    const currentRank = start + idx + 1;
-    return `
-      <tr>
-        <td>${renderCell('A', currentRank)}</td>
-        <td>${renderCell('B', row.B)}</td>
-        <td>${renderCell('C', row.C)}</td>
-        <td>${renderCell('D', row.D)}</td>
-        <td>${renderCell('E', row.E)}</td>
-        <td>${renderCell('F', row.F)}</td>
-      </tr>
-    `;
-  }).join('');
+  tableBody.innerHTML = pageRows.map((row, idx) => `
+    <tr>
+      <td>${renderCell('A', start + idx + 1)}</td>
+      <td>${renderCell('B', row.B)}</td>
+      <td>${renderCell('C', row.C)}</td>
+      <td>${renderCell('D', row.D)}</td>
+      <td>${renderCell('E', row.E)}</td>
+      <td>${renderCell('F', row.F)}</td>
+      ${premiumHeaders.map(key => `<td class="premium-col ${state.premiumPreview ? 'premium-unlocked' : 'premium-locked'}">${renderCell(key, row[key])}</td>`).join('')}
+    </tr>
+  `).join('');
 }
 
 function renderCell(key, value) {
-  if (!value) return '-';
-
   if (key === 'A') {
     return `<span class="rank">${escapeHtml(value)}</span>`;
   }
 
   if (key === 'F') {
+    if (!value) return '-';
     const url = isUrl(value) ? normalizeUrl(value) : `https://${String(value).trim()}`;
     return `<a class="link-btn" href="${escapeAttr(url)}" target="_blank" rel="noopener noreferrer">Link</a>`;
   }
 
+  if (premiumHeaders.includes(key)) {
+    if (!value) {
+      return state.premiumPreview ? '-' : `<span class="lock-chip">Premium</span>`;
+    }
+    return state.premiumPreview ? escapeHtml(value) : `<span class="lock-chip">Premium</span>`;
+  }
+
+  if (!value) return '-';
   if (isUrl(value)) {
     return `<a class="link" href="${escapeAttr(normalizeUrl(value))}" target="_blank" rel="noopener noreferrer">${escapeHtml(value)}</a>`;
   }
@@ -198,7 +201,6 @@ function renderCell(key, value) {
 function compareValues(a, b, dir = 'asc') {
   const aa = String(a ?? '').trim();
   const bb = String(b ?? '').trim();
-
   const na = Number(aa.replace(/,/g, ''));
   const nb = Number(bb.replace(/,/g, ''));
 
@@ -242,6 +244,13 @@ function escapeHtml(str) {
 
 function escapeAttr(str) {
   return escapeHtml(str);
+}
+
+function togglePremiumPreview(event) {
+  event.preventDefault();
+  state.premiumPreview = !state.premiumPreview;
+  previewPremiumBtn.textContent = state.premiumPreview ? 'Free 화면으로 보기' : '미리보기 전환';
+  renderTable();
 }
 
 document.querySelectorAll('thead th').forEach(th => {
@@ -290,7 +299,7 @@ $('nextBtn').addEventListener('click', () => {
 $('resetBtn').addEventListener('click', () => {
   searchInput.value = '';
   categoryFilter.value = '';
-  pageSize.value = '10';
+  pageSize.value = '20';
   state.page = 1;
   state.sortKey = 'A';
   state.sortDir = 'asc';
@@ -298,10 +307,9 @@ $('resetBtn').addEventListener('click', () => {
 });
 
 $('refreshBtn').addEventListener('click', fetchSheetData);
+previewPremiumBtn.addEventListener('click', togglePremiumPreview);
 
 fetchSheetData();
-
-// 선택: 5분마다 자동 갱신
 setInterval(fetchSheetData, 5 * 60 * 1000);
 
 /**
