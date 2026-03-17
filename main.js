@@ -76,9 +76,10 @@ async function fetchSheetData() {
       const getValue = (i) => {
         const cell = cells[i];
         if (!cell) return '';
+        // f는 포맷팅된 값, v는 실제 값입니다. 텍스트/숫자 모두 대응하기 위해 f가 있으면 f를, 없으면 v를 문자열로 가져옵니다.
         if (cell.f != null) return String(cell.f).trim();
-        if (cell.v == null) return '';
-        return String(cell.v).trim();
+        if (cell.v != null) return String(cell.v).trim();
+        return '';
       };
 
       return {
