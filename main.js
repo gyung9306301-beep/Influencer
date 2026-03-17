@@ -170,10 +170,10 @@ function renderTable() {
       <td>${renderCell('A', start + idx + 1)}</td>
       <td>${renderCell('B', row.B)}</td>
       <td>${renderCell('C', row.C)}</td>
-      <td>${renderCell('D', row.D)}</td>
+      <td class="text-right">${renderCell('D', row.D)}</td>
       <td>${renderCell('E', row.E)}</td>
       <td>${renderCell('F', row.F)}</td>
-      ${premiumHeaders.map(key => `<td class="premium-col ${state.premiumPreview ? 'premium-unlocked' : 'premium-locked'}">${renderCell(key, row[key])}</td>`).join('')}
+      ${premiumHeaders.map(key => `<td class="premium-col text-right ${state.premiumPreview ? 'premium-unlocked' : 'premium-locked'}">${renderCell(key, row[key])}</td>`).join('')}
     </tr>
   `).join('');
 }
