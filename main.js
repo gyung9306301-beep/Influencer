@@ -82,7 +82,7 @@ async function fetchSheetData() {
       };
 
       return {
-        _idx: idx + 1,
+        _sheetIdx: idx + 2, // 1-based index where idx 0 is row 2
         A: getValue(columnMap.A),
         B: getValue(columnMap.B),
         C: getValue(columnMap.C),
@@ -94,7 +94,12 @@ async function fetchSheetData() {
         I: getValue(columnMap.I),
         J: getValue(columnMap.J)
       };
-    }).filter(item => [item.B, item.C, item.D, item.E, item.F].some(v => String(v).trim() !== ''));
+    }).filter(item => {
+      // Exclude sheet row 2 (which is idx 0 in our mapping since header is row 1)
+      const isNotSheetRow2 = item._sheetIdx !== 2;
+      const isNotEmpty = [item.B, item.C, item.D, item.E, item.F].some(v => String(v).trim() !== '');
+      return isNotSheetRow2 && isNotEmpty;
+    });
 
     state.lastLoadedAt = new Date();
     populateCategoryFilter();
