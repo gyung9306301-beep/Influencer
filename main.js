@@ -27,7 +27,7 @@ const state = {
   sortKey: 'A',
   sortDir: 'asc',
   page: 1,
-  pageSize: 20,
+  pageSize: 10,
   lastLoadedAt: null,
   premiumPreview: CONFIG.PREMIUM_PREVIEW_DEFAULT
 };
@@ -124,7 +124,7 @@ function populateCategoryFilter() {
 function applyFilters() {
   const keyword = searchInput.value.trim().toLowerCase();
   const category = categoryFilter.value;
-  state.pageSize = Number(pageSize.value || 20);
+  state.pageSize = Number(pageSize.value || 10);
 
   let rows = [...state.rawRows];
 
@@ -305,7 +305,7 @@ $('nextBtn').addEventListener('click', () => {
 $('resetBtn').addEventListener('click', () => {
   searchInput.value = '';
   categoryFilter.value = '';
-  pageSize.value = '20';
+  pageSize.value = '10';
   state.page = 1;
   state.sortKey = 'A';
   state.sortDir = 'asc';
