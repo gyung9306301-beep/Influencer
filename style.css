@@ -431,3 +431,22 @@ a.link:hover { text-decoration: underline; }
   .toolbar { grid-template-columns: 1fr; }
   table { min-width: 1180px; }
 }
+
+.footer-affiliate {
+  margin-top: 28px;
+  text-align: center;
+}
+
+.footer-affiliate a {
+  font-size: 11px;
+  color: var(--muted);
+  text-decoration: none;
+  opacity: 0.6;
+  transition: 0.2s ease;
+  letter-spacing: 0.05em;
+}
+
+.footer-affiliate a:hover {
+  opacity: 1;
+  color: var(--cyan-soft);
+}

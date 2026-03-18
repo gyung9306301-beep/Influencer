@@ -15,9 +15,10 @@ A real-time dashboard that fetches and displays TikTok influencer rankings from 
 - **Data Integrity:** Specifically excludes the 2nd row of the spreadsheet from the dashboard display to maintain data quality.
 - **Responsive Design:** Utilizes modern CSS (Baseline) features including radial gradients, backdrop filters, and container-aware layouts.
 - **Performance:** Implements client-side pagination (default 20 rows) and sorting.
+- **Affiliate Application:** A centered footer link for affiliate applications using Formspree.
 
 ## Current State
-- `index.html`: Cleaned up structure, linking to external styles and scripts. Includes a premium banner and interactive table.
+- `index.html`: Cleaned up structure, linking to external styles and scripts. Includes a premium banner, interactive table, and affiliate link in the footer.
 - `style.css`: Contains all visual styles, using CSS variables for theming and modern layout techniques.
 - `main.js`: Handles data fetching, filtering, sorting, and rendering logic. Includes the premium preview toggle.
 
@@ -28,6 +29,7 @@ A real-time dashboard that fetches and displays TikTok influencer rankings from 
 - [x] Implement dynamic ranking recalculation.
 - [x] Add Premium Access Preview and UI improvements.
 - [x] Rename premium columns and exclude spreadsheet row 2.
+- [x] Add Affiliate Application link.
 
 ## Future Roadmap
 - **Web Components:** Refactor the table and rows into custom elements.
