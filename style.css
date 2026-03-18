@@ -432,21 +432,27 @@ a.link:hover { text-decoration: underline; }
   table { min-width: 1180px; }
 }
 
-.footer-affiliate {
-  margin-top: 28px;
+.footer {
+  margin-top: 72px;
+  padding: 22px 0 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
   text-align: center;
 }
 
-.footer-affiliate a {
-  font-size: 11px;
-  color: var(--muted);
-  text-decoration: none;
-  opacity: 0.6;
-  transition: 0.2s ease;
-  letter-spacing: 0.05em;
+.footer-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px 18px;
 }
 
-.footer-affiliate a:hover {
-  opacity: 1;
-  color: var(--cyan-soft);
+.footer-links a {
+  color: #7f93aa;
+  font-size: 12px;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: #80d6ff;
 }

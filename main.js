@@ -325,6 +325,7 @@ setInterval(fetchSheetData, 5 * 60 * 1000);
   const todayKey = 'visit_today';
   const totalKey = 'visit_total';
   const dateKey = 'visit_date';
+  const timeKey = 'visit_last_time';
 
   const todayEl = $('todayCount');
   const totalEl = $('totalCount');
@@ -332,6 +333,9 @@ setInterval(fetchSheetData, 5 * 60 * 1000);
 
   const todayStr = new Date().toISOString().slice(0, 10);
   const savedDate = localStorage.getItem(dateKey);
+  const lastVisitTime = parseInt(localStorage.getItem(timeKey) || '0', 10);
+  const now = Date.now();
+  const oneHour = 60 * 60 * 1000;
 
   let todayCount = parseInt(localStorage.getItem(todayKey) || '0', 10);
   let totalCount = parseInt(localStorage.getItem(totalKey) || '0', 10);
@@ -341,11 +345,15 @@ setInterval(fetchSheetData, 5 * 60 * 1000);
     localStorage.setItem(dateKey, todayStr);
   }
 
-  todayCount += 1;
-  totalCount += 1;
+  // 1시간 이내 재접속 여부 확인
+  if (now - lastVisitTime > oneHour) {
+    todayCount += 1;
+    totalCount += 1;
 
-  localStorage.setItem(todayKey, todayCount);
-  localStorage.setItem(totalKey, totalCount);
+    localStorage.setItem(todayKey, todayCount);
+    localStorage.setItem(totalKey, totalCount);
+    localStorage.setItem(timeKey, now.toString());
+  }
 
   todayEl.textContent = todayCount;
   totalEl.textContent = totalCount;
