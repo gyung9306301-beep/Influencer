@@ -3,110 +3,117 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TikTok Influencer Rankings</title>
-  <link rel="stylesheet" href="style.css">
+  <title>현지인 추천 인플루언서 인사이트</title>
+  <link rel="stylesheet" href="landing.css">
 </head>
 <body>
-  <div class="wrap">
+  <div class="container">
     <section class="hero">
-      <h1>
-        <span class="cyan">TikTok Influencer</span>
-        <span class="white">Ranking</span>
-        <span class="green">List</span>
-      </h1>
+      <div class="eyebrow">SERVICE OVERVIEW</div>
+      <h1 class="title">현지인 추천 인플루언서 인사이트</h1>
+      <p class="description">
+        본 서비스는 태국 내 TikTok 인플루언서들의 활동 데이터를 수집하고 분석하여,
+        브랜드 마케터와 광고주들에게 실질적인 가치를 제공합니다.
+        단순한 팔로워 수를 넘어 영상 조회수, 기대 조회수, 단가 등을 제공하며
+        최적의 파트너를 찾을 수 있도록 돕습니다.
+      </p>
+    </section>
 
-      <div class="toolbar">
-        <div class="field">
-          <label for="searchInput">Search</label>
-          <input id="searchInput" class="input" type="text" placeholder="닉네임 / 카테고리 / 팔로워 / 등급 / 링크 검색" />
+    <section class="section">
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="icon-wrap">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 19h16"></path>
+              <path d="M7 16V9"></path>
+              <path d="M12 16V5"></path>
+              <path d="M17 16v-3"></path>
+              <path d="M6 7l3-2 3 2 5-3"></path>
+            </svg>
+          </div>
+          <h3 class="feature-title">정밀한 성과 분석</h3>
+          <p class="feature-text">
+            평균 조회수, 최고/최소 조회수 등 상세 지표를 제공해 캠페인의 예측 가능성을 높입니다.
+          </p>
         </div>
 
-        <div class="field">
-          <label for="categoryFilter">Category Filter</label>
-          <select id="categoryFilter" class="select">
-            <option value="">전체</option>
-          </select>
+        <div class="feature-card">
+          <div class="icon-wrap">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.1l1-5.8-4.2-4.1 5.9-.9L12 3z"></path>
+            </svg>
+          </div>
+          <h3 class="feature-title">프리미엄 데이터</h3>
+          <p class="feature-text">
+            프리미엄 플랜을 통해 인플루언서의 광고 단가와 히스토리컬 데이터를 포함한 상세 리포트를 확인하세요.
+          </p>
         </div>
 
-        <div class="field">
-          <label for="pageSize">Rows Per Page</label>
-          <select id="pageSize" class="select">
-            <option value="10" selected>10</option>
-            <option value="20">20</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
-          </select>
+        <div class="feature-card">
+          <div class="icon-wrap">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 6h10"></path>
+              <path d="M4 12h16"></path>
+              <path d="M4 18h8"></path>
+              <circle cx="17" cy="6" r="2"></circle>
+              <circle cx="10" cy="18" r="2"></circle>
+            </svg>
+          </div>
+          <h3 class="feature-title">카테고리 세분화</h3>
+          <p class="feature-text">
+            뷰티, 라이프스타일, 먹방 등 다양한 카테고리 필터링을 통해 타겟에 맞는 인플루언서를 빠르게 검색합니다.
+          </p>
         </div>
 
-        <button id="refreshBtn" class="btn">새로고침</button>
-        <button id="resetBtn" class="btn">필터 초기화</button>
+        <div class="feature-card">
+          <div class="icon-wrap">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path>
+              <path d="M16 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path>
+              <path d="M3 19c0-2.2 2.2-4 5-4s5 1.8 5 4"></path>
+              <path d="M11 19c.3-1.7 2.2-3 5-3 3 0 5 1.6 5 3"></path>
+            </svg>
+          </div>
+          <h3 class="feature-title">매칭</h3>
+          <p class="feature-text">
+            캠페인을 수행할 프로젝트 매니저를 기용하세요. 당신의 캠페인을 가장 합리적이고 투명한 가격으로 제공합니다.
+          </p>
+        </div>
       </div>
     </section>
 
-    <section class="premium-banner">
-      <div class="premium-left">
-        <div class="premium-badge">Premium Access</div>
-        <div class="premium-text">
-          기본 플랜은 <strong>A~F</strong> 열까지 확인 가능하며, 프리미엄 플랜에서는 <strong>G~J</strong> 열의 상세 정보까지 확인할 수 있습니다.
-        </div>
-      </div>
-      <div style="display:flex; gap:10px; flex-wrap:wrap;">
-        <a href="#" class="ghost-btn" id="previewPremiumBtn">미리보기 전환</a>
-        <a href="#" class="upgrade-btn" id="upgradeBtn">Upgrade to Premium</a>
-      </div>
-    </section>
+    <section class="role-section">
+      <h2 class="section-title">누구를 위한 서비스인가요?</h2>
+      <p class="section-desc">
+        아래 항목을 클릭하면 각 대상에 맞춘 전용 페이지로 이동할 수 있습니다.
+        현재는 임시 링크가 연결되어 있으며, 추후 원하는 URL로 교체하면 됩니다.
+      </p>
 
-    <section class="panel">
-      <div class="meta">
-        <div class="meta-left">
-          <div class="pill" id="countPill">0 rows</div>
-          <div class="pill" id="planPill">Current View: Free</div>
-        </div>
-        <div class="pill" id="updatedPill">Updated: -</div>
-      </div>
+      <div class="role-grid">
+        <a href="ranking.html" class="role-card">
+          <div class="role-badge">FOR BRANDS</div>
+          <h3 class="role-title">마케터</h3>
+          <p class="role-text">
+            브랜드 캠페인에 적합한 인플루언서를 빠르게 탐색하고 성과 중심으로 비교할 수 있습니다.
+          </p>
+        </a>
 
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th data-key="A">Rank</th>
-              <th data-key="B">닉네임</th>
-              <th data-key="C">카테고리</th>
-              <th data-key="D" class="text-right">팔로워수</th>
-              <th data-key="E">등급</th>
-              <th data-key="F">링크</th>
-              <th data-key="G" class="premium-col text-right">영상 평균 조회수</th>
-              <th data-key="H" class="premium-col text-right">최고 영상 조회수</th>
-              <th data-key="I" class="premium-col text-right">최소 영상 조회수</th>
-              <th data-key="J" class="premium-col text-right">가격</th>
-            </tr>
-          </thead>
-          <tbody id="tableBody">
-            <tr><td colspan="10" class="loading">데이터를 불러오는 중입니다...</td></tr>
-          </tbody>
-        </table>
-      </div>
+        <a href="#" class="role-card">
+          <div class="role-badge">FOR CREATORS</div>
+          <h3 class="role-title">인플루언서</h3>
+          <p class="role-text">
+            자신의 카테고리와 데이터 경쟁력을 바탕으로 협업 기회를 확인할 수 있도록 구성합니다.
+          </p>
+        </a>
 
-      <div class="premium-note" id="premiumNote">
-        <div>
-          <strong>Premium Preview UI</strong> — 현재는 화면 설계 단계입니다. 결제 전 사용자에게는 G~J 영역을 잠금 상태로 보여주고, 결제 후에는 실제 값이 보이는 흐름으로 연결할 수 있습니다.
-        </div>
-        <div class="lock-chip" id="lockChip">Locked</div>
+        <a href="#" class="role-card">
+          <div class="role-badge">FOR OPERATIONS</div>
+          <h3 class="role-title">프로젝트 매니저</h3>
+          <p class="role-text">
+            캠페인 운영, 커뮤니케이션, 매칭 및 실행 관리까지 효율적으로 진행할 수 있는 안내 페이지로 연결합니다.
+          </p>
+        </a>
       </div>
-
-      <div class="meta" style="margin-top:14px; margin-bottom:0;">
-        <div class="meta-left">
-          <button id="prevBtn" class="btn">이전</button>
-          <button id="nextBtn" class="btn">다음</button>
-          <div class="pill" id="pagePill">Page 1 / 1</div>
-        </div>
-        <div class="status" id="statusText">준비 중...</div>
-      </div>
-    </section>
-
-    <section class="panel" style="margin-top: 28px;">
-      <div id="disqus_thread"></div>
-      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     </section>
 
     <div id="visitorCounter">
@@ -123,6 +130,40 @@
     </footer>
   </div>
 
-  <script src="main.js"></script>
+  <script>
+    (function() {
+      const $ = (id) => document.getElementById(id);
+      const todayKey = 'visit_today';
+      const totalKey = 'visit_total';
+      const dateKey = 'visit_date';
+      const timeKey = 'visit_last_time';
+
+      const todayStr = new Date().toISOString().slice(0, 10);
+      const savedDate = localStorage.getItem(dateKey);
+      const lastVisitTime = parseInt(localStorage.getItem(timeKey) || '0', 10);
+      const now = Date.now();
+      const oneHour = 60 * 60 * 1000;
+
+      let todayCount = parseInt(localStorage.getItem(todayKey) || '0', 10);
+      let totalCount = parseInt(localStorage.getItem(totalKey) || '0', 10);
+
+      if (savedDate !== todayStr) {
+        todayCount = 0;
+        localStorage.setItem(dateKey, todayStr);
+      }
+
+      // 1시간 이내 재접속 여부 확인
+      if (now - lastVisitTime > oneHour) {
+        todayCount += 1;
+        totalCount += 1;
+        localStorage.setItem(todayKey, todayCount);
+        localStorage.setItem(totalKey, totalCount);
+        localStorage.setItem(timeKey, now.toString());
+      }
+
+      if ($('todayCount')) $('todayCount').textContent = todayCount;
+      if ($('totalCount')) $('totalCount').textContent = totalCount;
+    })();
+  </script>
 </body>
 </html>
