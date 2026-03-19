@@ -8,6 +8,8 @@ A real-time dashboard that fetches and displays TikTok influencer rankings from 
 - **Dynamic Filtering:** Supports keyword searches across all displayed columns and category-specific filtering based on Column C.
 - **Dynamic Ranking:** Automatically re-calculates the rank (1, 2, 3...) based on the currently filtered and sorted results.
 - **Influencer Selection:** Includes a "Select" column with checkboxes next to the "Link" column for selecting specific influencers.
+- **Selection Counter:** Displays the total number of selected influencers in a real-time counter ("선택 된 인플루언서 총 0명") located near the pagination controls.
+- **Selection Management:** Added "선택 초기화" (Reset Selection) and "선택 된 인플루언서 견적 확인" (Check Quote) buttons for bulk actions.
 - **Premium Access Preview:** Includes a preview mode for extended data (Columns G-J), which are:
   - **G:** 영상 평균 조회수 (Average Video Views)
   - **H:** 최고 영상 조회수 (Max Video Views)
@@ -21,7 +23,7 @@ A real-time dashboard that fetches and displays TikTok influencer rankings from 
 ## Current State
 - `index.html`: Cleaned up structure, linking to external styles and scripts. Includes a premium banner, interactive table, and affiliate link in the footer.
 - `style.css`: Contains all visual styles, using CSS variables for theming and modern layout techniques.
-- `main.js`: Handles data fetching, filtering, sorting, and rendering logic. Includes the premium preview toggle.
+- `main.js`: Handles data fetching, filtering, sorting, and rendering logic. Includes the premium preview toggle and selection logic.
 
 ## Current Plan: Refinement & Synchronization
 - [x] Extract internal styles to `style.css`.
@@ -32,6 +34,8 @@ A real-time dashboard that fetches and displays TikTok influencer rankings from 
 - [x] Rename premium columns and exclude spreadsheet row 2.
 - [x] Add Affiliate Application link.
 - [x] Remove the premium preview note from `ranking.html`.
+- [x] Add selection checkboxes for each influencer.
+- [x] Add selection counter and reset/check quote buttons.
 
 ## Future Roadmap
 - **Web Components:** Refactor the table and rows into custom elements.
