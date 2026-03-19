@@ -7,6 +7,7 @@ A real-time dashboard that fetches and displays TikTok influencer rankings from 
 - **Google Sheets Integration:** Fetches data via the `gviz` API for real-time updates.
 - **Dynamic Filtering:** Supports keyword searches across all displayed columns and category-specific filtering based on Column C.
 - **Dynamic Ranking:** Automatically re-calculates the rank (1, 2, 3...) based on the currently filtered and sorted results.
+- **Influencer Selection:** Includes a "Select" column with checkboxes next to the "Link" column for selecting specific influencers.
 - **Premium Access Preview:** Includes a preview mode for extended data (Columns G-J), which are:
   - **G:** 영상 평균 조회수 (Average Video Views)
   - **H:** 최고 영상 조회수 (Max Video Views)
@@ -30,6 +31,7 @@ A real-time dashboard that fetches and displays TikTok influencer rankings from 
 - [x] Add Premium Access Preview and UI improvements.
 - [x] Rename premium columns and exclude spreadsheet row 2.
 - [x] Add Affiliate Application link.
+- [x] Remove the premium preview note from `ranking.html`.
 
 ## Future Roadmap
 - **Web Components:** Refactor the table and rows into custom elements.
