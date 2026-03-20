@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TikTok Influencer Rankings</title>
   <link rel="stylesheet" href="style.css">
+  <script defer src="main.js"></script>
 </head>
 <body>
   <div class="wrap">
@@ -45,14 +46,13 @@
 
     <section class="premium-banner">
       <div class="premium-left">
-        <div class="premium-badge">Premium Access</div>
+        <div class="premium-badge">Quote Check Service</div>
         <div class="premium-text">
-          기본 플랜은 <strong>A~F</strong> 열까지 확인 가능하며, 프리미엄 플랜에서는 <strong>G~J</strong> 열의 상세 정보까지 확인할 수 있습니다.
+          각 인플루언서의 조건과 가격을 확인할 수 있으며, 선택한 인플루언서의 견적 확인 비용은 다음 단계에서 안내됩니다.
         </div>
       </div>
       <div style="display:flex; gap:10px; flex-wrap:wrap;">
-        <a href="#" class="ghost-btn" id="previewPremiumBtn">미리보기 전환</a>
-        <a href="#" class="upgrade-btn" id="upgradeBtn">Upgrade to Premium</a>
+        <a href="#" class="ghost-btn" onclick="return false;">Open Data View</a>
       </div>
     </section>
 
@@ -60,7 +60,7 @@
       <div class="meta">
         <div class="meta-left">
           <div class="pill" id="countPill">0 rows</div>
-          <div class="pill" id="planPill">Current View: Free</div>
+          <div class="pill" id="planPill">Current View: Open</div>
         </div>
         <div class="pill" id="updatedPill">Updated: -</div>
       </div>
@@ -76,14 +76,13 @@
               <th data-key="E">등급</th>
               <th data-key="F">링크</th>
               <th class="text-center">선택</th>
-              <th data-key="G" class="premium-col text-right">영상 평균 조회수</th>
-              <th data-key="H" class="premium-col text-right">최고 영상 조회수</th>
-              <th data-key="I" class="premium-col text-right">최소 영상 조회수</th>
-              <th data-key="J" class="premium-col text-right">가격</th>
+              <th data-key="G" class="text-right">영상 평균 조회수</th>
+              <th data-key="H" class="text-right">최고 영상 조회수</th>
+              <th data-key="I" class="text-right">최소 영상 조회수</th>
             </tr>
           </thead>
           <tbody id="tableBody">
-            <tr><td colspan="11" class="loading">데이터를 불러오는 중입니다...</td></tr>
+            <tr><td colspan="10" class="loading">데이터를 불러오는 중입니다...</td></tr>
           </tbody>
         </table>
       </div>
@@ -95,7 +94,7 @@
           <div class="pill" id="pagePill">Page 1 / 1</div>
           <div class="pill" id="selectionPill">선택 된 인플루언서 총 0명</div>
           <button id="resetSelectionBtn" class="btn">선택 초기화</button>
-          <button id="checkQuoteBtn" class="upgrade-btn">선택 된 인플루언서 견적 확인</button>
+          <a href="quote.html" id="checkQuoteBtn" class="upgrade-btn">선택 된 인플루언서 견적 확인</a>
         </div>
         <div class="status" id="statusText">준비 중...</div>
       </div>
@@ -119,7 +118,5 @@
       </div>
     </footer>
   </div>
-
-  <script src="main.js"></script>
 </body>
 </html>
