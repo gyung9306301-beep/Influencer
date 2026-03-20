@@ -29,7 +29,8 @@ const state = {
   page: 1,
   pageSize: 10,
   lastLoadedAt: null,
-  premiumPreview: CONFIG.PREMIUM_PREVIEW_DEFAULT
+  premiumPreview: CONFIG.PREMIUM_PREVIEW_DEFAULT,
+  selectedNicknames: new Set()
 };
 
 const $ = (id) => document.getElementById(id);
@@ -42,8 +43,10 @@ const updatedPill = $('updatedPill');
 const countPill = $('countPill');
 const pagePill = $('pagePill');
 const planPill = $('planPill');
-const lockChip = $('lockChip');
+const selectionPill = $('selectionPill');
 const previewPremiumBtn = $('previewPremiumBtn');
+const resetSelectionBtn = $('resetSelectionBtn');
+const checkQuoteBtn = $('checkQuoteBtn');
 
 function buildSheetUrl() {
   const base = `https://docs.google.com/spreadsheets/d/${CONFIG.SHEET_ID}/gviz/tq`;
@@ -60,7 +63,7 @@ function buildSheetUrl() {
 
 async function fetchSheetData() {
   setStatus('Google Sheets 데이터를 불러오는 중...');
-  tableBody.innerHTML = `<tr><td colspan="10" class="loading">데이터를 불러오는 중입니다...</td></tr>`;
+  tableBody.innerHTML = `<tr><td colspan="11" class="loading">데이터를 불러오는 중입니다...</td></tr>`;
 
   try {
     const res = await fetch(buildSheetUrl());
@@ -76,14 +79,13 @@ async function fetchSheetData() {
       const getValue = (i) => {
         const cell = cells[i];
         if (!cell) return '';
-        // f는 포맷팅된 값, v는 실제 값입니다. 텍스트/숫자 모두 대응하기 위해 f가 있으면 f를, 없으면 v를 문자열로 가져옵니다.
         if (cell.f != null) return String(cell.f).trim();
         if (cell.v != null) return String(cell.v).trim();
         return '';
       };
 
       return {
-        _sheetIdx: idx + 2, // 1-based index where idx 0 is row 2
+        _sheetIdx: idx + 2,
         A: getValue(columnMap.A),
         B: getValue(columnMap.B),
         C: getValue(columnMap.C),
@@ -96,7 +98,6 @@ async function fetchSheetData() {
         J: getValue(columnMap.J)
       };
     }).filter(item => {
-      // Exclude sheet row 2 (which is idx 0 in our mapping since header is row 1)
       const isNotSheetRow2 = item._sheetIdx !== 2;
       const isNotEmpty = [item.B, item.C, item.D, item.E, item.F].some(v => String(v).trim() !== '');
       return isNotSheetRow2 && isNotEmpty;
@@ -109,7 +110,7 @@ async function fetchSheetData() {
     setStatus('최신 시트 데이터를 불러왔습니다.');
   } catch (error) {
     console.error(error);
-    tableBody.innerHTML = `<tr><td colspan="10" class="empty">데이터를 불러오지 못했습니다.<br>시트가 공개 상태인지, 시트명이 정확히 <strong>Influencer list</strong>인지 확인해주세요.</td></tr>`;
+    tableBody.innerHTML = `<tr><td colspan="11" class="empty">데이터를 불러오지 못했습니다.<br>시트가 공개 상태인지, 시트명이 정확히 <strong>Influencer list</strong>인지 확인해주세요.</td></tr>`;
     setStatus(`오류: ${error.message}`);
   }
 }
@@ -158,10 +159,10 @@ function renderTable() {
   countPill.textContent = `${total} rows`;
   pagePill.textContent = `Page ${state.page} / ${totalPages}`;
   planPill.textContent = `Current View: ${state.premiumPreview ? 'Premium Preview' : 'Free'}`;
-  lockChip.textContent = state.premiumPreview ? 'Unlocked Preview' : 'Locked';
+  updateSelectionCount();
 
   if (!pageRows.length) {
-    tableBody.innerHTML = `<tr><td colspan="10" class="empty">조건에 맞는 데이터가 없습니다.</td></tr>`;
+    tableBody.innerHTML = `<tr><td colspan="11" class="empty">조건에 맞는 데이터가 없습니다.</td></tr>`;
     return;
   }
 
@@ -173,9 +174,18 @@ function renderTable() {
       <td class="text-right">${renderCell('D', row.D)}</td>
       <td>${renderCell('E', row.E)}</td>
       <td>${renderCell('F', row.F)}</td>
+      <td class="text-center">
+        <input type="checkbox" class="row-checkbox" data-nickname="${escapeAttr(row.B)}" ${state.selectedNicknames.has(row.B) ? 'checked' : ''}>
+      </td>
       ${premiumHeaders.map(key => `<td class="premium-col text-right ${state.premiumPreview ? 'premium-unlocked' : 'premium-locked'}">${renderCell(key, row[key])}</td>`).join('')}
     </tr>
   `).join('');
+}
+
+function updateSelectionCount() {
+  if (selectionPill) {
+    selectionPill.textContent = `선택 된 인플루언서 총 ${state.selectedNicknames.size}명`;
+  }
 }
 
 function renderCell(key, value) {
@@ -312,8 +322,34 @@ $('resetBtn').addEventListener('click', () => {
   applyFilters();
 });
 
+tableBody.addEventListener('change', (e) => {
+  if (e.target.classList.contains('row-checkbox')) {
+    const nickname = e.target.dataset.nickname;
+    if (e.target.checked) {
+      state.selectedNicknames.add(nickname);
+    } else {
+      state.selectedNicknames.delete(nickname);
+    }
+    updateSelectionCount();
+  }
+});
+
 $('refreshBtn').addEventListener('click', fetchSheetData);
 previewPremiumBtn.addEventListener('click', togglePremiumPreview);
+resetSelectionBtn.addEventListener('click', () => {
+  state.selectedNicknames.clear();
+  updateSelectionCount();
+  renderTable();
+});
+
+checkQuoteBtn.addEventListener('click', () => {
+  if (state.selectedNicknames.size === 0) {
+    alert("인플루언서를 먼저 선택해주세요.");
+  } else {
+    const nicknamesList = Array.from(state.selectedNicknames).join(', ');
+    alert(`선택된 인플루언서 (${state.selectedNicknames.size}명): ${nicknamesList}\n\n이들에 대한 견적 문의를 진행하시겠습니까?`);
+  }
+});
 
 fetchSheetData();
 setInterval(fetchSheetData, 5 * 60 * 1000);
@@ -345,7 +381,6 @@ setInterval(fetchSheetData, 5 * 60 * 1000);
     localStorage.setItem(dateKey, todayStr);
   }
 
-  // 1시간 이내 재접속 여부 확인
   if (now - lastVisitTime > oneHour) {
     todayCount += 1;
     totalCount += 1;
