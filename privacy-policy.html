@@ -3,102 +3,210 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tesari Privacy Policy</title>
+  <title>Tesari Policies</title>
   <style>
     :root {
-      --bg: #0b1020;
-      --card: #121933;
-      --text: #e8ecf8;
-      --muted: #aab3cc;
-      --line: #26304f;
-      --accent: #56c2ff;
-      --accent2: #7ef0c0;
-      --btn: #1a2447;
-      --btn-hover: #24305b;
+      --bg: #07111f;
+      --bg2: #0c1730;
+      --card: rgba(15, 24, 49, 0.92);
+      --card-2: rgba(11, 19, 39, 0.95);
+      --text: #eef4ff;
+      --muted: #9fb3d9;
+      --line: rgba(120, 150, 210, 0.18);
+      --cyan: #56c2ff;
+      --green: #72f0be;
+      --white: #ffffff;
+      --tab-bg: rgba(255, 255, 255, 0.03);
+      --tab-hover: rgba(255, 255, 255, 0.06);
+      --tab-active: rgba(86, 194, 255, 0.12);
+      --shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
     }
 
     * {
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
       font-family: Arial, "Noto Sans KR", sans-serif;
-      background: linear-gradient(180deg, #09101d 0%, #101833 100%);
       color: var(--text);
-      line-height: 1.7;
+      background:
+        radial-gradient(circle at top left, rgba(86, 194, 255, 0.12), transparent 28%),
+        radial-gradient(circle at top right, rgba(114, 240, 190, 0.08), transparent 22%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+      line-height: 1.75;
     }
 
     .wrap {
-      max-width: 980px;
+      max-width: 1180px;
       margin: 0 auto;
-      padding: 40px 20px 80px;
+      padding: 48px 20px 80px;
+    }
+
+    .eyebrow {
+      font-size: 13px;
+      letter-spacing: 0.14em;
+      color: var(--cyan);
+      font-weight: 700;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .hero {
+      margin-bottom: 28px;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: 42px;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    .hero .cyan { color: var(--cyan); }
+    .hero .white { color: var(--white); }
+    .hero .green { color: var(--green); }
+
+    .hero p {
+      margin: 16px 0 0;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .policy-shell {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
     }
 
     .topbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
+      padding: 18px 18px 0 18px;
       flex-wrap: wrap;
-      margin-bottom: 28px;
     }
 
-    .brand {
-      font-size: 14px;
-      color: var(--muted);
-    }
-
-    .lang-buttons {
+    .policy-tabs {
       display: flex;
+      flex-wrap: wrap;
       gap: 10px;
     }
 
-    .lang-buttons button {
+    .policy-tab {
       border: 1px solid var(--line);
-      background: var(--btn);
+      background: var(--tab-bg);
       color: var(--text);
-      padding: 10px 16px;
-      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: 12px;
       cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .policy-tab:hover {
+      background: var(--tab-hover);
+      transform: translateY(-1px);
+    }
+
+    .policy-tab.active {
+      background: var(--tab-active);
+      border-color: rgba(86, 194, 255, 0.45);
+      color: var(--cyan);
+      box-shadow: inset 0 0 0 1px rgba(86, 194, 255, 0.15);
+    }
+
+    .lang-switch {
+      display: flex;
+      gap: 8px;
+    }
+
+    .lang-switch button {
+      border: 1px solid var(--line);
+      background: var(--tab-bg);
+      color: var(--text);
+      padding: 10px 14px;
+      cursor: pointer;
+      border-radius: 10px;
       font-size: 14px;
       transition: 0.2s ease;
     }
 
-    .lang-buttons button:hover {
-      background: var(--btn-hover);
+    .lang-switch button:hover {
+      background: var(--tab-hover);
     }
 
-    .lang-buttons button.active {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 1px rgba(86, 194, 255, 0.3) inset;
+    .lang-switch button.active {
+      border-color: rgba(114, 240, 190, 0.45);
+      color: var(--green);
+      box-shadow: inset 0 0 0 1px rgba(114, 240, 190, 0.12);
     }
 
-    .card {
-      background: rgba(18, 25, 51, 0.95);
+    .content-card {
+      padding: 28px 18px 18px;
+    }
+
+    .policy-panel {
+      display: none;
+    }
+
+    .policy-panel.active {
+      display: block;
+    }
+
+    .lang-content {
+      display: none;
+    }
+
+    .lang-content.active {
+      display: block;
+    }
+
+    .panel-card {
+      background: var(--card-2);
       border: 1px solid var(--line);
       border-radius: 20px;
-      padding: 32px 24px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+      padding: 30px 26px 36px;
     }
 
-    h1 {
-      font-size: 34px;
+    .panel-card h1 {
       margin: 0 0 8px;
+      font-size: 34px;
       line-height: 1.2;
+      letter-spacing: -0.02em;
     }
 
-    .subtitle {
+    .meta {
       color: var(--muted);
-      margin-bottom: 28px;
-      font-size: 15px;
+      margin-bottom: 22px;
+      font-size: 14px;
+    }
+
+    .notice {
+      background: rgba(86, 194, 255, 0.08);
+      border: 1px solid rgba(86, 194, 255, 0.18);
+      color: var(--text);
+      padding: 14px 16px;
+      border-radius: 14px;
+      margin-bottom: 24px;
+      font-size: 14px;
     }
 
     h2 {
-      margin-top: 34px;
-      margin-bottom: 12px;
+      margin-top: 28px;
+      margin-bottom: 10px;
       font-size: 22px;
-      color: var(--accent2);
+      color: var(--green);
     }
 
     p {
@@ -106,57 +214,60 @@
       color: var(--text);
     }
 
-    ul {
-      margin: 0 0 12px 20px;
+    ul, ol {
+      margin: 0 0 16px 22px;
       padding: 0;
     }
 
     li {
-      margin-bottom: 8px;
+      margin-bottom: 7px;
       color: var(--text);
-    }
-
-    .notice {
-      background: rgba(86, 194, 255, 0.08);
-      border: 1px solid rgba(86, 194, 255, 0.25);
-      color: var(--text);
-      padding: 14px 16px;
-      border-radius: 12px;
-      margin: 18px 0 10px;
-      font-size: 14px;
-    }
-
-    .footer {
-      margin-top: 36px;
-      padding-top: 18px;
-      border-top: 1px solid var(--line);
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .lang-section {
-      display: none;
-    }
-
-    .lang-section.active {
-      display: block;
     }
 
     .email {
-      color: var(--accent);
+      color: var(--cyan);
       word-break: break-all;
+      font-weight: 700;
     }
 
-    @media (max-width: 640px) {
+    .contact-box {
+      margin-top: 18px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 18px;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .contact-box p {
+      margin-bottom: 10px;
+    }
+
+    .contact-box strong {
+      display: inline-block;
+      min-width: 140px;
+      color: var(--green);
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 900px) {
       .wrap {
-        padding: 24px 14px 60px;
+        padding: 32px 14px 56px;
       }
 
-      .card {
-        padding: 24px 18px;
+      .hero h1 {
+        font-size: 32px;
       }
 
-      h1 {
+      .panel-card {
+        padding: 22px 18px 28px;
+      }
+
+      .panel-card h1 {
         font-size: 28px;
       }
 
@@ -165,277 +276,693 @@
       }
 
       .topbar {
-        align-items: flex-start;
+        padding: 16px 16px 0 16px;
+      }
+
+      .content-card {
+        padding: 20px 16px 16px;
+      }
+
+      .policy-tabs,
+      .lang-switch {
+        width: 100%;
+      }
+
+      .policy-tab,
+      .lang-switch button {
+        flex: 1 1 auto;
       }
     }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="topbar">
-      <div class="brand">Tesari Privacy Policy Page</div>
-      <div class="lang-buttons">
-        <button id="btn-ko" class="active" onclick="showLang('ko')">한국어</button>
-        <button id="btn-en" onclick="showLang('en')">English</button>
+    <section class="hero">
+      <div class="eyebrow">SERVICE POLICY</div>
+      <h1>
+        <span class="cyan">Tesari</span>
+        <span class="white">Policy</span>
+        <span class="green">Center</span>
+      </h1>
+      <p>
+        Tesari 서비스 이용에 필요한 주요 정책과 안내를 한 곳에서 확인할 수 있습니다.
+        탭을 눌러 Privacy Policy, Terms of Service, Affiliate Offer, Contact Us 내용을 확인하세요.
+      </p>
+    </section>
+
+    <div class="policy-shell">
+      <div class="topbar">
+        <div class="policy-tabs">
+          <button class="policy-tab active" data-tab="privacy">Privacy Policy</button>
+          <button class="policy-tab" data-tab="terms">Terms of Service</button>
+          <button class="policy-tab" data-tab="affiliate">Affiliate Offer</button>
+          <button class="policy-tab" data-tab="contact">Contact Us</button>
+        </div>
+
+        <div class="lang-switch">
+          <button id="lang-ko-btn" class="active" data-lang="ko">한국어</button>
+          <button id="lang-en-btn" data-lang="en">English</button>
+        </div>
       </div>
-    </div>
 
-    <div class="card">
-      <!-- Korean -->
-      <section id="lang-ko" class="lang-section active">
-        <h1>개인정보처리방침</h1>
-        <div class="subtitle">
-          최종 업데이트일: 2026년 3월 21일
-        </div>
+      <div class="content-card">
+        <!-- PRIVACY -->
+        <section id="privacy" class="policy-panel active">
+          <div id="privacy-ko" class="lang-content active">
+            <div class="panel-card">
+              <h1>개인정보처리방침</h1>
+              <div class="meta">최종 업데이트일: 2026년 3월 21일</div>
 
-        <div class="notice">
-          본 개인정보처리방침은 Tesari(임시 상호 포함)의 서비스 운영에 적용됩니다.
-          회사명은 추후 변경될 수 있으며, 변경 시 본 페이지를 통해 업데이트될 수 있습니다.
-        </div>
+              <div class="notice">
+                본 개인정보처리방침은 Tesari(임시 상호 포함)의 서비스 운영에 적용됩니다.
+                회사명은 추후 변경될 수 있으며, 변경 시 본 페이지를 통해 업데이트될 수 있습니다.
+              </div>
 
-        <h2>1. 소개</h2>
-        <p>
-          Tesari(이하 “회사”, “당사”, 또는 “서비스”)는 인플루언서 가격 정보 확인 및 인플루언서 마케팅 진행 서비스를 제공합니다.
-          본 개인정보처리방침은 사용자가 당사 웹사이트 및 관련 서비스를 이용할 때 어떠한 정보를 수집하고,
-          이를 어떻게 이용·보관·보호하는지 설명하기 위해 마련되었습니다.
-        </p>
+              <h2>1. 소개</h2>
+              <p>
+                Tesari(이하 “회사”, “당사”, 또는 “서비스”)는 인플루언서 가격 정보 확인 및 인플루언서 마케팅 진행 서비스를 제공합니다.
+                본 개인정보처리방침은 사용자가 당사 웹사이트 및 관련 서비스를 이용할 때 어떠한 정보를 수집하고,
+                이를 어떻게 이용·보관·보호하는지 설명하기 위해 마련되었습니다.
+              </p>
 
-        <h2>2. 수집하는 정보</h2>
-        <p>회사는 다음과 같은 정보를 수집할 수 있습니다.</p>
-        <ul>
-          <li>회원가입 시 제공하는 정보: 이름, 이메일 주소, 비밀번호 또는 기타 계정 정보</li>
-          <li>서비스 이용 과정에서 사용자가 입력하는 정보: 문의 내용, 견적 요청, 마케팅 의뢰 관련 정보</li>
-          <li>인플루언서 마케팅 진행을 위해 필요한 캠페인 관련 정보</li>
-          <li>결제 서비스 제공 시 필요한 거래 관련 정보 (결제 방식은 추후 확정 예정)</li>
-          <li>접속 기록, 클릭 기록, 이용 시간, 브라우저 종류, 기기 정보, IP 주소 등 이용 로그 정보</li>
-          <li>쿠키, 픽셀, 유사 기술을 통해 수집되는 정보</li>
-        </ul>
+              <h2>2. 수집하는 정보</h2>
+              <p>회사는 다음과 같은 정보를 수집할 수 있습니다.</p>
+              <ul>
+                <li>회원가입 시 제공하는 정보: 이름, 이메일 주소, 비밀번호 또는 기타 계정 정보</li>
+                <li>서비스 이용 과정에서 사용자가 입력하는 정보: 문의 내용, 견적 요청, 마케팅 의뢰 관련 정보</li>
+                <li>인플루언서 마케팅 진행을 위해 필요한 캠페인 관련 정보</li>
+                <li>결제 서비스 제공 시 필요한 거래 관련 정보 (결제 방식은 추후 확정 예정)</li>
+                <li>접속 기록, 클릭 기록, 이용 시간, 브라우저 종류, 기기 정보, IP 주소 등 이용 로그 정보</li>
+                <li>쿠키, 픽셀, 유사 기술을 통해 수집되는 정보</li>
+              </ul>
 
-        <h2>3. 개인정보 이용 목적</h2>
-        <p>회사는 수집한 정보를 다음 목적 범위 내에서 이용합니다.</p>
-        <ul>
-          <li>회원가입, 본인 확인, 계정 관리 및 사용자 인증</li>
-          <li>인플루언서 가격 정보 제공 및 관련 서비스 운영</li>
-          <li>인플루언서 마케팅 캠페인 상담, 제안, 진행 및 커뮤니케이션</li>
-          <li>결제 처리, 거래 기록 관리 및 고객 지원</li>
-          <li>서비스 품질 개선, 기능 개발, 사용자 경험 향상</li>
-          <li>부정 이용 방지, 보안 점검 및 법적 의무 이행</li>
-          <li>사용자가 동의한 경우 뉴스, 공지, 프로모션 등 마케팅 정보 제공</li>
-        </ul>
+              <h2>3. 개인정보 이용 목적</h2>
+              <p>회사는 수집한 정보를 다음 목적 범위 내에서 이용합니다.</p>
+              <ul>
+                <li>회원가입, 본인 확인, 계정 관리 및 사용자 인증</li>
+                <li>인플루언서 가격 정보 제공 및 관련 서비스 운영</li>
+                <li>인플루언서 마케팅 캠페인 상담, 제안, 진행 및 커뮤니케이션</li>
+                <li>결제 처리, 거래 기록 관리 및 고객 지원</li>
+                <li>서비스 품질 개선, 기능 개발, 사용자 경험 향상</li>
+                <li>부정 이용 방지, 보안 점검 및 법적 의무 이행</li>
+                <li>사용자가 동의한 경우 뉴스, 공지, 프로모션 등 마케팅 정보 제공</li>
+              </ul>
 
-        <h2>4. 제3자 제공 및 공유</h2>
-        <p>
-          회사는 원칙적으로 사용자의 개인정보를 외부에 판매하지 않습니다.
-          다만 다음의 경우에는 필요한 범위 내에서 개인정보를 제3자와 공유할 수 있습니다.
-        </p>
-        <ul>
-          <li>결제 처리, 데이터 분석, 이메일 발송 등 서비스 제공을 위한 업무 위탁 업체</li>
-          <li>Google Analytics와 같은 분석 도구 제공업체</li>
-          <li>법령에 따라 제출 의무가 있는 경우</li>
-          <li>사용자가 사전에 동의한 경우</li>
-        </ul>
+              <h2>4. 제3자 제공 및 공유</h2>
+              <p>
+                회사는 원칙적으로 사용자의 개인정보를 외부에 판매하지 않습니다.
+                다만 다음의 경우에는 필요한 범위 내에서 개인정보를 제3자와 공유할 수 있습니다.
+              </p>
+              <ul>
+                <li>결제 처리, 데이터 분석, 이메일 발송 등 서비스 제공을 위한 업무 위탁 업체</li>
+                <li>Google Analytics와 같은 분석 도구 제공업체</li>
+                <li>법령에 따라 제출 의무가 있는 경우</li>
+                <li>사용자가 사전에 동의한 경우</li>
+              </ul>
 
-        <h2>5. Google Analytics 및 쿠키 사용</h2>
-        <p>
-          회사는 서비스 이용 현황을 분석하고 웹사이트를 개선하기 위해 Google Analytics를 사용할 예정입니다.
-          이 과정에서 쿠키, 기기 정보, 페이지 방문 기록, 이용 행동 정보 등이 수집될 수 있습니다.
-        </p>
-        <p>
-          사용자는 브라우저 설정을 통해 쿠키 저장을 거부하거나 삭제할 수 있습니다.
-          다만 쿠키 사용을 제한할 경우 일부 기능 이용에 제한이 있을 수 있습니다.
-        </p>
+              <h2>5. Google Analytics 및 쿠키 사용</h2>
+              <p>
+                회사는 서비스 이용 현황을 분석하고 웹사이트를 개선하기 위해 Google Analytics를 사용할 예정입니다.
+                이 과정에서 쿠키, 기기 정보, 페이지 방문 기록, 이용 행동 정보 등이 수집될 수 있습니다.
+              </p>
+              <p>
+                사용자는 브라우저 설정을 통해 쿠키 저장을 거부하거나 삭제할 수 있습니다.
+                다만 쿠키 사용을 제한할 경우 일부 기능 이용에 제한이 있을 수 있습니다.
+              </p>
 
-        <h2>6. 결제 관련 정보</h2>
-        <p>
-          회사는 향후 유료 서비스를 운영할 예정입니다. 현재 결제 방식은 아직 확정되지 않았으며,
-          결제 기능이 도입되는 경우 실제 결제 처리 방식, 결제 대행사, 수집되는 결제 정보 범위 등은
-          본 개인정보처리방침 또는 별도 고지를 통해 안내될 예정입니다.
-        </p>
+              <h2>6. 결제 관련 정보</h2>
+              <p>
+                회사는 향후 유료 서비스를 운영할 예정입니다. 현재 결제 방식은 아직 확정되지 않았으며,
+                결제 기능이 도입되는 경우 실제 결제 처리 방식, 결제 대행사, 수집되는 결제 정보 범위 등은
+                본 개인정보처리방침 또는 별도 고지를 통해 안내될 예정입니다.
+              </p>
 
-        <h2>7. 보관 기간</h2>
-        <p>
-          회사는 개인정보 수집 및 이용 목적이 달성될 때까지 개인정보를 보관합니다.
-          다만 관련 법령에 따라 일정 기간 보관이 필요한 경우 해당 기간 동안 보관 후 안전하게 삭제합니다.
-        </p>
+              <h2>7. 보관 기간</h2>
+              <p>
+                회사는 개인정보 수집 및 이용 목적이 달성될 때까지 개인정보를 보관합니다.
+                다만 관련 법령에 따라 일정 기간 보관이 필요한 경우 해당 기간 동안 보관 후 안전하게 삭제합니다.
+              </p>
 
-        <h2>8. 개인정보 보호</h2>
-        <p>
-          회사는 개인정보의 분실, 도난, 유출, 위조, 변조 또는 훼손을 방지하기 위하여
-          합리적인 기술적·관리적 보호조치를 시행합니다.
-          다만 인터넷 기반 서비스의 특성상 완전한 보안을 보장할 수는 없습니다.
-        </p>
+              <h2>8. 개인정보 보호</h2>
+              <p>
+                회사는 개인정보의 분실, 도난, 유출, 위조, 변조 또는 훼손을 방지하기 위하여
+                합리적인 기술적·관리적 보호조치를 시행합니다.
+                다만 인터넷 기반 서비스의 특성상 완전한 보안을 보장할 수는 없습니다.
+              </p>
 
-        <h2>9. 이용자의 권리</h2>
-        <p>사용자는 관련 법령이 정하는 바에 따라 다음과 같은 권리를 가질 수 있습니다.</p>
-        <ul>
-          <li>본인의 개인정보 열람 요청</li>
-          <li>개인정보 정정 또는 삭제 요청</li>
-          <li>개인정보 처리 정지 요청</li>
-          <li>마케팅 정보 수신 동의 철회</li>
-        </ul>
+              <h2>9. 이용자의 권리</h2>
+              <p>사용자는 관련 법령이 정하는 바에 따라 다음과 같은 권리를 가질 수 있습니다.</p>
+              <ul>
+                <li>본인의 개인정보 열람 요청</li>
+                <li>개인정보 정정 또는 삭제 요청</li>
+                <li>개인정보 처리 정지 요청</li>
+                <li>마케팅 정보 수신 동의 철회</li>
+              </ul>
 
-        <h2>10. 미성년자 개인정보</h2>
-        <p>
-          회사는 관련 법령에 따라 필요한 경우 미성년자의 개인정보 보호를 위해 추가 조치를 취할 수 있습니다.
-          법정대리인의 동의가 필요한 경우, 회사는 해당 절차를 요구할 수 있습니다.
-        </p>
+              <h2>10. 미성년자 개인정보</h2>
+              <p>
+                회사는 관련 법령에 따라 필요한 경우 미성년자의 개인정보 보호를 위해 추가 조치를 취할 수 있습니다.
+                법정대리인의 동의가 필요한 경우, 회사는 해당 절차를 요구할 수 있습니다.
+              </p>
 
-        <h2>11. 정책 변경</h2>
-        <p>
-          회사는 법령, 서비스 내용 또는 운영 정책의 변경에 따라 본 개인정보처리방침을 수정할 수 있습니다.
-          중요한 변경이 있는 경우 웹사이트를 통해 사전에 또는 합리적인 시점에 공지합니다.
-        </p>
+              <h2>11. 정책 변경</h2>
+              <p>
+                회사는 법령, 서비스 내용 또는 운영 정책의 변경에 따라 본 개인정보처리방침을 수정할 수 있습니다.
+                중요한 변경이 있는 경우 웹사이트를 통해 사전에 또는 합리적인 시점에 공지합니다.
+              </p>
 
-        <h2>12. 연락처</h2>
-        <p>
-          개인정보 관련 문의는 아래 이메일로 연락해 주시기 바랍니다.
-        </p>
-        <p class="email">gyung9306301@gmail.com</p>
+              <h2>12. 연락처</h2>
+              <p>개인정보 관련 문의는 아래 이메일로 연락해 주시기 바랍니다.</p>
+              <p class="email">gyung9306301@gmail.com</p>
+            </div>
+          </div>
 
-        <div class="footer">
-          운영 국가: 대한민국<br />
-          서비스명: Tesari (임시명 포함 가능)
-        </div>
-      </section>
+          <div id="privacy-en" class="lang-content">
+            <div class="panel-card">
+              <h1>Privacy Policy</h1>
+              <div class="meta">Last Updated: March 21, 2026</div>
 
-      <!-- English -->
-      <section id="lang-en" class="lang-section">
-        <h1>Privacy Policy</h1>
-        <div class="subtitle">
-          Last Updated: March 21, 2026
-        </div>
+              <div class="notice">
+                This Privacy Policy applies to the services operated by Tesari, including any temporary or working business name.
+                The company name may be updated in the future, and this page may be revised accordingly.
+              </div>
 
-        <div class="notice">
-          This Privacy Policy applies to the services operated by Tesari, including any temporary or working business name.
-          The company name may be updated in the future, and this page may be revised accordingly.
-        </div>
+              <h2>1. Introduction</h2>
+              <p>
+                Tesari (“Company,” “we,” “our,” or “the Service”) provides influencer pricing information services and influencer marketing campaign services.
+                This Privacy Policy explains what information we collect, how we use it, how we store it, and how we protect it when users access our website and related services.
+              </p>
 
-        <h2>1. Introduction</h2>
-        <p>
-          Tesari (“Company,” “we,” “our,” or “the Service”) provides influencer pricing information services and influencer marketing campaign services.
-          This Privacy Policy explains what information we collect, how we use it, how we store it, and how we protect it when users access our website and related services.
-        </p>
+              <h2>2. Information We Collect</h2>
+              <p>We may collect the following types of information:</p>
+              <ul>
+                <li>Information provided during sign-up, such as name, email address, password, or other account details</li>
+                <li>Information entered while using the service, including inquiries, quote requests, and marketing campaign requests</li>
+                <li>Campaign-related information required to support influencer marketing services</li>
+                <li>Transaction-related information necessary for paid services once payment functionality is introduced (payment method to be decided later)</li>
+                <li>Usage logs such as access time, click history, browser type, device information, and IP address</li>
+                <li>Information collected through cookies, pixels, and similar technologies</li>
+              </ul>
 
-        <h2>2. Information We Collect</h2>
-        <p>We may collect the following types of information:</p>
-        <ul>
-          <li>Information provided during sign-up, such as name, email address, password, or other account details</li>
-          <li>Information entered while using the service, including inquiries, quote requests, and marketing campaign requests</li>
-          <li>Campaign-related information required to support influencer marketing services</li>
-          <li>Transaction-related information necessary for paid services once payment functionality is introduced (payment method to be decided later)</li>
-          <li>Usage logs such as access time, click history, browser type, device information, and IP address</li>
-          <li>Information collected through cookies, pixels, and similar technologies</li>
-        </ul>
+              <h2>3. How We Use Information</h2>
+              <p>We use collected information for the following purposes:</p>
+              <ul>
+                <li>User registration, identity verification, account management, and authentication</li>
+                <li>Providing influencer pricing information and related services</li>
+                <li>Consulting, proposing, managing, and communicating regarding influencer marketing campaigns</li>
+                <li>Processing payments, maintaining transaction records, and supporting customers</li>
+                <li>Improving service quality, developing features, and enhancing user experience</li>
+                <li>Preventing abuse, maintaining security, and complying with legal obligations</li>
+                <li>Sending notices, updates, and promotional information where the user has provided consent</li>
+              </ul>
 
-        <h2>3. How We Use Information</h2>
-        <p>We use collected information for the following purposes:</p>
-        <ul>
-          <li>User registration, identity verification, account management, and authentication</li>
-          <li>Providing influencer pricing information and related services</li>
-          <li>Consulting, proposing, managing, and communicating regarding influencer marketing campaigns</li>
-          <li>Processing payments, maintaining transaction records, and supporting customers</li>
-          <li>Improving service quality, developing features, and enhancing user experience</li>
-          <li>Preventing abuse, maintaining security, and complying with legal obligations</li>
-          <li>Sending notices, updates, and promotional information where the user has provided consent</li>
-        </ul>
+              <h2>4. Sharing of Information</h2>
+              <p>
+                We do not sell users’ personal information to third parties.
+                However, we may share personal information to the extent necessary in the following circumstances:
+              </p>
+              <ul>
+                <li>With service providers that support payment processing, analytics, email delivery, or related business operations</li>
+                <li>With analytics providers such as Google Analytics</li>
+                <li>Where disclosure is required by law or legal process</li>
+                <li>Where the user has given prior consent</li>
+              </ul>
 
-        <h2>4. Sharing of Information</h2>
-        <p>
-          We do not sell users’ personal information to third parties.
-          However, we may share personal information to the extent necessary in the following circumstances:
-        </p>
-        <ul>
-          <li>With service providers that support payment processing, analytics, email delivery, or related business operations</li>
-          <li>With analytics providers such as Google Analytics</li>
-          <li>Where disclosure is required by law or legal process</li>
-          <li>Where the user has given prior consent</li>
-        </ul>
+              <h2>5. Google Analytics and Cookies</h2>
+              <p>
+                We plan to use Google Analytics to analyze website traffic and improve our service.
+                In this process, cookies, device information, page visit history, and user behavior information may be collected.
+              </p>
+              <p>
+                Users may refuse or delete cookies through their browser settings.
+                However, restricting cookies may affect the availability of certain features of the service.
+              </p>
 
-        <h2>5. Google Analytics and Cookies</h2>
-        <p>
-          We plan to use Google Analytics to analyze website traffic and improve our service.
-          In this process, cookies, device information, page visit history, and user behavior information may be collected.
-        </p>
-        <p>
-          Users may refuse or delete cookies through their browser settings.
-          However, restricting cookies may affect the availability of certain features of the service.
-        </p>
+              <h2>6. Payment-Related Information</h2>
+              <p>
+                We plan to introduce paid services in the future. The payment method has not yet been finalized.
+                Once payment functionality is implemented, details regarding payment processing, payment service providers,
+                and the scope of payment-related information collected will be announced through this Privacy Policy or a separate notice.
+              </p>
 
-        <h2>6. Payment-Related Information</h2>
-        <p>
-          We plan to introduce paid services in the future. The payment method has not yet been finalized.
-          Once payment functionality is implemented, details regarding payment processing, payment service providers,
-          and the scope of payment-related information collected will be announced through this Privacy Policy or a separate notice.
-        </p>
+              <h2>7. Data Retention</h2>
+              <p>
+                We retain personal information for as long as necessary to fulfill the purposes for which it was collected.
+                Where retention is required by applicable law, we will store the information for the required period and then delete it securely.
+              </p>
 
-        <h2>7. Data Retention</h2>
-        <p>
-          We retain personal information for as long as necessary to fulfill the purposes for which it was collected.
-          Where retention is required by applicable law, we will store the information for the required period and then delete it securely.
-        </p>
+              <h2>8. Data Protection</h2>
+              <p>
+                We implement reasonable technical and organizational measures to protect personal information from loss, theft, leakage, alteration, or damage.
+                However, no internet-based service can be guaranteed to be completely secure.
+              </p>
 
-        <h2>8. Data Protection</h2>
-        <p>
-          We implement reasonable technical and organizational measures to protect personal information from loss, theft, leakage, alteration, or damage.
-          However, no internet-based service can be guaranteed to be completely secure.
-        </p>
+              <h2>9. User Rights</h2>
+              <p>Subject to applicable law, users may have the following rights:</p>
+              <ul>
+                <li>The right to request access to their personal information</li>
+                <li>The right to request correction or deletion of their personal information</li>
+                <li>The right to request restriction of processing</li>
+                <li>The right to withdraw consent for receiving marketing communications</li>
+              </ul>
 
-        <h2>9. User Rights</h2>
-        <p>Subject to applicable law, users may have the following rights:</p>
-        <ul>
-          <li>The right to request access to their personal information</li>
-          <li>The right to request correction or deletion of their personal information</li>
-          <li>The right to request restriction of processing</li>
-          <li>The right to withdraw consent for receiving marketing communications</li>
-        </ul>
+              <h2>10. Children’s Privacy</h2>
+              <p>
+                Where required by applicable law, we may take additional steps to protect minors’ personal information.
+                If consent from a parent or legal guardian is required, we may request such consent before providing certain services.
+              </p>
 
-        <h2>10. Children’s Privacy</h2>
-        <p>
-          Where required by applicable law, we may take additional steps to protect minors’ personal information.
-          If consent from a parent or legal guardian is required, we may request such consent before providing certain services.
-        </p>
+              <h2>11. Changes to This Policy</h2>
+              <p>
+                We may update this Privacy Policy from time to time due to changes in law, service content, or operational policies.
+                If material changes are made, we will provide notice on the website in advance or within a reasonable time.
+              </p>
 
-        <h2>11. Changes to This Policy</h2>
-        <p>
-          We may update this Privacy Policy from time to time due to changes in law, service content, or operational policies.
-          If material changes are made, we will provide notice on the website in advance or within a reasonable time.
-        </p>
+              <h2>12. Contact Us</h2>
+              <p>For privacy-related inquiries, please contact us at:</p>
+              <p class="email">gyung9306301@gmail.com</p>
+            </div>
+          </div>
+        </section>
 
-        <h2>12. Contact Us</h2>
-        <p>
-          For privacy-related inquiries, please contact us at:
-        </p>
-        <p class="email">gyung9306301@gmail.com</p>
+        <!-- TERMS -->
+        <section id="terms" class="policy-panel">
+          <div id="terms-ko" class="lang-content active">
+            <div class="panel-card">
+              <h1>이용약관</h1>
+              <div class="meta">시행일자: 2026년 3월 21일</div>
 
-        <div class="footer">
-          Operating Country: Republic of Korea<br />
-          Service Name: Tesari (including temporary working name)
-        </div>
-      </section>
+              <div class="notice">
+                본 약관은 Tesari가 제공하는 인플루언서 가격 정보 확인 및 인플루언서 마케팅 진행 서비스에 적용됩니다.
+              </div>
+
+              <h2>제1조 목적</h2>
+              <p>
+                본 약관은 Tesari(이하 “회사”)가 제공하는 인플루언서 가격 정보 확인 서비스, 인플루언서 마케팅 진행 서비스 및 관련 제반 서비스(이하 “서비스”)의 이용과 관련하여 회사와 이용자 간의 권리, 의무 및 책임사항을 규정함을 목적으로 합니다.
+              </p>
+
+              <h2>제2조 정의</h2>
+              <ol>
+                <li>“서비스”란 회사가 웹사이트 및 관련 플랫폼을 통해 제공하는 인플루언서 가격 정보 조회, 마케팅 캠페인 진행, 상담, 문의, 기타 관련 기능을 의미합니다.</li>
+                <li>“이용자”란 본 약관에 따라 회사가 제공하는 서비스를 이용하는 회원 및 비회원을 말합니다.</li>
+                <li>“회원”이란 회사에 개인정보를 제공하여 회원등록을 한 자로서, 계속적으로 서비스를 이용할 수 있는 자를 말합니다.</li>
+                <li>“비회원”이란 회원으로 가입하지 않고 서비스를 이용하는 자를 말합니다.</li>
+              </ol>
+
+              <h2>제3조 약관의 게시와 개정</h2>
+              <ol>
+                <li>회사는 본 약관의 내용을 이용자가 쉽게 알 수 있도록 서비스 화면 또는 별도 연결 화면에 게시합니다.</li>
+                <li>회사는 관련 법령을 위반하지 않는 범위에서 본 약관을 개정할 수 있습니다.</li>
+                <li>회사가 약관을 개정하는 경우, 적용일자 및 개정사유를 명시하여 사전에 공지합니다.</li>
+                <li>이용자가 개정 약관 시행일 이후에도 서비스를 계속 이용하는 경우, 개정 약관에 동의한 것으로 봅니다.</li>
+              </ol>
+
+              <h2>제4조 서비스의 제공</h2>
+              <ol>
+                <li>인플루언서 가격 정보 및 관련 정보 제공</li>
+                <li>인플루언서 마케팅 캠페인 제안, 진행 및 관리 지원</li>
+                <li>회원관리, 고객 문의 대응 및 기타 부가 서비스</li>
+                <li>회사가 추가 개발하거나 제휴를 통해 제공하는 서비스</li>
+              </ol>
+
+              <h2>제5조 서비스 이용 및 회원가입</h2>
+              <ol>
+                <li>이용자는 회사가 정한 절차에 따라 회원가입을 신청할 수 있습니다.</li>
+                <li>회사는 허위 정보 기재, 타인 정보 도용, 법령 위반 목적, 기타 부적절한 경우 회원가입 신청을 거절하거나 제한할 수 있습니다.</li>
+                <li>회원은 자신의 계정 정보를 정확하게 관리해야 하며, 계정 관리 소홀로 발생한 불이익에 대해 책임을 질 수 있습니다.</li>
+              </ol>
+
+              <h2>제6조 이용자의 의무</h2>
+              <ol>
+                <li>허위 정보 등록 또는 타인 정보 도용</li>
+                <li>회사 또는 제3자의 권리 침해 행위</li>
+                <li>서비스 운영 방해 행위</li>
+                <li>불법적이거나 부적절한 목적의 이용</li>
+                <li>회사 동의 없는 복제, 판매, 재배포, 상업적 이용</li>
+              </ol>
+
+              <h2>제7조 인플루언서 정보의 이용</h2>
+              <ol>
+                <li>회사가 제공하는 인플루언서 관련 정보는 참고용 또는 서비스 제공 목적 범위 내에서 제공될 수 있습니다.</li>
+                <li>회사는 정보의 정확성과 최신성을 높이기 위해 노력하나, 완전성·정확성·실시간성을 보장하지 않습니다.</li>
+                <li>이용자는 관련 법령 및 본 약관에 따라 적법하게 정보를 이용해야 합니다.</li>
+              </ol>
+
+              <h2>제8조 결제 및 유료 서비스</h2>
+              <ol>
+                <li>회사는 향후 일부 서비스를 유료로 제공할 수 있습니다.</li>
+                <li>유료 서비스의 내용, 요금, 결제 방법, 환불 기준 등은 별도 고지를 통해 안내합니다.</li>
+                <li>결제 방식은 현재 미정이며, 추후 관련 정책이 추가될 수 있습니다.</li>
+              </ol>
+
+              <h2>제9조 서비스의 변경 또는 중단</h2>
+              <ol>
+                <li>회사는 운영상 또는 기술상 필요에 따라 서비스의 전부 또는 일부를 변경할 수 있습니다.</li>
+                <li>시스템 점검, 장애, 통신 문제 등으로 서비스 제공이 일시 중단될 수 있습니다.</li>
+                <li>회사는 중요한 변경 사항이 있을 경우 사전에 공지하도록 노력합니다.</li>
+              </ol>
+
+              <h2>제10조 지식재산권</h2>
+              <ol>
+                <li>서비스와 관련된 상표, 로고, 디자인, 텍스트, 소프트웨어, 데이터 등은 회사 또는 정당한 권리자에게 귀속됩니다.</li>
+                <li>이용자는 회사의 사전 서면 동의 없이 이를 복제, 배포, 수정, 전송, 전시 또는 상업적으로 이용할 수 없습니다.</li>
+              </ol>
+
+              <h2>제11조 책임의 제한</h2>
+              <ol>
+                <li>회사는 천재지변, 불가항력, 이용자 귀책사유 또는 제3자 사유로 인한 손해에 대해 책임을 지지 않습니다.</li>
+                <li>회사는 이용자가 기대한 결과를 얻지 못한 것에 대해 책임을 지지 않습니다.</li>
+                <li>회사는 인플루언서 또는 제3자와의 개별 거래, 계약, 분쟁에 직접 관여하지 않는 한 책임을 지지 않습니다.</li>
+              </ol>
+
+              <h2>제12조 이용제한 및 해지</h2>
+              <ol>
+                <li>회사는 이용자가 본 약관 또는 관련 법령을 위반하는 경우 서비스 이용을 제한하거나 회원 자격을 해지할 수 있습니다.</li>
+                <li>회원은 언제든지 탈퇴를 요청할 수 있으며, 회사는 관련 절차에 따라 처리합니다.</li>
+              </ol>
+
+              <h2>제13조 준거법 및 관할</h2>
+              <p>
+                본 약관은 대한민국 법률에 따라 해석되며, 서비스 이용과 관련하여 분쟁이 발생할 경우 대한민국의 관할 법원을 전속적 합의관할로 합니다.
+              </p>
+            </div>
+          </div>
+
+          <div id="terms-en" class="lang-content">
+            <div class="panel-card">
+              <h1>Terms of Service</h1>
+              <div class="meta">Effective Date: March 21, 2026</div>
+
+              <div class="notice">
+                These Terms apply to Tesari’s influencer pricing information service and influencer marketing campaign service.
+              </div>
+
+              <h2>Article 1. Purpose</h2>
+              <p>
+                These Terms of Service set forth the rights, obligations, and responsibilities between Tesari and users in connection with the use of the influencer pricing information service, influencer marketing campaign service, and related services.
+              </p>
+
+              <h2>Article 2. Definitions</h2>
+              <ol>
+                <li>“Service” means influencer pricing information, marketing campaign support, inquiry handling, and related functions provided through the website or platform.</li>
+                <li>“User” means any member or non-member who uses the Service under these Terms.</li>
+                <li>“Member” means a person who registers an account and continuously uses the Service.</li>
+                <li>“Non-member” means a person who uses the Service without registering an account.</li>
+              </ol>
+
+              <h2>Article 3. Posting and Amendment of Terms</h2>
+              <ol>
+                <li>The Company makes these Terms available through the Service or a linked page.</li>
+                <li>The Company may amend these Terms to the extent permitted by law.</li>
+                <li>If amended, the Company will announce the effective date and reason in advance.</li>
+                <li>Continued use after the effective date constitutes acceptance of the revised Terms.</li>
+              </ol>
+
+              <h2>Article 4. Provision of Service</h2>
+              <ol>
+                <li>Influencer pricing information and related information</li>
+                <li>Proposal, execution, and support for influencer marketing campaigns</li>
+                <li>Member management and customer support</li>
+                <li>Other services developed or provided through partnerships</li>
+              </ol>
+
+              <h2>Article 5. Use of Service and Registration</h2>
+              <ol>
+                <li>Users may apply for membership in accordance with the Company’s procedures.</li>
+                <li>The Company may reject or restrict registration where false information is submitted or where the application is improper.</li>
+                <li>Members are responsible for properly managing their account information.</li>
+              </ol>
+
+              <h2>Article 6. User Obligations</h2>
+              <ol>
+                <li>Providing false information or misusing another person’s identity</li>
+                <li>Infringing the rights of the Company or third parties</li>
+                <li>Interfering with operation of the Service</li>
+                <li>Using the Service for unlawful or improper purposes</li>
+                <li>Reproducing, selling, redistributing, or commercially exploiting the Service without consent</li>
+              </ol>
+
+              <h2>Article 7. Use of Influencer Information</h2>
+              <ol>
+                <li>Influencer-related information may be provided for reference or service purposes.</li>
+                <li>The Company does not guarantee completeness, accuracy, or real-time updates of such information.</li>
+                <li>Users must use such information lawfully and in accordance with these Terms.</li>
+              </ol>
+
+              <h2>Article 8. Payment and Paid Services</h2>
+              <ol>
+                <li>The Company may introduce paid services in the future.</li>
+                <li>Fees, payment methods, and refund standards will be announced separately.</li>
+                <li>The payment method has not yet been determined.</li>
+              </ol>
+
+              <h2>Article 9. Modification or Suspension of Service</h2>
+              <ol>
+                <li>The Company may modify all or part of the Service for operational or technical reasons.</li>
+                <li>The Service may be temporarily suspended due to maintenance or system issues.</li>
+                <li>The Company will endeavor to provide prior notice of material changes.</li>
+              </ol>
+
+              <h2>Article 10. Intellectual Property</h2>
+              <ol>
+                <li>All trademarks, logos, designs, text, software, and data related to the Service belong to the Company or rightful owners.</li>
+                <li>Users may not copy or commercially use such materials without prior written consent.</li>
+              </ol>
+
+              <h2>Article 11. Limitation of Liability</h2>
+              <ol>
+                <li>The Company is not liable for damages caused by force majeure, user fault, or third-party actions.</li>
+                <li>The Company is not liable where users fail to achieve expected results.</li>
+                <li>The Company is not responsible for individual transactions or disputes with influencers or third parties unless directly involved.</li>
+              </ol>
+
+              <h2>Article 12. Restriction and Termination</h2>
+              <ol>
+                <li>The Company may restrict access or terminate membership for violations of these Terms or applicable law.</li>
+                <li>Members may request account deletion at any time subject to applicable procedures.</li>
+              </ol>
+
+              <h2>Article 13. Governing Law and Jurisdiction</h2>
+              <p>
+                These Terms are governed by the laws of the Republic of Korea, and disputes shall be subject to the exclusive jurisdiction of the competent court in the Republic of Korea.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- AFFILIATE -->
+        <section id="affiliate" class="policy-panel">
+          <div id="affiliate-ko" class="lang-content active">
+            <div class="panel-card">
+              <h1>Affiliate Offer</h1>
+              <div class="meta">최종 업데이트일: 2026년 3월 21일</div>
+
+              <div class="notice">
+                아래 내용은 제휴 제안 및 협업 문의를 위한 기본 안내입니다. 세부 조건은 개별 협의에 따라 달라질 수 있습니다.
+              </div>
+
+              <h2>1. 개요</h2>
+              <p>
+                Tesari는 인플루언서 마케팅, 브랜드 협업, 콘텐츠 프로모션 및 관련 비즈니스 기회를 위한 제휴 및 협업 제안을 검토합니다.
+              </p>
+
+              <h2>2. 제휴 대상</h2>
+              <ul>
+                <li>브랜드 및 광고주</li>
+                <li>인플루언서 및 크리에이터</li>
+                <li>마케팅 에이전시</li>
+                <li>기타 Tesari 서비스와 시너지를 낼 수 있는 파트너</li>
+              </ul>
+
+              <h2>3. 제휴 검토 기준</h2>
+              <ul>
+                <li>서비스와의 적합성</li>
+                <li>브랜드 신뢰도 및 운영 안정성</li>
+                <li>캠페인 목표의 명확성</li>
+                <li>법적·윤리적 기준 충족 여부</li>
+              </ul>
+
+              <h2>4. 유의사항</h2>
+              <ul>
+                <li>모든 제휴 문의가 자동 승인되는 것은 아닙니다.</li>
+                <li>제휴 진행 여부 및 조건은 Tesari의 내부 검토 후 결정됩니다.</li>
+                <li>제휴와 관련된 구체적인 상업 조건은 별도 계약 또는 합의를 통해 정해질 수 있습니다.</li>
+              </ul>
+
+              <h2>5. 문의 방법</h2>
+              <p>제휴 제안은 아래 이메일로 보내주시기 바랍니다.</p>
+              <p class="email">gyung9306301@gmail.com</p>
+            </div>
+          </div>
+
+          <div id="affiliate-en" class="lang-content">
+            <div class="panel-card">
+              <h1>Affiliate Offer</h1>
+              <div class="meta">Last Updated: March 21, 2026</div>
+
+              <div class="notice">
+                The information below is a general guide for partnership and affiliate proposals. Specific terms may vary depending on individual discussions.
+              </div>
+
+              <h2>1. Overview</h2>
+              <p>
+                Tesari reviews partnership and affiliate opportunities related to influencer marketing, brand collaboration, content promotion, and related business initiatives.
+              </p>
+
+              <h2>2. Eligible Partners</h2>
+              <ul>
+                <li>Brands and advertisers</li>
+                <li>Influencers and creators</li>
+                <li>Marketing agencies</li>
+                <li>Other partners that may create synergy with Tesari’s services</li>
+              </ul>
+
+              <h2>3. Review Criteria</h2>
+              <ul>
+                <li>Relevance to the service</li>
+                <li>Brand credibility and operational reliability</li>
+                <li>Clarity of campaign goals</li>
+                <li>Compliance with legal and ethical standards</li>
+              </ul>
+
+              <h2>4. Important Notes</h2>
+              <ul>
+                <li>Not all partnership inquiries will be accepted automatically.</li>
+                <li>Acceptance and conditions are determined after Tesari’s internal review.</li>
+                <li>Specific commercial terms may be set through a separate agreement or contract.</li>
+              </ul>
+
+              <h2>5. Contact</h2>
+              <p>Please send affiliate or partnership proposals to:</p>
+              <p class="email">gyung9306301@gmail.com</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact" class="policy-panel">
+          <div id="contact-ko" class="lang-content active">
+            <div class="panel-card">
+              <h1>Contact Us</h1>
+              <div class="meta">최종 업데이트일: 2026년 3월 21일</div>
+
+              <div class="notice">
+                서비스 이용, 제휴, 개인정보, 기타 문의는 아래 연락처를 통해 접수하실 수 있습니다.
+              </div>
+
+              <h2>문의 안내</h2>
+              <p>
+                Tesari는 서비스 관련 문의, 제휴 문의, 기타 비즈니스 문의를 이메일로 받고 있습니다.
+                문의 내용을 가능한 한 구체적으로 작성해 주시면 더 원활한 답변이 가능합니다.
+              </p>
+
+              <div class="contact-box">
+                <p><strong>서비스명</strong> Tesari</p>
+                <p><strong>운영 국가</strong> 대한민국</p>
+                <p><strong>이메일</strong> <span class="email">gyung9306301@gmail.com</span></p>
+              </div>
+            </div>
+          </div>
+
+          <div id="contact-en" class="lang-content">
+            <div class="panel-card">
+              <h1>Contact Us</h1>
+              <div class="meta">Last Updated: March 21, 2026</div>
+
+              <div class="notice">
+                For service-related, partnership, privacy, or other general inquiries, please contact us using the information below.
+              </div>
+
+              <h2>Inquiry Information</h2>
+              <p>
+                Tesari accepts service inquiries, partnership requests, and other business-related communications by email.
+                Please include as much detail as possible so we can respond more effectively.
+              </p>
+
+              <div class="contact-box">
+                <p><strong>Service Name</strong> Tesari</p>
+                <p><strong>Operating Country</strong> Republic of Korea</p>
+                <p><strong>Email</strong> <span class="email">gyung9306301@gmail.com</span></p>
+              </div>
+
+              <div class="footer-note">
+                We aim to respond within a reasonable timeframe depending on the nature of the inquiry.
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
     </div>
   </div>
 
   <script>
-    function showLang(lang) {
-      const ko = document.getElementById('lang-ko');
-      const en = document.getElementById('lang-en');
-      const btnKo = document.getElementById('btn-ko');
-      const btnEn = document.getElementById('btn-en');
+    const tabButtons = document.querySelectorAll('.policy-tab');
+    const panels = document.querySelectorAll('.policy-panel');
+    const langButtons = document.querySelectorAll('.lang-switch button');
 
-      if (lang === 'ko') {
-        ko.classList.add('active');
-        en.classList.remove('active');
-        btnKo.classList.add('active');
-        btnEn.classList.remove('active');
-        document.documentElement.lang = 'ko';
-      } else {
-        en.classList.add('active');
-        ko.classList.remove('active');
-        btnEn.classList.add('active');
-        btnKo.classList.remove('active');
-        document.documentElement.lang = 'en';
-      }
+    let currentTab = 'privacy';
+    let currentLang = 'ko';
+
+    function getTabFromHash() {
+      const hash = window.location.hash.replace('#', '').toLowerCase();
+      const validTabs = ['privacy', 'terms', 'affiliate', 'contact'];
+      return validTabs.includes(hash) ? hash : 'privacy';
     }
+
+    function updateView() {
+      panels.forEach((panel) => {
+        panel.classList.toggle('active', panel.id === currentTab);
+      });
+
+      tabButtons.forEach((btn) => {
+        btn.classList.toggle('active', btn.dataset.tab === currentTab);
+      });
+
+      document.querySelectorAll('.lang-content').forEach((el) => {
+        el.classList.remove('active');
+      });
+
+      const activeLangBlock = document.getElementById(`${currentTab}-${currentLang}`);
+      if (activeLangBlock) {
+        activeLangBlock.classList.add('active');
+      }
+
+      langButtons.forEach((btn) => {
+        btn.classList.toggle('active', btn.dataset.lang === currentLang);
+      });
+
+      document.documentElement.lang = currentLang;
+    }
+
+    function setTab(tabName, updateHash = true) {
+      currentTab = tabName;
+      if (updateHash) {
+        history.replaceState(null, '', `#${tabName}`);
+      }
+      updateView();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    tabButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        setTab(btn.dataset.tab);
+      });
+    });
+
+    langButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        currentLang = btn.dataset.lang;
+        updateView();
+      });
+    });
+
+    window.addEventListener('hashchange', () => {
+      currentTab = getTabFromHash();
+      updateView();
+    });
+
+    currentTab = getTabFromHash();
+    updateView();
   </script>
 </body>
 </html>
