@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tesari Privacy Policy</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --card: #121933;
+      --text: #e8ecf8;
+      --muted: #aab3cc;
+      --line: #26304f;
+      --accent: #56c2ff;
+      --accent2: #7ef0c0;
+      --btn: #1a2447;
+      --btn-hover: #24305b;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, "Noto Sans KR", sans-serif;
+      background: linear-gradient(180deg, #09101d 0%, #101833 100%);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .brand {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .lang-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .lang-buttons button {
+      border: 1px solid var(--line);
+      background: var(--btn);
+      color: var(--text);
+      padding: 10px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.2s ease;
+    }
+
+    .lang-buttons button:hover {
+      background: var(--btn-hover);
+    }
+
+    .lang-buttons button.active {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(86, 194, 255, 0.3) inset;
+    }
+
+    .card {
+      background: rgba(18, 25, 51, 0.95);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 32px 24px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    }
+
+    h1 {
+      font-size: 34px;
+      margin: 0 0 8px;
+      line-height: 1.2;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      margin-bottom: 28px;
+      font-size: 15px;
+    }
+
+    h2 {
+      margin-top: 34px;
+      margin-bottom: 12px;
+      font-size: 22px;
+      color: var(--accent2);
+    }
+
+    p {
+      margin: 0 0 12px;
+      color: var(--text);
+    }
+
+    ul {
+      margin: 0 0 12px 20px;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .notice {
+      background: rgba(86, 194, 255, 0.08);
+      border: 1px solid rgba(86, 194, 255, 0.25);
+      color: var(--text);
+      padding: 14px 16px;
+      border-radius: 12px;
+      margin: 18px 0 10px;
+      font-size: 14px;
+    }
+
+    .footer {
+      margin-top: 36px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .lang-section {
+      display: none;
+    }
+
+    .lang-section.active {
+      display: block;
+    }
+
+    .email {
+      color: var(--accent);
+      word-break: break-all;
+    }
+
+    @media (max-width: 640px) {
+      .wrap {
+        padding: 24px 14px 60px;
+      }
+
+      .card {
+        padding: 24px 18px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+
+      .topbar {
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">Tesari Privacy Policy Page</div>
+      <div class="lang-buttons">
+        <button id="btn-ko" class="active" onclick="showLang('ko')">한국어</button>
+        <button id="btn-en" onclick="showLang('en')">English</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <!-- Korean -->
+      <section id="lang-ko" class="lang-section active">
+        <h1>개인정보처리방침</h1>
+        <div class="subtitle">
+          최종 업데이트일: 2026년 3월 21일
+        </div>
+
+        <div class="notice">
+          본 개인정보처리방침은 Tesari(임시 상호 포함)의 서비스 운영에 적용됩니다.
+          회사명은 추후 변경될 수 있으며, 변경 시 본 페이지를 통해 업데이트될 수 있습니다.
+        </div>
+
+        <h2>1. 소개</h2>
+        <p>
+          Tesari(이하 “회사”, “당사”, 또는 “서비스”)는 인플루언서 가격 정보 확인 및 인플루언서 마케팅 진행 서비스를 제공합니다.
+          본 개인정보처리방침은 사용자가 당사 웹사이트 및 관련 서비스를 이용할 때 어떠한 정보를 수집하고,
+          이를 어떻게 이용·보관·보호하는지 설명하기 위해 마련되었습니다.
+        </p>
+
+        <h2>2. 수집하는 정보</h2>
+        <p>회사는 다음과 같은 정보를 수집할 수 있습니다.</p>
+        <ul>
+          <li>회원가입 시 제공하는 정보: 이름, 이메일 주소, 비밀번호 또는 기타 계정 정보</li>
+          <li>서비스 이용 과정에서 사용자가 입력하는 정보: 문의 내용, 견적 요청, 마케팅 의뢰 관련 정보</li>
+          <li>인플루언서 마케팅 진행을 위해 필요한 캠페인 관련 정보</li>
+          <li>결제 서비스 제공 시 필요한 거래 관련 정보 (결제 방식은 추후 확정 예정)</li>
+          <li>접속 기록, 클릭 기록, 이용 시간, 브라우저 종류, 기기 정보, IP 주소 등 이용 로그 정보</li>
+          <li>쿠키, 픽셀, 유사 기술을 통해 수집되는 정보</li>
+        </ul>
+
+        <h2>3. 개인정보 이용 목적</h2>
+        <p>회사는 수집한 정보를 다음 목적 범위 내에서 이용합니다.</p>
+        <ul>
+          <li>회원가입, 본인 확인, 계정 관리 및 사용자 인증</li>
+          <li>인플루언서 가격 정보 제공 및 관련 서비스 운영</li>
+          <li>인플루언서 마케팅 캠페인 상담, 제안, 진행 및 커뮤니케이션</li>
+          <li>결제 처리, 거래 기록 관리 및 고객 지원</li>
+          <li>서비스 품질 개선, 기능 개발, 사용자 경험 향상</li>
+          <li>부정 이용 방지, 보안 점검 및 법적 의무 이행</li>
+          <li>사용자가 동의한 경우 뉴스, 공지, 프로모션 등 마케팅 정보 제공</li>
+        </ul>
+
+        <h2>4. 제3자 제공 및 공유</h2>
+        <p>
+          회사는 원칙적으로 사용자의 개인정보를 외부에 판매하지 않습니다.
+          다만 다음의 경우에는 필요한 범위 내에서 개인정보를 제3자와 공유할 수 있습니다.
+        </p>
+        <ul>
+          <li>결제 처리, 데이터 분석, 이메일 발송 등 서비스 제공을 위한 업무 위탁 업체</li>
+          <li>Google Analytics와 같은 분석 도구 제공업체</li>
+          <li>법령에 따라 제출 의무가 있는 경우</li>
+          <li>사용자가 사전에 동의한 경우</li>
+        </ul>
+
+        <h2>5. Google Analytics 및 쿠키 사용</h2>
+        <p>
+          회사는 서비스 이용 현황을 분석하고 웹사이트를 개선하기 위해 Google Analytics를 사용할 예정입니다.
+          이 과정에서 쿠키, 기기 정보, 페이지 방문 기록, 이용 행동 정보 등이 수집될 수 있습니다.
+        </p>
+        <p>
+          사용자는 브라우저 설정을 통해 쿠키 저장을 거부하거나 삭제할 수 있습니다.
+          다만 쿠키 사용을 제한할 경우 일부 기능 이용에 제한이 있을 수 있습니다.
+        </p>
+
+        <h2>6. 결제 관련 정보</h2>
+        <p>
+          회사는 향후 유료 서비스를 운영할 예정입니다. 현재 결제 방식은 아직 확정되지 않았으며,
+          결제 기능이 도입되는 경우 실제 결제 처리 방식, 결제 대행사, 수집되는 결제 정보 범위 등은
+          본 개인정보처리방침 또는 별도 고지를 통해 안내될 예정입니다.
+        </p>
+
+        <h2>7. 보관 기간</h2>
+        <p>
+          회사는 개인정보 수집 및 이용 목적이 달성될 때까지 개인정보를 보관합니다.
+          다만 관련 법령에 따라 일정 기간 보관이 필요한 경우 해당 기간 동안 보관 후 안전하게 삭제합니다.
+        </p>
+
+        <h2>8. 개인정보 보호</h2>
+        <p>
+          회사는 개인정보의 분실, 도난, 유출, 위조, 변조 또는 훼손을 방지하기 위하여
+          합리적인 기술적·관리적 보호조치를 시행합니다.
+          다만 인터넷 기반 서비스의 특성상 완전한 보안을 보장할 수는 없습니다.
+        </p>
+
+        <h2>9. 이용자의 권리</h2>
+        <p>사용자는 관련 법령이 정하는 바에 따라 다음과 같은 권리를 가질 수 있습니다.</p>
+        <ul>
+          <li>본인의 개인정보 열람 요청</li>
+          <li>개인정보 정정 또는 삭제 요청</li>
+          <li>개인정보 처리 정지 요청</li>
+          <li>마케팅 정보 수신 동의 철회</li>
+        </ul>
+
+        <h2>10. 미성년자 개인정보</h2>
+        <p>
+          회사는 관련 법령에 따라 필요한 경우 미성년자의 개인정보 보호를 위해 추가 조치를 취할 수 있습니다.
+          법정대리인의 동의가 필요한 경우, 회사는 해당 절차를 요구할 수 있습니다.
+        </p>
+
+        <h2>11. 정책 변경</h2>
+        <p>
+          회사는 법령, 서비스 내용 또는 운영 정책의 변경에 따라 본 개인정보처리방침을 수정할 수 있습니다.
+          중요한 변경이 있는 경우 웹사이트를 통해 사전에 또는 합리적인 시점에 공지합니다.
+        </p>
+
+        <h2>12. 연락처</h2>
+        <p>
+          개인정보 관련 문의는 아래 이메일로 연락해 주시기 바랍니다.
+        </p>
+        <p class="email">gyung9306301@gmail.com</p>
+
+        <div class="footer">
+          운영 국가: 대한민국<br />
+          서비스명: Tesari (임시명 포함 가능)
+        </div>
+      </section>
+
+      <!-- English -->
+      <section id="lang-en" class="lang-section">
+        <h1>Privacy Policy</h1>
+        <div class="subtitle">
+          Last Updated: March 21, 2026
+        </div>
+
+        <div class="notice">
+          This Privacy Policy applies to the services operated by Tesari, including any temporary or working business name.
+          The company name may be updated in the future, and this page may be revised accordingly.
+        </div>
+
+        <h2>1. Introduction</h2>
+        <p>
+          Tesari (“Company,” “we,” “our,” or “the Service”) provides influencer pricing information services and influencer marketing campaign services.
+          This Privacy Policy explains what information we collect, how we use it, how we store it, and how we protect it when users access our website and related services.
+        </p>
+
+        <h2>2. Information We Collect</h2>
+        <p>We may collect the following types of information:</p>
+        <ul>
+          <li>Information provided during sign-up, such as name, email address, password, or other account details</li>
+          <li>Information entered while using the service, including inquiries, quote requests, and marketing campaign requests</li>
+          <li>Campaign-related information required to support influencer marketing services</li>
+          <li>Transaction-related information necessary for paid services once payment functionality is introduced (payment method to be decided later)</li>
+          <li>Usage logs such as access time, click history, browser type, device information, and IP address</li>
+          <li>Information collected through cookies, pixels, and similar technologies</li>
+        </ul>
+
+        <h2>3. How We Use Information</h2>
+        <p>We use collected information for the following purposes:</p>
+        <ul>
+          <li>User registration, identity verification, account management, and authentication</li>
+          <li>Providing influencer pricing information and related services</li>
+          <li>Consulting, proposing, managing, and communicating regarding influencer marketing campaigns</li>
+          <li>Processing payments, maintaining transaction records, and supporting customers</li>
+          <li>Improving service quality, developing features, and enhancing user experience</li>
+          <li>Preventing abuse, maintaining security, and complying with legal obligations</li>
+          <li>Sending notices, updates, and promotional information where the user has provided consent</li>
+        </ul>
+
+        <h2>4. Sharing of Information</h2>
+        <p>
+          We do not sell users’ personal information to third parties.
+          However, we may share personal information to the extent necessary in the following circumstances:
+        </p>
+        <ul>
+          <li>With service providers that support payment processing, analytics, email delivery, or related business operations</li>
+          <li>With analytics providers such as Google Analytics</li>
+          <li>Where disclosure is required by law or legal process</li>
+          <li>Where the user has given prior consent</li>
+        </ul>
+
+        <h2>5. Google Analytics and Cookies</h2>
+        <p>
+          We plan to use Google Analytics to analyze website traffic and improve our service.
+          In this process, cookies, device information, page visit history, and user behavior information may be collected.
+        </p>
+        <p>
+          Users may refuse or delete cookies through their browser settings.
+          However, restricting cookies may affect the availability of certain features of the service.
+        </p>
+
+        <h2>6. Payment-Related Information</h2>
+        <p>
+          We plan to introduce paid services in the future. The payment method has not yet been finalized.
+          Once payment functionality is implemented, details regarding payment processing, payment service providers,
+          and the scope of payment-related information collected will be announced through this Privacy Policy or a separate notice.
+        </p>
+
+        <h2>7. Data Retention</h2>
+        <p>
+          We retain personal information for as long as necessary to fulfill the purposes for which it was collected.
+          Where retention is required by applicable law, we will store the information for the required period and then delete it securely.
+        </p>
+
+        <h2>8. Data Protection</h2>
+        <p>
+          We implement reasonable technical and organizational measures to protect personal information from loss, theft, leakage, alteration, or damage.
+          However, no internet-based service can be guaranteed to be completely secure.
+        </p>
+
+        <h2>9. User Rights</h2>
+        <p>Subject to applicable law, users may have the following rights:</p>
+        <ul>
+          <li>The right to request access to their personal information</li>
+          <li>The right to request correction or deletion of their personal information</li>
+          <li>The right to request restriction of processing</li>
+          <li>The right to withdraw consent for receiving marketing communications</li>
+        </ul>
+
+        <h2>10. Children’s Privacy</h2>
+        <p>
+          Where required by applicable law, we may take additional steps to protect minors’ personal information.
+          If consent from a parent or legal guardian is required, we may request such consent before providing certain services.
+        </p>
+
+        <h2>11. Changes to This Policy</h2>
+        <p>
+          We may update this Privacy Policy from time to time due to changes in law, service content, or operational policies.
+          If material changes are made, we will provide notice on the website in advance or within a reasonable time.
+        </p>
+
+        <h2>12. Contact Us</h2>
+        <p>
+          For privacy-related inquiries, please contact us at:
+        </p>
+        <p class="email">gyung9306301@gmail.com</p>
+
+        <div class="footer">
+          Operating Country: Republic of Korea<br />
+          Service Name: Tesari (including temporary working name)
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    function showLang(lang) {
+      const ko = document.getElementById('lang-ko');
+      const en = document.getElementById('lang-en');
+      const btnKo = document.getElementById('btn-ko');
+      const btnEn = document.getElementById('btn-en');
+
+      if (lang === 'ko') {
+        ko.classList.add('active');
+        en.classList.remove('active');
+        btnKo.classList.add('active');
+        btnEn.classList.remove('active');
+        document.documentElement.lang = 'ko';
+      } else {
+        en.classList.add('active');
+        ko.classList.remove('active');
+        btnEn.classList.add('active');
+        btnKo.classList.remove('active');
+        document.documentElement.lang = 'en';
+      }
+    }
+  </script>
+</body>
+</html>
