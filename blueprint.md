@@ -20,19 +20,27 @@ A real-time dashboard that fetches and displays TikTok influencer rankings from 
 - **Performance:** Implements client-side pagination (default 10 rows) and sorting.
 - **Affiliate Application:** A centered footer link for affiliate applications using Formspree.
 
-## Current State
-- `index.html`: Main landing page or entry point (currently landing.html is used as the home).
-- `ranking.html`: The main ranking dashboard, updated to link `main.js` and show "Quote Check Service" information.
-- `quote.html` & `quote.js`: New quotation summary and fee calculation page.
-- `style.css`: Contains all visual styles, using CSS variables for theming and modern layout techniques.
-- `main.js`: Refactored to handle data fetching, filtering, sorting, and navigation to the quote page.
+- **Supabase Authentication:** Integrated Supabase for user authentication (Login/Signup/Logout).
+- **Protected Actions:** Clicking "선택 된 인플루언서 견적 확인" (Confirm Quote) on `ranking.html` now triggers a login popup if the user is not authenticated.
+- **Persistent Header:** Added a login/logout button to the top right of all pages using `auth.js`.
+- **Responsive Auth UI:** Simple modal for login and signup using vanilla JavaScript.
 
-## Current Plan: Quotation Feature & Refinement
-- [x] Refactor `main.js` for better structure and state management.
-- [x] Implement `quote.html` and `quote.js` for quotation summaries.
-- [x] Update `ranking.html` to reflect the "Quote Check Service" branding.
-- [x] Integrate selection logic with the quotation page via `localStorage`.
-- [x] Add fee calculation logic based on influencer grades.
+## Current State
+- `index.html`: Main landing page with Auth UI initialization.
+- `ranking.html`: The main ranking dashboard, protected with login check on the quote button.
+- `quote.html` & `quote.js`: Protected page that displays a summary of selected influencers; also initializes Auth UI.
+- `auth.js`: Centralized authentication logic and UI management.
+- `supabase.js`: Supabase client initialization.
+- `.env`: Stores Supabase project configuration.
+- `style.css`: Visual styles, including new Auth UI styling.
+- `main.js`: Updated to module script, handles data fetching, filtering, and login-protected navigation.
+
+## Current Plan: Authentication Integration
+- [x] Install `@supabase/supabase-js`.
+- [x] Create `supabase.js` and `.env` for configuration.
+- [x] Create `auth.js` for login/signup/logout and UI initialization.
+- [x] Update `index.html`, `ranking.html`, and `quote.html` to include the Auth UI.
+- [x] Protect the "Confirm Quote" button on `ranking.html` with a login check.
 
 ## Future Roadmap
 - **Web Components:** Refactor the table and rows into custom elements.

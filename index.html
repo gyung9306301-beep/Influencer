@@ -8,6 +8,12 @@
      crossorigin="anonymous"></script>
   <title>현지인 추천 인플루언서 인사이트</title>
   <link rel="stylesheet" href="landing.css">
+  <script type="module">
+    import { initAuthUI } from './auth.js';
+    document.addEventListener('DOMContentLoaded', () => {
+      initAuthUI();
+    });
+  </script>
 </head>
 <body>
   <div class="container">

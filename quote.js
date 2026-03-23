@@ -1,4 +1,16 @@
-document.addEventListener('DOMContentLoaded', () => {
+import { checkUser, showLoginModal, initAuthUI } from './auth.js';
+
+document.addEventListener('DOMContentLoaded', async () => {
+  initAuthUI();
+  
+  const user = await checkUser();
+  if (!user) {
+    showLoginModal();
+    // Optional: redirect back if you want to force login
+    // window.location.href = 'ranking.html';
+    // return;
+  }
+
   const quoteTableBody = document.getElementById('quoteTableBody');
   const selectedCountPill = document.getElementById('selectedCountPill');
   const totalFeePill = document.getElementById('totalFeePill');

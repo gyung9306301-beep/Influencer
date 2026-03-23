@@ -1,3 +1,5 @@
+import { checkUser, showLoginModal, initAuthUI } from './auth.js';
+
 const CONFIG = {
   SHEET_ID: '1WULcOtmX-UoH5huTAr6umW0rs27QeIYrEs8eDszT-JA',
   SHEET_NAME: 'Influencer list',
@@ -312,7 +314,13 @@ document.addEventListener('DOMContentLoaded', () => {
     return 0;
   }
 
-  function goToQuotePage() {
+  async function goToQuotePage() {
+    const user = await checkUser();
+    if (!user) {
+      showLoginModal();
+      return;
+    }
+
     const selectedRows = state.rawRows.filter((row) => state.selectedNicknames.has(row.B));
 
     if (selectedRows.length === 0) {
@@ -450,6 +458,8 @@ document.addEventListener('DOMContentLoaded', () => {
     todayEl.textContent = todayCount;
     totalEl.textContent = totalCount;
   })();
+
+  initAuthUI();
 
   (function () {
     const d = document;
