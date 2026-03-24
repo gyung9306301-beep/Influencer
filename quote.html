@@ -72,5 +72,19 @@
   </div>
 </footer>
   </div>
+  <script type="module" src="./quote.js"></script>
+
+<script type="module">
+  import { initAuthUI, checkUser } from './auth.js';
+
+  initAuthUI();
+
+  const user = await checkUser();
+
+  if (!user) {
+    alert('견적 확인은 로그인 후 이용할 수 있습니다.');
+    window.location.href = '/ranking';
+  }
+</script>
 </body>
 </html>
