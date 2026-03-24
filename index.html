@@ -8,12 +8,6 @@
      crossorigin="anonymous"></script>
   <title>현지인 추천 인플루언서 인사이트</title>
   <link rel="stylesheet" href="landing.css">
-  <script type="module">
-    import { initAuthUI } from './auth.js';
-    document.addEventListener('DOMContentLoaded', () => {
-      initAuthUI();
-    });
-  </script>
 </head>
 <body>
   <div class="container">
@@ -130,16 +124,15 @@
     </div>
 
     <footer class="footer">
-  <div class="footer-links">
-    <a href="about.html">About</a>
-    <a href="blog.html">Blog</a>
-
-    <a href="privacy-policy.html#privacy">Privacy Policy</a>
-    <a href="privacy-policy.html#terms">Terms of Service</a>
-    <a href="privacy-policy.html#affiliate">Affiliate Offer</a>
-    <a href="privacy-policy.html#contact">Contact us</a>
-  </div>
-</footer>
+      <div class="footer-links">
+        <a href="about.html">About</a>
+        <a href="blog.html">Blog</a>
+        <a href="privacy-policy.html#privacy">Privacy Policy</a>
+        <a href="privacy-policy.html#terms">Terms of Service</a>
+        <a href="privacy-policy.html#affiliate">Affiliate Offer</a>
+        <a href="privacy-policy.html#contact">Contact us</a>
+      </div>
+    </footer>
   </div>
 
   <script>
@@ -164,7 +157,6 @@
         localStorage.setItem(dateKey, todayStr);
       }
 
-      // 1시간 이내 재접속 여부 확인
       if (now - lastVisitTime > oneHour) {
         todayCount += 1;
         totalCount += 1;
@@ -177,10 +169,10 @@
       if ($('totalCount')) $('totalCount').textContent = totalCount;
     })();
   </script>
-  <script type="module">
-  import { initAuthUI } from './auth.js';
 
-  initAuthUI();
-</script>
+  <script type="module">
+    import { initAuthUI } from './auth.js';
+    initAuthUI();
+  </script>
 </body>
 </html>
