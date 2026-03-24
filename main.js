@@ -461,11 +461,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initAuthUI();
 
-  (function loadDisqus() {
+  window.loadDisqus = function () {
   const d = document;
   const s = d.createElement('script');
   s.src = 'https://thai-influencer.disqus.com/embed.js';
-  s.setAttribute('data-timestamp', +new Date());
+  s.setAttribute('data-timestamp', String(+new Date()));
   (d.head || d.body).appendChild(s);
-}
-});
+};
