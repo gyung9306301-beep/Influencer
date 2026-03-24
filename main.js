@@ -461,11 +461,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initAuthUI();
 
-  (function () {
-    const d = document;
-    const s = d.createElement('script');
-    s.src = 'https://thai-influencer.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-  })();
+  (function loadDisqus() {
+  const d = document;
+  const s = d.createElement('script');
+  s.src = 'https://thai-influencer.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+}
 });
