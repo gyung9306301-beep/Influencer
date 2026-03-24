@@ -122,9 +122,31 @@
 </footer>
   </div>
   <script type="module">
-  import { initAuthUI } from './auth.js';
+  import { initAuthUI, checkUser } from './auth.js';
 
   initAuthUI();
+
+  const quoteBtn = document.getElementById('checkQuoteBtn');
+
+  if (quoteBtn) {
+    quoteBtn.addEventListener('click', async (e) => {
+      const user = await checkUser();
+
+      if (!user) {
+        e.preventDefault();
+
+        const loginBtn = document.getElementById('auth-login-btn');
+        if (loginBtn) {
+          loginBtn.click();
+        } else {
+          alert('로그인이 필요합니다.');
+        }
+        return;
+      }
+
+      window.location.href = 'quote.html';
+    });
+  }
 </script>
 </body>
 </html>
