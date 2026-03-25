@@ -126,27 +126,14 @@
 
   initAuthUI();
 
-  const quoteBtn = document.getElementById('checkQuoteBtn');
-
-  if (quoteBtn) {
-    quoteBtn.addEventListener('click', async (e) => {
-      const user = await checkUser();
-
-      if (!user) {
-        e.preventDefault();
-
-        const loginBtn = document.getElementById('auth-login-btn');
-        if (loginBtn) {
-          loginBtn.click();
-        } else {
-          alert('로그인이 필요합니다.');
-        }
-        return;
-      }
-
-      window.location.href = 'quote.html';
-    });
-  }
+// 댓글을 눌렀을 때만 Disqus 로드
+window.loadDisqus = function () {
+  const d = document;
+  const s = d.createElement('script');
+  s.src = 'https://thai-influencer.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', String(+new Date()));
+  (d.head || d.body).appendChild(s);
+};
 </script>
 </body>
 </html>
