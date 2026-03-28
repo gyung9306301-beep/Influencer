@@ -119,10 +119,6 @@
       </div>
     </section>
 
-    <div id="visitorCounter">
-      Today: <span id="todayCount">0</span>명, Total: <span id="totalCount">0</span>명
-    </div>
-
     <footer class="footer">
       <div class="footer-links">
         <a href="about.html">About</a>
@@ -134,41 +130,6 @@
       </div>
     </footer>
   </div>
-
-  <script>
-    (function() {
-      const $ = (id) => document.getElementById(id);
-      const todayKey = 'visit_today';
-      const totalKey = 'visit_total';
-      const dateKey = 'visit_date';
-      const timeKey = 'visit_last_time';
-
-      const todayStr = new Date().toISOString().slice(0, 10);
-      const savedDate = localStorage.getItem(dateKey);
-      const lastVisitTime = parseInt(localStorage.getItem(timeKey) || '0', 10);
-      const now = Date.now();
-      const oneHour = 60 * 60 * 1000;
-
-      let todayCount = parseInt(localStorage.getItem(todayKey) || '0', 10);
-      let totalCount = parseInt(localStorage.getItem(totalKey) || '0', 10);
-
-      if (savedDate !== todayStr) {
-        todayCount = 0;
-        localStorage.setItem(dateKey, todayStr);
-      }
-
-      if (now - lastVisitTime > oneHour) {
-        todayCount += 1;
-        totalCount += 1;
-        localStorage.setItem(todayKey, todayCount);
-        localStorage.setItem(totalKey, totalCount);
-        localStorage.setItem(timeKey, now.toString());
-      }
-
-      if ($('todayCount')) $('todayCount').textContent = todayCount;
-      if ($('totalCount')) $('totalCount').textContent = totalCount;
-    })();
-  </script>
 
   <script type="module">
     import { initAuthUI } from './auth.js';
