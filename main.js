@@ -468,3 +468,4 @@ document.addEventListener('DOMContentLoaded', () => {
   s.setAttribute('data-timestamp', String(+new Date()));
   (d.head || d.body).appendChild(s);
 };
+  });
