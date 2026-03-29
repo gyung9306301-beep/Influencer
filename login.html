@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SN11NCE3YL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-SN11NCE3YL');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - TikTok Influencer Ranking</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="auth.js"></script>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero" style="min-height: 40vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+      <h1>
+        <span class="cyan">Member</span>
+        <span class="white">Login</span>
+      </h1>
+      <p style="color: var(--muted); margin-top: 10px;">인플루언서 랭킹 데이터를 더 편리하게 이용하세요.</p>
+    </section>
+
+    <section style="display: flex; justify-content: center; margin-top: -50px; padding: 0 20px;">
+      <div class="panel" style="width: 100%; max-width: 450px; padding: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.4);">
+        
+        <div id="login-section">
+          <h2 style="margin-top: 0; margin-bottom: 25px; text-align: center;">로그인</h2>
+          <div class="field">
+            <label for="login-email">이메일 주소</label>
+            <input type="email" id="login-email" class="input" placeholder="example@email.com">
+          </div>
+          <div class="field">
+            <label for="login-password">비밀번호</label>
+            <input type="password" id="login-password" class="input" placeholder="********">
+          </div>
+          <div id="login-error" style="color: #ff5f5f; font-size: 14px; margin-bottom: 15px; min-height: 18px; text-align: center;"></div>
+          <button id="submit-login" class="upgrade-btn" style="width: 100%; height: 50px; font-size: 16px;">로그인하기</button>
+          
+          <div style="margin-top: 25px; text-align: center; font-size: 14px; color: var(--muted);">
+            계정이 없으신가요? <a href="#" id="show-signup" style="color: var(--cyan); text-decoration: none; font-weight: 600;">회원가입</a>
+          </div>
+        </div>
+
+        <div id="signup-section" style="display: none;">
+          <h2 style="margin-top: 0; margin-bottom: 25px; text-align: center;">회원가입</h2>
+          <div class="field">
+            <label for="signup-email">이메일 주소</label>
+            <input type="email" id="signup-email" class="input" placeholder="example@email.com">
+          </div>
+          <div class="field">
+            <label for="signup-password">비밀번호</label>
+            <input type="password" id="signup-password" class="input" placeholder="최소 6자 이상">
+          </div>
+          <div id="signup-error" style="color: #ff5f5f; font-size: 14px; margin-bottom: 15px; min-height: 18px; text-align: center;"></div>
+          <button id="submit-signup" class="upgrade-btn" style="width: 100%; height: 50px; font-size: 16px;">가입하기</button>
+          
+          <div style="margin-top: 25px; text-align: center; font-size: 14px; color: var(--muted);">
+            이미 계정이 있으신가요? <a href="#" id="show-login" style="color: var(--cyan); text-decoration: none; font-weight: 600;">로그인</a>
+          </div>
+        </div>
+
+        <div style="margin-top: 20px; text-align: center;">
+            <a href="index.html" style="color: var(--muted); font-size: 13px; text-decoration: none;">메인페이지로 돌아가기</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-links">
+        <a href="about.html">About</a>
+        <a href="privacy-policy.html#privacy">Privacy Policy</a>
+        <a href="privacy-policy.html#terms">Terms of Service</a>
+      </div>
+    </footer>
+  </div>
+
+  <script type="module">
+    import { login, signUp } from './auth.js';
+
+    const loginSection = document.getElementById('login-section');
+    const signupSection = document.getElementById('signup-section');
+    const showSignup = document.getElementById('show-signup');
+    const showLogin = document.getElementById('show-login');
+
+    showSignup.onclick = (e) => {
+      e.preventDefault();
+      loginSection.style.display = 'none';
+      signupSection.style.display = 'block';
+    };
+
+    showLogin.onclick = (e) => {
+      e.preventDefault();
+      signupSection.style.display = 'none';
+      loginSection.style.display = 'block';
+    };
+
+    // Login logic
+    document.getElementById('submit-login').onclick = async () => {
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+      const errorDiv = document.getElementById('login-error');
+      
+      try {
+        errorDiv.textContent = '';
+        await login(email, password);
+        window.location.href = 'ranking.html';
+      } catch (err) {
+        errorDiv.textContent = err.message;
+      }
+    };
+
+    // Signup logic
+    document.getElementById('submit-signup').onclick = async () => {
+      const email = document.getElementById('signup-email').value;
+      const password = document.getElementById('signup-password').value;
+      const errorDiv = document.getElementById('signup-error');
+      
+      try {
+        errorDiv.textContent = '';
+        await signUp(email, password);
+        alert('가입 확인 이메일이 발송되었습니다. 이메일을 확인해 주세요!');
+        signupSection.style.display = 'none';
+        loginSection.style.display = 'block';
+      } catch (err) {
+        errorDiv.textContent = err.message;
+      }
+    };
+  </script>
+</body>
+</html>
