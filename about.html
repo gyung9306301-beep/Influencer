@@ -1,96 +1,424 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SN11NCE3YL"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | Tesari</title>
+  <meta
+    name="description"
+    content="Tesari는 브랜드와 마케터를 위해 태국 인플루언서를 데이터 기반으로 탐색할 수 있도록 돕는 인플루언서 마케팅 플랫폼입니다."
+  />
+  <meta
+    name="keywords"
+    content="Tesari, 태국 인플루언서, 인플루언서 마케팅, TikTok 인플루언서, 태국 마케팅 플랫폼"
+  />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="About | Tesari" />
+  <meta
+    property="og:description"
+    content="Tesari는 브랜드와 마케터를 위해 태국 인플루언서를 데이터 기반으로 탐색할 수 있도록 돕는 플랫폼입니다."
+  />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://influencer-8b3.pages.dev/about.html" />
+  <link rel="canonical" href="https://influencer-8b3.pages.dev/about.html" />
+  <link rel="stylesheet" href="style.css" />
 
-    gtag('config', 'G-SN11NCE3YL');
-  </script>
-
-  <meta charset="UTF-8">
-  <meta name="google-adsense-account" content="ca-pub-7086635604989579">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7086635604989579"
-     crossorigin="anonymous"></script>
-  <title>About Tesari</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body {
-      margin:0;
-      font-family: Arial, "Noto Sans KR", sans-serif;
-      background:#07111f;
-      color:white;
-      line-height:1.7;
+    .about-wrap {
+      width: min(1180px, calc(100% - 32px));
+      margin: 28px auto 64px;
+      position: relative;
+      z-index: 1;
     }
-    .wrap {
-      max-width:900px;
-      margin:0 auto;
-      padding:40px 20px;
+
+    .about-hero,
+    .about-card,
+    .about-contact-card {
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: linear-gradient(135deg, rgba(10,16,33,0.94), rgba(5,10,21,0.9));
+      box-shadow: var(--shadow);
     }
-    h1 { color:#56c2ff; }
-    h2 { color:#72f0be; margin-top:35px;}
-    p { color:#c9d6f5; }
+
+    .top-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .top-nav a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 40px;
+      padding: 0 16px;
+      border-radius: 12px;
+      text-decoration: none;
+      color: var(--white);
+      background: rgba(10, 18, 34, 0.82);
+      border: 1px solid rgba(90, 136, 255, 0.22);
+      font-size: 14px;
+      font-weight: 700;
+      transition: 0.2s ease;
+    }
+
+    .top-nav a:hover,
+    .about-link:hover {
+      transform: translateY(-1px);
+      border-color: rgba(55, 217, 255, 0.45);
+    }
+
+    .about-hero {
+      padding: 32px;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-hero::after {
+      content: "";
+      position: absolute;
+      right: -60px;
+      bottom: -60px;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(55, 217, 255, 0.14), transparent 65%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 12px;
+      color: var(--cyan-soft);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .about-hero h1 {
+      margin: 0 0 16px;
+      font-size: clamp(30px, 5vw, 54px);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+
+    .about-hero p {
+      margin: 0;
+      max-width: 850px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.85;
+    }
+
+    .hero-badges {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .hero-badges span {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(55, 217, 255, 0.08);
+      border: 1px solid rgba(55, 217, 255, 0.16);
+      color: var(--cyan-soft);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .about-card,
+    .about-contact-card {
+      padding: 24px;
+    }
+
+    .about-card h2,
+    .about-contact-card h2 {
+      margin: 0 0 12px;
+      font-size: 24px;
+      color: var(--white);
+    }
+
+    .about-card p,
+    .about-contact-card p {
+      margin: 0 0 14px;
+      color: #dce7f8;
+      line-height: 1.9;
+      font-size: 15px;
+    }
+
+    .about-card ul {
+      margin: 0;
+      padding-left: 18px;
+      color: #dce7f8;
+      line-height: 1.9;
+      font-size: 15px;
+    }
+
+    .about-card li + li {
+      margin-top: 8px;
+    }
+
+    .highlight-box {
+      margin-top: 16px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(255, 215, 106, 0.06);
+      border: 1px solid rgba(255, 215, 106, 0.16);
+      color: #f7e8b0;
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .full-width {
+      margin-bottom: 18px;
+    }
+
+    .about-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .about-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 16px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 800;
+      transition: 0.2s ease;
+    }
+
+    .primary-link {
+      color: var(--cyan-soft);
+      border: 1px solid rgba(55, 217, 255, 0.28);
+      background: linear-gradient(135deg, rgba(55, 217, 255, 0.16), rgba(39, 228, 108, 0.14));
+    }
+
+    .secondary-link {
+      color: var(--white);
+      border: 1px solid rgba(90, 136, 255, 0.22);
+      background: rgba(10, 18, 34, 0.84);
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .contact-item {
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(55, 217, 255, 0.05);
+      border: 1px solid rgba(55, 217, 255, 0.12);
+    }
+
+    .contact-label {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--cyan-soft);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .contact-value {
+      color: var(--white);
+      font-size: 15px;
+      line-height: 1.7;
+      word-break: break-word;
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      color: #7f93aa;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .about-wrap {
+        width: min(100% - 20px, 100%);
+      }
+
+      .about-hero,
+      .about-card,
+      .about-contact-card {
+        padding: 18px;
+        border-radius: 18px;
+      }
+
+      .top-nav a {
+        height: 38px;
+        padding: 0 12px;
+        font-size: 13px;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <h1>About Tesari</h1>
+  <main class="about-wrap">
+    <section class="about-hero">
+      <nav class="top-nav" aria-label="주요 메뉴">
+        <a href="index.html">홈</a>
+        <a href="ranking.html">랭킹 보기</a>
+        <a href="blog.html">Blog</a>
+        <a href="about.html">About</a>
+       <a href="privacy-policy.html">정책센터</a>
+      </nav>
 
-    <p>
-      Tesari는 인플루언서 마케팅을 보다 쉽고 효율적으로 진행할 수 있도록 돕는 데이터 기반 플랫폼입니다.
-    </p>
+      <div class="eyebrow">ABOUT TESARI</div>
+      <h1>태국 인플루언서를 더 쉽게 찾고 비교할 수 있도록 만든 플랫폼</h1>
+      <p>
+        Tesari는 브랜드와 마케터가 태국 인플루언서를 보다 효율적으로 탐색하고 비교할 수 있도록 돕는
+        인플루언서 마케팅 플랫폼입니다. 단순히 팔로워 수만 나열하는 것이 아니라, 카테고리와 규모,
+        조회수 기반 인사이트를 함께 참고할 수 있도록 구성하여 더 합리적인 협업 검토가 가능하도록 돕는 것을 목표로 합니다.
+      </p>
 
-    <h2>What We Do</h2>
-    <p>
-      우리는 인플루언서의 평균 조회수, 예상 성과, 가격 정보를 분석하여
-      브랜드가 최적의 마케팅 파트너를 선택할 수 있도록 지원합니다.
-    </p>
+      <div class="hero-badges">
+        <span>Thai Influencer Discovery</span>
+        <span>Data-driven Insights</span>
+        <span>Brand-friendly Platform</span>
+      </div>
+    </section>
 
-    <h2>Why Tesari</h2>
-    <p>
-      기존 인플루언서 마케팅은 정보 비대칭이 심하고, 비용 대비 성과를 예측하기 어렵습니다.
-      Tesari는 데이터를 기반으로 더 합리적인 의사결정을 가능하게 합니다.
-    </p>
+    <section class="about-grid">
+      <article class="about-card">
+        <h2>Tesari는 어떤 서비스인가요?</h2>
+        <p>
+          Tesari는 태국 인플루언서를 찾고 싶은 브랜드, 마케터, 광고 실무자를 위해 만들어진 플랫폼입니다.
+          많은 경우 인플루언서를 검토할 때 팔로워 수만 먼저 보게 되지만, 실제 협업 적합성은 카테고리,
+          계정 규모, 콘텐츠 반응, 조회수 패턴 등 다양한 요소를 함께 봐야 더 정확하게 판단할 수 있습니다.
+        </p>
+        <p>
+          Tesari는 이런 과정을 더 쉽게 만들기 위해 인플루언서를 정리하고, 탐색과 비교가 가능한 구조로
+          정보를 제공하는 것을 목표로 합니다.
+        </p>
+      </article>
 
-    <h2>Our Mission</h2>
-    <p>
-      복잡한 인플루언서 마케팅 시장에서 투명한 데이터와 간편한 프로세스를 제공하여
-      누구나 쉽게 마케팅을 시작할 수 있도록 돕는 것이 우리의 목표입니다.
-    </p>
+      <article class="about-card">
+        <h2>누구를 위한 플랫폼인가요?</h2>
+        <p>
+          이 플랫폼은 특히 아래와 같은 사용자에게 도움이 되도록 설계되었습니다.
+        </p>
+        <ul>
+          <li>태국 시장에서 인플루언서 마케팅을 검토하는 브랜드</li>
+          <li>캠페인 후보 인플루언서를 빠르게 찾고 싶은 마케터</li>
+          <li>카테고리별 인플루언서를 비교하고 싶은 실무 담당자</li>
+          <li>태국 TikTok 인플루언서 트렌드를 파악하고 싶은 사용자</li>
+        </ul>
+      </article>
+    </section>
 
-    <h2>Contact</h2>
-    <p>Email: gyung9306301@gmail.com</p>
-  </div>
-  <script type="module">
-  import { initAuthUI } from './auth.js';
+    <section class="about-grid">
+      <article class="about-card">
+        <h2>어떤 기준으로 인플루언서를 보나요?</h2>
+        <p>
+          Tesari는 인플루언서를 단순 인기 순으로만 보여주기보다, 브랜드 실무자가 참고하기 쉬운 구조를
+          만드는 데 집중하고 있습니다. 예를 들어 카테고리, 팔로워 규모, 조회수 관련 정보, 계정 링크 등
+          실무적으로 자주 보는 요소를 정리해서 더 빠르게 검토할 수 있도록 구성하고 있습니다.
+        </p>
+        <div class="highlight-box">
+          팔로워 수만으로는 실제 성과를 정확히 예측하기 어렵기 때문에, 조회수와 카테고리 적합성까지 함께
+          살펴보는 것이 중요합니다.
+        </div>
+      </article>
 
-  initAuthUI();
-</script>
-  <footer class="footer">
-  <div class="footer-links">
-    <a href="index.html">Home</a>
-    <a href="ranking.html">Ranking</a>
-    <a href="blog.html">Blog</a>
-    <a href="about.html">About</a>
-    <a href="privacy-policy.html#privacy">Privacy Policy</a>
-    <a href="privacy-policy.html#terms">Terms of Service</a>
-    <a href="privacy-policy.html#contact">Contact</a>
-  </div>
+      <article class="about-card">
+        <h2>왜 Tesari를 만들었나요?</h2>
+        <p>
+          태국 인플루언서 마케팅을 검토할 때 가장 어려운 점 중 하나는 필요한 정보를 한눈에 비교하기 어렵다는 점입니다.
+          계정을 직접 하나씩 찾아보고, 카테고리를 구분하고, 규모를 비교하는 과정은 생각보다 많은 시간이 듭니다.
+        </p>
+        <p>
+          Tesari는 이런 비효율을 줄이기 위해 시작되었습니다. 브랜드와 마케터가 보다 빠르게 후보군을 보고,
+          캠페인 방향에 맞는 인플루언서를 검토할 수 있도록 돕는 것이 이 서비스의 목적입니다.
+        </p>
+      </article>
+    </section>
 
-  <p class="footer-description">
-    Tesari is an influencer marketing platform that helps brands explore Thai influencers with data-driven insights.
-  </p>
+    <section class="about-card full-width">
+      <h2>앞으로의 방향</h2>
+      <p>
+        Tesari는 앞으로도 태국 인플루언서 탐색 경험을 더 직관적으로 만들고, 브랜드가 협업 대상을 검토할 때
+        도움이 되는 정보 구조를 계속 개선해 나갈 예정입니다. 현재는 인플루언서 리스트와 기본 탐색 기능을 중심으로
+        구성되어 있지만, 점차 더 정리된 인사이트와 실무형 콘텐츠를 함께 제공하는 방향으로 발전시키고자 합니다.
+      </p>
+      <div class="about-actions">
+        <a class="about-link primary-link" href="ranking.html">인플루언서 랭킹 보기</a>
+        <a class="about-link secondary-link" href="blog.html">마케팅 가이드 보기</a>
+      </div>
+    </section>
 
-  <p class="footer-contact">
-    Contact: gyung9306301@gmail.com
-  </p>
+    <section class="about-contact-card">
+      <h2>Contact</h2>
+      <p>
+        서비스 관련 문의, 제휴 문의, 플랫폼 관련 의견이 있다면 아래 이메일로 연락해 주세요.
+      </p>
 
-  <p class="footer-copy">
-    © 2026 Tesari. All rights reserved.
-  </p>
-</footer>
+      <div class="contact-list">
+        <div class="contact-item">
+          <span class="contact-label">Platform</span>
+          <div class="contact-value">Tesari</div>
+        </div>
+
+        <div class="contact-item">
+          <span class="contact-label">Email</span>
+          <div class="contact-value">gyung9306301@gmail.com</div>
+        </div>
+
+        <div class="contact-item">
+          <span class="contact-label">Website</span>
+          <div class="contact-value">https://influencer-8b3.pages.dev/</div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="ranking.html">Ranking</a>
+        <a href="blog.html">Blog</a>
+        <a href="about.html">About</a>
+        <a href="privacy-policy.html#privacy">Privacy Policy</a>
+<a href="privacy-policy.html#terms">Terms of Service</a>
+<a href="privacy-policy.html#contact">Contact</a>
+      </div>
+
+      <p class="footer-description">
+        Tesari is an influencer marketing platform that helps brands explore Thai influencers with data-driven insights.
+      </p>
+
+      <p class="footer-contact">
+        Contact: gyung9306301@gmail.com
+      </p>
+
+      <p class="footer-copy">
+        © 2026 Tesari. All rights reserved.
+      </p>
+    </footer>
+  </main>
 </body>
 </html>
