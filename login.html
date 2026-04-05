@@ -49,81 +49,83 @@
         </div>
 
         <div id="signup-section" style="display: none;">
-  <h2 style="margin-top: 0; margin-bottom: 25px; text-align: center;">회원가입</h2>
+          <h2 style="margin-top: 0; margin-bottom: 25px; text-align: center;">회원가입</h2>
 
-  <div class="field">
-    <label for="signup-email">이메일 주소</label>
-    <input type="email" id="signup-email" class="input" placeholder="example@email.com">
-  </div>
+          <div class="field">
+            <label for="signup-email">이메일 주소</label>
+            <input type="email" id="signup-email" class="input" placeholder="example@email.com">
+          </div>
 
-  <div class="field">
-    <label for="signup-password">비밀번호</label>
-    <input type="password" id="signup-password" class="input" placeholder="최소 6자 이상">
-  </div>
+          <div class="field">
+            <label for="signup-password">비밀번호</label>
+            <input type="password" id="signup-password" class="input" placeholder="최소 6자 이상">
+          </div>
 
-  <div class="field">
-    <label for="signup-password-confirm">비밀번호 확인</label>
-    <input type="password" id="signup-password-confirm" class="input" placeholder="비밀번호를 다시 입력하세요">
-  </div>
+          <div class="field">
+            <label for="signup-password-confirm">비밀번호 확인</label>
+            <input type="password" id="signup-password-confirm" class="input" placeholder="비밀번호를 다시 입력하세요">
+          </div>
 
-  <div class="field">
-    <label for="signup-role">사용자 유형</label>
-    <select id="signup-role" class="input">
-      <option value="">선택하세요</option>
-      <option value="marketer">마케터(고객사)</option>
-      <option value="influencer">인플루언서</option>
-      <option value="project_manager">프로젝트 매니저</option>
-    </select>
-  </div>
+          <div class="field">
+            <label for="signup-role">사용자 유형</label>
+            <select id="signup-role" class="input">
+              <option value="">선택하세요</option>
+              <option value="marketer">마케터(고객사)</option>
+              <option value="influencer">인플루언서</option>
+              <option value="project_manager">프로젝트 매니저</option>
+            </select>
+          </div>
 
-  <div id="marketer-extra" style="display:none;">
-    <div class="field">
-      <label for="signup-company-name">회사 풀네임</label>
-      <input type="text" id="signup-company-name" class="input" placeholder="회사명을 입력하세요">
-    </div>
+          <div id="marketer-extra" style="display:none;">
+            <div class="field">
+              <label for="signup-company-name">회사 풀네임</label>
+              <input type="text" id="signup-company-name" class="input" placeholder="회사명을 입력하세요">
+            </div>
 
-    <div class="field">
-      <label for="signup-business-number">회사 사업자등록번호</label>
-      <input type="text" id="signup-business-number" class="input" placeholder="사업자등록번호를 입력하세요">
-    </div>
+            <div class="field">
+              <label for="signup-business-number">회사 사업자등록번호</label>
+              <input type="text" id="signup-business-number" class="input" placeholder="사업자등록번호를 입력하세요">
+            </div>
 
-    <div class="field">
-      <label for="signup-department">담당 부서명</label>
-      <input type="text" id="signup-department" class="input" placeholder="예: 마케팅팀">
-    </div>
+            <div class="field">
+              <label for="signup-department">담당 부서명</label>
+              <input type="text" id="signup-department" class="input" placeholder="예: 마케팅팀">
+            </div>
 
-    <div class="field">
-      <label for="signup-manager-name">담당자 이름</label>
-      <input type="text" id="signup-manager-name" class="input" placeholder="담당자 이름을 입력하세요">
-    </div>
-  </div>
+            <div class="field">
+              <label for="signup-manager-name">담당자 이름</label>
+              <input type="text" id="signup-manager-name" class="input" placeholder="담당자 이름을 입력하세요">
+            </div>
+          </div>
 
-  <div class="field">
-    <label for="signup-industry">업종</label>
-    <select id="signup-industry" class="input">
-      <option value="">선택하세요</option>
-      <option value="beauty">화장품</option>
-      <option value="fashion">패션</option>
-      <option value="goods">잡화</option>
-      <option value="food">식품</option>
-      <option value="other">기타</option>
-    </select>
-  </div>
+          <div class="field">
+            <label for="signup-industry">업종</label>
+            <select id="signup-industry" class="input">
+              <option value="">선택하세요</option>
+              <option value="beauty">화장품</option>
+              <option value="fashion">패션</option>
+              <option value="goods">잡화</option>
+              <option value="food">식품</option>
+              <option value="other">기타</option>
+            </select>
+          </div>
 
-  <div class="field" id="industry-other-wrap" style="display:none;">
-    <label for="signup-industry-other">기타 업종 직접 입력</label>
-    <input type="text" id="signup-industry-other" class="input" placeholder="업종을 직접 입력하세요">
-  </div>
+          <div class="field" id="industry-other-wrap" style="display:none;">
+            <label for="signup-industry-other">기타 업종 직접 입력</label>
+            <input type="text" id="signup-industry-other" class="input" placeholder="업종을 직접 입력하세요">
+          </div>
 
-  <div id="signup-error" style="color: #ff5f5f; font-size: 14px; margin-bottom: 15px; min-height: 18px; text-align: center;"></div>
+          <div id="signup-error" style="color: #ff5f5f; font-size: 14px; margin-bottom: 15px; min-height: 18px; text-align: center;"></div>
 
-  <button id="submit-signup" class="upgrade-btn" style="width: 100%; height: 50px; font-size: 16px;">가입하기</button>
+          <button id="submit-signup" class="upgrade-btn" style="width: 100%; height: 50px; font-size: 16px;">가입하기</button>
 
-  <div style="margin-top: 25px; text-align: center; font-size: 14px; color: var(--muted);">
-    이미 계정이 있으신가요? <a href="#" id="show-login" style="color: var(--cyan); text-decoration: none; font-weight: 600;">로그인</a>
-  </div>
-</div>        <div style="margin-top: 20px; text-align: center;">
-            <a href="index.html" style="color: var(--muted); font-size: 13px; text-decoration: none;">메인페이지로 돌아가기</a>
+          <div style="margin-top: 25px; text-align: center; font-size: 14px; color: var(--muted);">
+            이미 계정이 있으신가요? <a href="#" id="show-login" style="color: var(--cyan); text-decoration: none; font-weight: 600;">로그인</a>
+          </div>
+        </div>
+
+        <div style="margin-top: 20px; text-align: center;">
+          <a href="index.html" style="color: var(--muted); font-size: 13px; text-decoration: none;">메인페이지로 돌아가기</a>
         </div>
       </div>
     </section>
@@ -171,47 +173,87 @@
         errorDiv.textContent = err.message;
       }
     };
-const roleInput = document.getElementById('signup-role');
-const marketerExtra = document.getElementById('marketer-extra');
-const marketerTypeInput = document.getElementById('signup-marketer-type');
 
-roleInput.addEventListener('change', () => {
-  if (roleInput.value === 'marketer') {
-    marketerExtra.style.display = 'block';
-  } else {
-    marketerExtra.style.display = 'none';
-    marketerTypeInput.value = '';
-  }
-});
+    const roleInput = document.getElementById('signup-role');
+    const marketerExtra = document.getElementById('marketer-extra');
+    const industryInput = document.getElementById('signup-industry');
+    const industryOtherWrap = document.getElementById('industry-other-wrap');
+    const industryOtherInput = document.getElementById('signup-industry-other');
+
+    roleInput.addEventListener('change', () => {
+      if (roleInput.value === 'marketer') {
+        marketerExtra.style.display = 'block';
+      } else {
+        marketerExtra.style.display = 'none';
+        document.getElementById('signup-company-name').value = '';
+        document.getElementById('signup-business-number').value = '';
+        document.getElementById('signup-department').value = '';
+        document.getElementById('signup-manager-name').value = '';
+      }
+    });
+
+    industryInput.addEventListener('change', () => {
+      if (industryInput.value === 'other') {
+        industryOtherWrap.style.display = 'block';
+      } else {
+        industryOtherWrap.style.display = 'none';
+        industryOtherInput.value = '';
+      }
+    });
+
     // Signup logic
     document.getElementById('submit-signup').onclick = async () => {
-      const email = document.getElementById('signup-email').value;
+      const email = document.getElementById('signup-email').value.trim();
+      const password = document.getElementById('signup-password').value.trim();
+      const passwordConfirm = document.getElementById('signup-password-confirm').value.trim();
+
       const role = document.getElementById('signup-role').value;
-const marketerType = document.getElementById('signup-marketer-type').value;
-const industry = document.getElementById('signup-industry').value;
-      const password = document.getElementById('signup-password').value;
+
+      const companyName = document.getElementById('signup-company-name')?.value.trim();
+      const businessNumber = document.getElementById('signup-business-number')?.value.trim();
+      const department = document.getElementById('signup-department')?.value.trim();
+      const managerName = document.getElementById('signup-manager-name')?.value.trim();
+
+      const industry = document.getElementById('signup-industry').value;
+      const industryOther = document.getElementById('signup-industry-other')?.value.trim();
+
       const errorDiv = document.getElementById('signup-error');
-      if (!email || !password) {
-  errorDiv.textContent = '이메일과 비밀번호를 입력해주세요.';
-  return;
-}
 
-if (!role) {
-  errorDiv.textContent = '사용자 유형을 선택해주세요.';
-  return;
-}
+      errorDiv.textContent = '';
 
-if (role === 'marketer' && !marketerType) {
-  errorDiv.textContent = '회사/개인을 선택해주세요.';
-  return;
-}
+      if (!email || !password || !passwordConfirm) {
+        errorDiv.textContent = '이메일과 비밀번호를 모두 입력해주세요.';
+        return;
+      }
 
-if (!industry) {
-  errorDiv.textContent = '업종을 선택해주세요.';
-  return;
-}
+      if (password !== passwordConfirm) {
+        errorDiv.textContent = '비밀번호가 일치하지 않습니다.';
+        return;
+      }
+
+      if (!role) {
+        errorDiv.textContent = '사용자 유형을 선택해주세요.';
+        return;
+      }
+
+      if (role === 'marketer') {
+        if (!companyName || !businessNumber || !department || !managerName) {
+          errorDiv.textContent = '회사 정보를 모두 입력해주세요.';
+          return;
+        }
+      }
+
+      if (!industry) {
+        errorDiv.textContent = '업종을 선택해주세요.';
+        return;
+      }
+
+      if (industry === 'other' && !industryOther) {
+        errorDiv.textContent = '기타 업종을 입력해주세요.';
+        return;
+      }
+
       try {
-        errorDiv.textContent = '';
         await signUp(email, password);
         alert('가입 확인 이메일이 발송되었습니다. 이메일을 확인해 주세요!');
         signupSection.style.display = 'none';
