@@ -25,7 +25,43 @@ export async function login(email, password) {
 /**
  * Sign up with email and password.
  */
-export async function signUp(email, password) {
+import { supabase } from './supabase.js';
+
+export async function signUp(email, password, extraData = {}) {
+  // 1. 회원가입
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password
+  });
+
+  if (error) throw error;
+
+  const user = data.user;
+
+  if (!user) {
+    throw new Error('회원가입 실패');
+  }
+
+  // 2. profiles 테이블 저장
+  const { error: profileError } = await supabase
+    .from('profiles')
+    .insert([
+      {
+        id: user.id,
+        email: email,
+        role: extraData.role || null,
+        marketer_type: extraData.marketerType || null,
+        industry: extraData.industry || null
+      }
+    ]);
+
+  if (profileError) {
+    console.error('profiles 저장 실패:', profileError);
+    throw profileError;
+  }
+
+  return user;
+}
     if (!supabase) throw new Error('Supabase is not initialized.');
     const { data, error } = await supabase.auth.signUp({
       email,
