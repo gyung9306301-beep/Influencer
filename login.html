@@ -99,52 +99,64 @@
           </div>
 
           <div id="pm-extra" style="display:none;">
-  <div class="field">
-    <label>본명</label>
-    <input type="text" id="pm-name" class="input" placeholder="이름을 입력하세요">
-  </div>
 
   <div class="field">
-    <label>사용 가능 언어</label>
-    <input type="text" id="pm-languages" class="input" placeholder="예: 한국어, 영어, 태국어">
-  </div>
-
-  <div class="field">
-    <label>전화번호</label>
-    <input type="text" id="pm-phone" class="input" placeholder="전화번호를 입력하세요">
-  </div>
-
-  <div class="field">
-    <label>나이</label>
-    <input type="number" id="pm-age" class="input" placeholder="나이를 입력하세요">
-  </div>
-
-  <div class="field">
-    <label>연락 수단</label>
-    <select id="pm-contact-method" class="input">
+    <label>국적</label>
+    <select id="pm-nationality" class="input">
       <option value="">선택하세요</option>
-      <option value="line">라인</option>
-      <option value="kakao">카카오톡</option>
-      <option value="email">이메일</option>
-      <option value="phone">전화번호</option>
+      <option value="thai">태국</option>
+      <option value="korean">한국</option>
+      <option value="other">기타</option>
     </select>
   </div>
 
   <div class="field">
-    <label>LINE ID</label>
-    <input type="text" id="pm-line" class="input" placeholder="라인 ID">
+    <label>본명 (태국어 / 한국어)</label>
+    <input type="text" id="pm-name-local" class="input" placeholder="태국인은 태국어 / 한국인은 한국어로 입력">
   </div>
 
   <div class="field">
-    <label>카카오톡 ID</label>
-    <input type="text" id="pm-kakao" class="input" placeholder="카카오톡 ID">
+    <label>본명 (영어)</label>
+    <input type="text" id="pm-name-en" class="input" placeholder="영문 이름 입력">
+  </div>
+
+  <div class="field">
+    <label>사용 가능 언어</label>
+    <div>
+      <label><input type="checkbox" value="thai" class="pm-lang"> 태국어</label><br>
+      <label><input type="checkbox" value="english" class="pm-lang"> 영어</label><br>
+      <label><input type="checkbox" value="korean" class="pm-lang"> 한국어</label><br>
+      <label><input type="checkbox" value="other" id="pm-lang-other-check"> 기타</label>
+    </div>
+    <input type="text" id="pm-lang-other" class="input" placeholder="기타 언어 입력" style="display:none; margin-top:8px;">
+  </div>
+
+  <div class="field">
+    <label>전화번호</label>
+    <input type="text" id="pm-phone" class="input" placeholder="전화번호 입력">
+  </div>
+
+  <div class="field">
+    <label>가능한 연락수단</label>
+    <div>
+      <label><input type="checkbox" value="kakao" class="pm-contact-check"> 카카오톡</label><br>
+      <label><input type="checkbox" value="line" class="pm-contact-check"> 라인</label><br>
+      <label><input type="checkbox" value="whatsapp" class="pm-contact-check"> 왓츠앱</label>
+    </div>
+  </div>
+
+  <div id="pm-contact-inputs">
+    <input type="text" id="pm-kakao" class="input" placeholder="카카오톡 ID" style="display:none; margin-top:8px;">
+    <input type="text" id="pm-line" class="input" placeholder="LINE ID" style="display:none; margin-top:8px;">
+    <input type="text" id="pm-whatsapp" class="input" placeholder="WhatsApp 번호" style="display:none; margin-top:8px;">
   </div>
 
   <div class="field">
     <label>주요 경력</label>
-    <textarea id="pm-experience" class="input" placeholder="경력을 입력하세요"></textarea>
+    <textarea id="pm-experience" class="input" placeholder="경력 입력"></textarea>
   </div>
-</div>         
+
+</div>        
 
           <div class="field">
             <label for="signup-industry">업종</label>
