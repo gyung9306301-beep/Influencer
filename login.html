@@ -247,20 +247,27 @@ roleInput.addEventListener('change', () => {
     marketerExtra.style.display = 'block';
     pmExtra.style.display = 'none';
 
-    // 프로젝트 매니저 입력값 초기화
-    document.getElementById('pm-name').value = '';
-    document.getElementById('pm-languages').value = '';
+    document.getElementById('pm-nationality').value = '';
+    document.getElementById('pm-name-local').value = '';
+    document.getElementById('pm-name-en').value = '';
+    document.getElementById('pm-lang-other-check').checked = false;
+    document.getElementById('pm-lang-other').value = '';
+    document.getElementById('pm-lang-other').style.display = 'none';
     document.getElementById('pm-phone').value = '';
-    document.getElementById('pm-age').value = '';
-    document.getElementById('pm-contact-method').value = '';
-    document.getElementById('pm-line').value = '';
     document.getElementById('pm-kakao').value = '';
+    document.getElementById('pm-line').value = '';
+    document.getElementById('pm-whatsapp').value = '';
+    document.getElementById('pm-kakao').style.display = 'none';
+    document.getElementById('pm-line').style.display = 'none';
+    document.getElementById('pm-whatsapp').style.display = 'none';
     document.getElementById('pm-experience').value = '';
+
+    document.querySelectorAll('.pm-lang').forEach(el => el.checked = false);
+    document.querySelectorAll('.pm-contact-check').forEach(el => el.checked = false);
   } else if (roleInput.value === 'project_manager') {
     marketerExtra.style.display = 'none';
     pmExtra.style.display = 'block';
 
-    // 마케터 입력값 초기화
     document.getElementById('signup-company-name').value = '';
     document.getElementById('signup-business-number').value = '';
     document.getElementById('signup-department').value = '';
@@ -269,20 +276,28 @@ roleInput.addEventListener('change', () => {
     marketerExtra.style.display = 'none';
     pmExtra.style.display = 'none';
 
-    // 둘 다 초기화
     document.getElementById('signup-company-name').value = '';
     document.getElementById('signup-business-number').value = '';
     document.getElementById('signup-department').value = '';
     document.getElementById('signup-manager-name').value = '';
 
-    document.getElementById('pm-name').value = '';
-    document.getElementById('pm-languages').value = '';
+    document.getElementById('pm-nationality').value = '';
+    document.getElementById('pm-name-local').value = '';
+    document.getElementById('pm-name-en').value = '';
+    document.getElementById('pm-lang-other-check').checked = false;
+    document.getElementById('pm-lang-other').value = '';
+    document.getElementById('pm-lang-other').style.display = 'none';
     document.getElementById('pm-phone').value = '';
-    document.getElementById('pm-age').value = '';
-    document.getElementById('pm-contact-method').value = '';
-    document.getElementById('pm-line').value = '';
     document.getElementById('pm-kakao').value = '';
+    document.getElementById('pm-line').value = '';
+    document.getElementById('pm-whatsapp').value = '';
+    document.getElementById('pm-kakao').style.display = 'none';
+    document.getElementById('pm-line').style.display = 'none';
+    document.getElementById('pm-whatsapp').style.display = 'none';
     document.getElementById('pm-experience').value = '';
+
+    document.querySelectorAll('.pm-lang').forEach(el => el.checked = false);
+    document.querySelectorAll('.pm-contact-check').forEach(el => el.checked = false);
   }
 });
 
@@ -331,6 +346,57 @@ roleInput.addEventListener('change', () => {
 
       const errorDiv = document.getElementById('signup-error');
 
+      let extraData = {
+  role,
+  industry: industry === 'other' ? industryOther : industry
+};
+
+if (role === 'project_manager') {
+  const nationality = document.getElementById('pm-nationality').value;
+  const nameLocal = document.getElementById('pm-name-local').value.trim();
+  const nameEn = document.getElementById('pm-name-en').value.trim();
+  const phone = document.getElementById('pm-phone').value.trim();
+  const experience = document.getElementById('pm-experience').value.trim();
+
+  let languages = [];
+  document.querySelectorAll('.pm-lang:checked').forEach(el => {
+    languages.push(el.value);
+  });
+
+  if (document.getElementById('pm-lang-other-check').checked) {
+    const otherLang = document.getElementById('pm-lang-other').value.trim();
+    if (otherLang) languages.push(otherLang);
+  }
+
+  let contactMethods = [];
+  document.querySelectorAll('.pm-contact-check:checked').forEach(el => {
+    contactMethods.push(el.value);
+  });
+
+  const kakao = document.getElementById('pm-kakao').value.trim();
+  const line = document.getElementById('pm-line').value.trim();
+  const whatsapp = document.getElementById('pm-whatsapp').value.trim();
+
+  if (!nationality || !nameLocal || !nameEn || !phone) {
+    errorDiv.textContent = '국적, 본명(태국어/한국어), 본명(영어), 전화번호는 필수입니다.';
+    return;
+  }
+
+  extraData = {
+    ...extraData,
+    nationality,
+    full_name: nameLocal,
+    english_name: nameEn,
+    phone,
+    languages: languages.join(', '),
+    contact_method: contactMethods.join(', '),
+    kakao_id: kakao,
+    line_id: line,
+    whatsapp,
+    experience
+  };
+}
+
       errorDiv.textContent = '';
 
       if (!email || !password || !passwordConfirm) {
@@ -355,10 +421,10 @@ roleInput.addEventListener('change', () => {
         }
       }
 
-      if (!industry) {
-        errorDiv.textContent = '업종을 선택해주세요.';
-        return;
-      }
+      if (role !== 'project_manager' && !industry) {
+  errorDiv.textContent = '업종을 선택해주세요.';
+  return;
+}
 
       if (industry === 'other' && !industryOther) {
         errorDiv.textContent = '기타 업종을 입력해주세요.';
@@ -366,7 +432,7 @@ roleInput.addEventListener('change', () => {
       }
 
       try {
-        await signUp(email, password);
+       await signUp(email, password, extraData);
         alert('가입 확인 이메일이 발송되었습니다. 이메일을 확인해 주세요!');
         signupSection.style.display = 'none';
         loginSection.style.display = 'block';
