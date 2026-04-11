@@ -98,6 +98,54 @@
             </div>
           </div>
 
+          <div id="pm-extra" style="display:none;">
+  <div class="field">
+    <label>본명</label>
+    <input type="text" id="pm-name" class="input" placeholder="이름을 입력하세요">
+  </div>
+
+  <div class="field">
+    <label>사용 가능 언어</label>
+    <input type="text" id="pm-languages" class="input" placeholder="예: 한국어, 영어, 태국어">
+  </div>
+
+  <div class="field">
+    <label>전화번호</label>
+    <input type="text" id="pm-phone" class="input" placeholder="전화번호를 입력하세요">
+  </div>
+
+  <div class="field">
+    <label>나이</label>
+    <input type="number" id="pm-age" class="input" placeholder="나이를 입력하세요">
+  </div>
+
+  <div class="field">
+    <label>연락 수단</label>
+    <select id="pm-contact-method" class="input">
+      <option value="">선택하세요</option>
+      <option value="line">라인</option>
+      <option value="kakao">카카오톡</option>
+      <option value="email">이메일</option>
+      <option value="phone">전화번호</option>
+    </select>
+  </div>
+
+  <div class="field">
+    <label>LINE ID</label>
+    <input type="text" id="pm-line" class="input" placeholder="라인 ID">
+  </div>
+
+  <div class="field">
+    <label>카카오톡 ID</label>
+    <input type="text" id="pm-kakao" class="input" placeholder="카카오톡 ID">
+  </div>
+
+  <div class="field">
+    <label>주요 경력</label>
+    <textarea id="pm-experience" class="input" placeholder="경력을 입력하세요"></textarea>
+  </div>
+</div>         
+
           <div class="field">
             <label for="signup-industry">업종</label>
             <select id="signup-industry" class="input">
@@ -180,17 +228,51 @@
     const industryOtherWrap = document.getElementById('industry-other-wrap');
     const industryOtherInput = document.getElementById('signup-industry-other');
 
-    roleInput.addEventListener('change', () => {
-      if (roleInput.value === 'marketer') {
-        marketerExtra.style.display = 'block';
-      } else {
-        marketerExtra.style.display = 'none';
-        document.getElementById('signup-company-name').value = '';
-        document.getElementById('signup-business-number').value = '';
-        document.getElementById('signup-department').value = '';
-        document.getElementById('signup-manager-name').value = '';
-      }
-    });
+    const pmExtra = document.getElementById('pm-extra');
+
+roleInput.addEventListener('change', () => {
+  if (roleInput.value === 'marketer') {
+    marketerExtra.style.display = 'block';
+    pmExtra.style.display = 'none';
+
+    // 프로젝트 매니저 입력값 초기화
+    document.getElementById('pm-name').value = '';
+    document.getElementById('pm-languages').value = '';
+    document.getElementById('pm-phone').value = '';
+    document.getElementById('pm-age').value = '';
+    document.getElementById('pm-contact-method').value = '';
+    document.getElementById('pm-line').value = '';
+    document.getElementById('pm-kakao').value = '';
+    document.getElementById('pm-experience').value = '';
+  } else if (roleInput.value === 'project_manager') {
+    marketerExtra.style.display = 'none';
+    pmExtra.style.display = 'block';
+
+    // 마케터 입력값 초기화
+    document.getElementById('signup-company-name').value = '';
+    document.getElementById('signup-business-number').value = '';
+    document.getElementById('signup-department').value = '';
+    document.getElementById('signup-manager-name').value = '';
+  } else {
+    marketerExtra.style.display = 'none';
+    pmExtra.style.display = 'none';
+
+    // 둘 다 초기화
+    document.getElementById('signup-company-name').value = '';
+    document.getElementById('signup-business-number').value = '';
+    document.getElementById('signup-department').value = '';
+    document.getElementById('signup-manager-name').value = '';
+
+    document.getElementById('pm-name').value = '';
+    document.getElementById('pm-languages').value = '';
+    document.getElementById('pm-phone').value = '';
+    document.getElementById('pm-age').value = '';
+    document.getElementById('pm-contact-method').value = '';
+    document.getElementById('pm-line').value = '';
+    document.getElementById('pm-kakao').value = '';
+    document.getElementById('pm-experience').value = '';
+  }
+});
 
     industryInput.addEventListener('change', () => {
       if (industryInput.value === 'other') {
