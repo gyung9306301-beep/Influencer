@@ -295,6 +295,24 @@ roleInput.addEventListener('change', () => {
       }
     });
 
+    document.getElementById('pm-lang-other-check').addEventListener('change', (e) => {
+  const input = document.getElementById('pm-lang-other');
+  input.style.display = e.target.checked ? 'block' : 'none';
+});
+
+    document.querySelectorAll('.pm-contact-check').forEach((checkbox) => {
+  checkbox.addEventListener('change', () => {
+    document.getElementById('pm-kakao').style.display =
+      document.querySelector('input[value="kakao"]').checked ? 'block' : 'none';
+
+    document.getElementById('pm-line').style.display =
+      document.querySelector('input[value="line"]').checked ? 'block' : 'none';
+
+    document.getElementById('pm-whatsapp').style.display =
+      document.querySelector('input[value="whatsapp"]').checked ? 'block' : 'none';
+  });
+});
+
     // Signup logic
     document.getElementById('submit-signup').onclick = async () => {
       const email = document.getElementById('signup-email').value.trim();
