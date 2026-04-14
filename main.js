@@ -16,7 +16,8 @@ const columnMap = {
   F: 5,
   G: 6,
   H: 7,
-  I: 8
+  I: 8,
+  N: 13
 };
 
 const state = {
@@ -27,7 +28,7 @@ const state = {
   page: 1,
   pageSize: 10,
   lastLoadedAt: null,
-  selectedNicknames: new Set()
+  quoteUnlocked: localStorage.getItem('quoteUnlocked') === 'true'
 };
 
 const $ = (id) => document.getElementById(id);
@@ -42,13 +43,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const countPill = $('countPill');
   const pagePill = $('pagePill');
   const planPill = $('planPill');
-  const selectionPill = $('selectionPill');
-  const resetSelectionBtn = $('resetSelectionBtn');
-  const checkQuoteBtn = $('checkQuoteBtn');
+  const quoteAccessPill = $('quoteAccessPill');
   const refreshBtn = $('refreshBtn');
   const prevBtn = $('prevBtn');
   const nextBtn = $('nextBtn');
   const resetBtn = $('resetBtn');
+  const openQuoteModalBtn = $('openQuoteModalBtn');
+  const paymentModal = $('paymentModal');
+  const closeQuoteModalBtn = $('closeQuoteModalBtn');
+  const confirmQuotePaymentBtn = $('confirmQuotePaymentBtn');
 
   function setText(el, text) {
     if (el) el.textContent = text;
@@ -116,7 +119,8 @@ document.addEventListener('DOMContentLoaded', () => {
             F: getValue(columnMap.F),
             G: getValue(columnMap.G),
             H: getValue(columnMap.H),
-            I: getValue(columnMap.I)
+            I: getValue(columnMap.I),
+            N: getValue(columnMap.N)
           };
         })
         .filter((item) => {
@@ -130,8 +134,9 @@ document.addEventListener('DOMContentLoaded', () => {
       state.lastLoadedAt = new Date();
       populateCategoryFilter();
       applyFilters();
+      updateQuoteAccessUI();
+
       setText(updatedPill, `Updated: ${formatDateTime(state.lastLoadedAt)}`);
-      setText(planPill, 'Current View: Open');
       setStatus('최신 시트 데이터를 불러왔습니다.');
     } catch (error) {
       console.error(error);
@@ -173,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (keyword) {
       rows = rows.filter((r) =>
-        [r.B, r.C, r.D, r.E, r.F, r.G, r.H, r.I].some((v) =>
+        [r.B, r.C, r.D, r.E, r.F, r.G, r.H, r.I, r.N].some((v) =>
           String(v).toLowerCase().includes(keyword)
         )
       );
@@ -201,7 +206,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setText(countPill, `${total} rows`);
     setText(pagePill, `Page ${state.page} / ${totalPages}`);
-    updateSelectionCount();
 
     if (!pageRows.length) {
       setHtml(tableBody, `<tr><td colspan="10" class="empty">조건에 맞는 데이터가 없습니다.</td></tr>`);
@@ -218,19 +222,13 @@ document.addEventListener('DOMContentLoaded', () => {
           <td class="text-right">${renderCell('D', row.D)}</td>
           <td>${renderCell('E', row.E)}</td>
           <td>${renderCell('F', row.F)}</td>
-          <td class="text-center">
-            <input type="checkbox" class="row-checkbox" data-nickname="${escapeAttr(row.B)}" ${state.selectedNicknames.has(row.B) ? 'checked' : ''}>
-          </td>
           <td class="text-right">${renderCell('G', row.G)}</td>
           <td class="text-right">${renderCell('H', row.H)}</td>
           <td class="text-right">${renderCell('I', row.I)}</td>
+          <td>${renderQuoteCell(row.N)}</td>
         </tr>
       `).join('')
     );
-  }
-
-  function updateSelectionCount() {
-    setText(selectionPill, `선택 된 인플루언서 총 ${state.selectedNicknames.size}명`);
   }
 
   function renderCell(key, value) {
@@ -251,6 +249,65 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     return escapeHtml(value);
+  }
+
+  function renderQuoteCell(value) {
+    const quote = String(value || '').trim();
+
+    if (!quote) {
+      return `<span class="quote-empty-box">미등록</span>`;
+    }
+
+    if (!state.quoteUnlocked) {
+      return `<div class="quote-blur-box">결제 후 전체 견적 확인 가능</div>`;
+    }
+
+    return `<div class="quote-real-box">${escapeHtml(quote)}</div>`;
+  }
+
+  function updateQuoteAccessUI() {
+    setText(
+      quoteAccessPill,
+      `견적 상태: ${state.quoteUnlocked ? '열람 가능' : '잠금'}`
+    );
+
+    setText(
+      planPill,
+      `Current View: ${state.quoteUnlocked ? 'Quote Unlocked' : 'Quote Locked'}`
+    );
+
+    if (openQuoteModalBtn) {
+      openQuoteModalBtn.textContent = state.quoteUnlocked ? '견적 다시 보기' : '견적 확인';
+    }
+  }
+
+  function openPaymentModal() {
+    if (!paymentModal) return;
+    paymentModal.classList.add('open');
+    paymentModal.setAttribute('aria-hidden', 'false');
+  }
+
+  function closePaymentModal() {
+    if (!paymentModal) return;
+    paymentModal.classList.remove('open');
+    paymentModal.setAttribute('aria-hidden', 'true');
+  }
+
+  async function handleQuoteUnlock() {
+    const user = await checkUser();
+
+    if (!user) {
+      showLoginModal();
+      return;
+    }
+
+    state.quoteUnlocked = true;
+    localStorage.setItem('quoteUnlocked', 'true');
+
+    updateQuoteAccessUI();
+    renderTable();
+    closePaymentModal();
+    setStatus('결제가 완료된 것으로 처리되어 전체 견적이 공개되었습니다.');
   }
 
   function compareValues(a, b, dir = 'asc') {
@@ -305,41 +362,6 @@ document.addEventListener('DOMContentLoaded', () => {
     return escapeHtml(str);
   }
 
-  function getQuoteFeeByGrade(grade) {
-    const normalized = String(grade || '').trim().toLowerCase();
-
-    if (normalized === 'mega') return 3000;
-    if (normalized === 'macro') return 2000;
-    if (normalized === 'micro') return 1000;
-    return 0;
-  }
-
-  async function goToQuotePage() {
-    const user = await checkUser();
-    if (!user) {
-      showLoginModal();
-      return;
-    }
-
-    const selectedRows = state.rawRows.filter((row) => state.selectedNicknames.has(row.B));
-
-    if (selectedRows.length === 0) {
-      alert('인플루언서를 먼저 선택해주세요.');
-      return;
-    }
-
-    const payload = selectedRows.map((row) => ({
-      nickname: row.B,
-      category: row.C,
-      followers: row.D,
-      grade: row.E,
-      fee: getQuoteFeeByGrade(row.E)
-    }));
-
-    localStorage.setItem('selectedInfluencersForQuote', JSON.stringify(payload));
-    window.location.href = 'quote.html';
-  }
-
   document.querySelectorAll('thead th').forEach((th) => {
     th.addEventListener('click', () => {
       const key = th.dataset.key;
@@ -351,6 +373,7 @@ document.addEventListener('DOMContentLoaded', () => {
         state.sortKey = key;
         state.sortDir = 'asc';
       }
+
       applyFilters();
     });
   });
@@ -396,39 +419,26 @@ document.addEventListener('DOMContentLoaded', () => {
     applyFilters();
   });
 
-  tableBody?.addEventListener('change', (e) => {
-    if (e.target.classList.contains('row-checkbox')) {
-      const nickname = e.target.dataset.nickname;
-      if (!nickname) return;
+  refreshBtn?.addEventListener('click', fetchSheetData);
+  openQuoteModalBtn?.addEventListener('click', openPaymentModal);
+  closeQuoteModalBtn?.addEventListener('click', closePaymentModal);
+  confirmQuotePaymentBtn?.addEventListener('click', handleQuoteUnlock);
 
-      if (e.target.checked) {
-        state.selectedNicknames.add(nickname);
-      } else {
-        state.selectedNicknames.delete(nickname);
-      }
-      updateSelectionCount();
+  paymentModal?.addEventListener('click', (e) => {
+    if (e.target === paymentModal) {
+      closePaymentModal();
     }
   });
-
-  refreshBtn?.addEventListener('click', fetchSheetData);
-
-  resetSelectionBtn?.addEventListener('click', () => {
-    state.selectedNicknames.clear();
-    updateSelectionCount();
-    renderTable();
-  });
-
-  checkQuoteBtn?.addEventListener('click', goToQuotePage);
 
   fetchSheetData();
 
   initAuthUI();
 
   window.loadDisqus = function () {
-  const d = document;
-  const s = d.createElement('script');
-  s.src = 'https://thai-influencer.disqus.com/embed.js';
-  s.setAttribute('data-timestamp', String(+new Date()));
-  (d.head || d.body).appendChild(s);
-};
-  });
+    const d = document;
+    const s = d.createElement('script');
+    s.src = 'https://thai-influencer.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', String(+new Date()));
+    (d.head || d.body).appendChild(s);
+  };
+});
