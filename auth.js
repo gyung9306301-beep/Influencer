@@ -5,9 +5,11 @@ import { supabase } from './supabase.js';
  */
 export async function checkUser() {
   if (!supabase) return null;
+
   const {
     data: { user },
   } = await supabase.auth.getUser();
+
   return user;
 }
 
@@ -23,7 +25,7 @@ export async function login(email, password) {
   });
 
   if (error) throw error;
-  return data;
+  return data.user;
 }
 
 /**
@@ -32,7 +34,6 @@ export async function login(email, password) {
 export async function signUp(email, password, extraData = {}) {
   if (!supabase) throw new Error('Supabase is not initialized.');
 
-  // 1. 회원가입
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
@@ -44,12 +45,10 @@ export async function signUp(email, password, extraData = {}) {
   if (error) throw error;
 
   const user = data.user;
-
   if (!user) {
-    throw new Error('회원가입 실패');
+    throw new Error('회원가입은 성공했지만 사용자 정보를 가져오지 못했습니다.');
   }
 
-  // 2. profiles 테이블 저장
   const { error: profileError } = await supabase.from('profiles').insert([
     {
       id: user.id,
@@ -81,7 +80,7 @@ export async function logout() {
 }
 
 /**
- * Initialize Auth UI (Login/Logout buttons) in the header.
+ * Initialize Auth UI (Login/Logout/Profile buttons) in the header.
  */
 export function initAuthUI() {
   let container = document.getElementById('auth-ui-container');
@@ -97,6 +96,8 @@ export function initAuthUI() {
       display: flex;
       gap: 10px;
       align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
     `;
     document.body.appendChild(container);
   }
@@ -106,6 +107,13 @@ export function initAuthUI() {
     container.innerHTML = '';
 
     if (user) {
+      const profileBtn = document.createElement('a');
+      profileBtn.href = 'profile-settings.html';
+      profileBtn.textContent = '프로필 설정';
+      profileBtn.className = 'btn';
+      profileBtn.style.padding = '5px 12px';
+      profileBtn.style.textDecoration = 'none';
+
       const userEmail = document.createElement('span');
       userEmail.textContent = user.email;
       userEmail.className = 'pill';
@@ -118,6 +126,7 @@ export function initAuthUI() {
       logoutBtn.style.padding = '5px 12px';
       logoutBtn.onclick = logout;
 
+      container.appendChild(profileBtn);
       container.appendChild(userEmail);
       container.appendChild(logoutBtn);
     } else {
