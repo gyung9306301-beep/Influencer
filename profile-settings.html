@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>프로필 설정</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    .profile-wrap {
+      width: min(980px, calc(100% - 32px));
+      margin: 120px auto 60px;
+    }
+
+    .profile-header {
+      margin-bottom: 24px;
+    }
+
+    .profile-header h1 {
+      margin: 0 0 10px;
+      font-size: 34px;
+      color: #f2f7ff;
+    }
+
+    .profile-header p {
+      margin: 0;
+      color: #9fb3d9;
+      line-height: 1.6;
+    }
+
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .profile-card {
+      background: rgba(10, 16, 30, 0.82);
+      border: 1px solid rgba(90,136,255,0.14);
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+    }
+
+    .profile-card h2 {
+      margin: 0 0 14px;
+      font-size: 20px;
+      color: #f2f7ff;
+    }
+
+    .profile-note {
+      color: #8fa3c7;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    .form-group label {
+      font-size: 14px;
+      color: #dfe9ff;
+      font-weight: 600;
+    }
+
+    .form-input,
+    .form-textarea {
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid rgba(90,136,255,0.16);
+      background: rgba(255,255,255,0.04);
+      color: #f2f7ff;
+      padding: 12px 14px;
+      font-size: 14px;
+      outline: none;
+      box-sizing: border-box;
+    }
+
+    .form-textarea {
+      min-height: 140px;
+      resize: vertical;
+      line-height: 1.6;
+    }
+
+    .readonly-box {
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid rgba(90,136,255,0.12);
+      background: rgba(255,255,255,0.03);
+      color: #9fb3d9;
+      padding: 12px 14px;
+      font-size: 14px;
+      box-sizing: border-box;
+      min-height: 46px;
+      display: flex;
+      align-items: center;
+    }
+
+    .save-actions {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .info-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      color: #dbe7ff;
+      font-size: 13px;
+      border: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 14px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 768px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-wrap {
+        margin-top: 100px;
+      }
+
+      .profile-header h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="profile-wrap">
+    <div class="profile-header">
+      <h1>프로필 설정</h1>
+      <p>
+        로그인한 계정의 역할에 따라 프로필 정보를 설정할 수 있습니다.
+        현재는 프로젝트 매니저용 프로필 작성 기능을 먼저 적용합니다.
+      </p>
+    </div>
+
+    <div class="profile-grid">
+      <section class="profile-card">
+        <div class="info-pill" id="roleBadge">역할 확인 중...</div>
+        <div class="profile-note" id="topMessage">
+          프로필 정보를 불러오는 중입니다.
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label>이메일</label>
+            <div id="emailBox" class="readonly-box">-</div>
+          </div>
+
+          <div class="form-group">
+            <label>역할</label>
+            <div id="roleBox" class="readonly-box">-</div>
+          </div>
+
+          <div class="form-group">
+            <label>업종</label>
+            <div id="industryBox" class="readonly-box">-</div>
+          </div>
+
+          <div class="form-group">
+            <label>마케터 유형</label>
+            <div id="marketerTypeBox" class="readonly-box">-</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="pmProfileCard" class="profile-card hidden">
+        <h2>프로젝트 매니저 프로필</h2>
+        <p class="profile-note">
+          아래 내용은 이후 프로젝트 매니저 리스트 페이지에서 마케팅 업체가 확인할 수 있는 정보입니다.
+        </p>
+
+        <form id="pmProfileForm">
+          <div class="form-grid">
+            <div class="form-group full">
+              <label for="profileImageUrl">프로필 사진 URL</label>
+              <input id="profileImageUrl" class="form-input" type="text" placeholder="https://..." />
+            </div>
+
+            <div class="form-group">
+              <label for="displayName">표시 이름</label>
+              <input id="displayName" class="form-input" type="text" placeholder="예: Min Kim" />
+            </div>
+
+            <div class="form-group">
+              <label for="contactMethod">선호 연락 방식</label>
+              <input id="contactMethod" class="form-input" type="text" placeholder="예: Email / KakaoTalk / Line" />
+            </div>
+
+            <div class="form-group">
+              <label for="availableHours">소통 가능 시간</label>
+              <input id="availableHours" class="form-input" type="text" placeholder="예: 평일 10:00~19:00" />
+            </div>
+
+            <div class="form-group">
+              <label for="languages">가능 언어</label>
+              <input id="languages" class="form-input" type="text" placeholder="예: 한국어, 태국어, 영어" />
+            </div>
+
+            <div class="form-group full">
+              <label for="specialties">전문 분야</label>
+              <input id="specialties" class="form-input" type="text" placeholder="예: 뷰티 / F&B / 라이브커머스 / 태국 캠페인 운영" />
+            </div>
+
+            <div class="form-group full">
+              <label for="portfolioUrl">포트폴리오 링크</label>
+              <input id="portfolioUrl" class="form-input" type="text" placeholder="https://..." />
+            </div>
+
+            <div class="form-group full">
+              <label for="introduction">자기소개</label>
+              <textarea id="introduction" class="form-textarea" placeholder="프로젝트 진행 경험, 강점, 소통 방식 등을 작성해주세요."></textarea>
+            </div>
+          </div>
+
+          <div class="save-actions">
+            <button type="submit" class="upgrade-btn">저장하기</button>
+            <a href="ranking.html" class="btn" style="text-decoration:none;">랭킹 페이지로 돌아가기</a>
+          </div>
+        </form>
+      </section>
+
+      <section id="otherRoleCard" class="profile-card hidden">
+        <h2>준비 중</h2>
+        <p class="profile-note">
+          현재는 프로젝트 매니저용 프로필 설정 기능을 먼저 만들고 있습니다.
+          다른 역할의 프로필 입력 화면은 다음 단계에서 추가하면 됩니다.
+        </p>
+      </section>
+    </div>
+  </div>
+
+  <script type="module" src="profile-settings.js"></script>
+</body>
+</html>
