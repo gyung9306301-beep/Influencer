@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const nextBtn = $('nextBtn');
   const resetBtn = $('resetBtn');
   const openQuoteModalBtn = $('openQuoteModalBtn');
+  const goPmListBtn = $('goPmListBtn');
   const paymentModal = $('paymentModal');
   const closeQuoteModalBtn = $('closeQuoteModalBtn');
   const confirmQuotePaymentBtn = $('confirmQuotePaymentBtn');
@@ -279,6 +280,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (openQuoteModalBtn) {
       openQuoteModalBtn.textContent = state.quoteUnlocked ? '견적 다시 보기' : '견적 확인';
     }
+
+    if (goPmListBtn) {
+      if (state.quoteUnlocked) {
+        goPmListBtn.setAttribute('aria-disabled', 'false');
+        goPmListBtn.removeAttribute('tabindex');
+      } else {
+        goPmListBtn.setAttribute('aria-disabled', 'true');
+        goPmListBtn.setAttribute('tabindex', '-1');
+      }
+    }
   }
 
   function openPaymentModal() {
@@ -308,6 +319,20 @@ document.addEventListener('DOMContentLoaded', () => {
     renderTable();
     closePaymentModal();
     setStatus('결제가 완료된 것으로 처리되어 전체 견적이 공개되었습니다.');
+  }
+
+  async function handlePmListMove(e) {
+    if (state.quoteUnlocked) return;
+
+    e.preventDefault();
+
+    const user = await checkUser();
+    if (!user) {
+      showLoginModal();
+      return;
+    }
+
+    alert('먼저 견적 확인을 완료한 뒤 프로젝트 매니저를 선택할 수 있습니다.');
   }
 
   function compareValues(a, b, dir = 'asc') {
@@ -423,6 +448,7 @@ document.addEventListener('DOMContentLoaded', () => {
   openQuoteModalBtn?.addEventListener('click', openPaymentModal);
   closeQuoteModalBtn?.addEventListener('click', closePaymentModal);
   confirmQuotePaymentBtn?.addEventListener('click', handleQuoteUnlock);
+  goPmListBtn?.addEventListener('click', handlePmListMove);
 
   paymentModal?.addEventListener('click', (e) => {
     if (e.target === paymentModal) {
@@ -431,7 +457,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   fetchSheetData();
-
+  updateQuoteAccessUI();
   initAuthUI();
 
   window.loadDisqus = function () {
