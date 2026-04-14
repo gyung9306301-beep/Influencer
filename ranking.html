@@ -15,6 +15,98 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TikTok Influencer Rankings</title>
   <link rel="stylesheet" href="style.css">
+
+  <style>
+    .quote-blur-box {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 180px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.06);
+      color: rgba(234,242,255,0.72);
+      border: 1px solid rgba(90,136,255,0.14);
+      letter-spacing: 0.02em;
+      font-size: 13px;
+    }
+
+    .quote-real-box {
+      display: inline-block;
+      min-width: 180px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: rgba(55, 217, 255, 0.08);
+      color: #eaf2ff;
+      border: 1px solid rgba(55, 217, 255, 0.18);
+      font-size: 13px;
+      line-height: 1.45;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .quote-empty-box {
+      color: #8fa3c7;
+      font-size: 13px;
+    }
+
+    .quote-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(3, 7, 18, 0.74);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 99999;
+    }
+
+    .quote-modal-overlay.open {
+      display: flex;
+    }
+
+    .quote-modal {
+      width: min(100%, 520px);
+      background: linear-gradient(180deg, rgba(13,23,45,0.98), rgba(8,15,28,0.98));
+      border: 1px solid rgba(90,136,255,0.2);
+      border-radius: 22px;
+      padding: 24px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.35);
+    }
+
+    .quote-modal h3 {
+      margin: 0 0 10px;
+      color: #f2f7ff;
+      font-size: 22px;
+    }
+
+    .quote-modal p {
+      margin: 0 0 12px;
+      color: #9fb3d9;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .quote-modal-note {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #d7e3ff;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .quote-modal-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+  </style>
+
   <script type="module" src="main.js"></script>
 </head>
 <body>
@@ -58,11 +150,9 @@
       <div class="premium-left">
         <div class="premium-badge">Quote Check Service</div>
         <div class="premium-text">
-          각 인플루언서의 조건과 가격을 확인할 수 있으며, 선택한 인플루언서의 견적 확인 비용은 다음 단계에서 안내됩니다.
+          인플루언서 견적은 기본적으로 비공개 상태이며, 견적 확인 버튼을 누르면 결제창이 열립니다.
+          결제 완료 후 전체 인플루언서의 견적을 한 번에 확인할 수 있습니다.
         </div>
-      </div>
-      <div style="display:flex; gap:10px; flex-wrap:wrap;">
-        <a href="#" class="ghost-btn" onclick="return false;">Open Data View</a>
       </div>
     </section>
 
@@ -70,7 +160,7 @@
       <div class="meta">
         <div class="meta-left">
           <div class="pill" id="countPill">0 rows</div>
-          <div class="pill" id="planPill">Current View: Open</div>
+          <div class="pill" id="planPill">Current View: Quote Locked</div>
         </div>
         <div class="pill" id="updatedPill">Updated: -</div>
       </div>
@@ -85,10 +175,10 @@
               <th data-key="D" class="text-right">팔로워수</th>
               <th data-key="E">등급</th>
               <th data-key="F">링크</th>
-              <th class="text-center">선택</th>
               <th data-key="G" class="text-right">영상 평균 조회수</th>
               <th data-key="H" class="text-right">최고 영상 조회수</th>
               <th data-key="I" class="text-right">최소 영상 조회수</th>
+              <th>견적</th>
             </tr>
           </thead>
           <tbody id="tableBody">
@@ -102,9 +192,8 @@
           <button id="prevBtn" class="btn">이전</button>
           <button id="nextBtn" class="btn">다음</button>
           <div class="pill" id="pagePill">Page 1 / 1</div>
-          <div class="pill" id="selectionPill">선택 된 인플루언서 총 0명</div>
-          <button id="resetSelectionBtn" class="btn">선택 초기화</button>
-          <a href="quote.html" id="checkQuoteBtn" class="upgrade-btn">선택 된 인플루언서 견적 확인</a>
+          <div class="pill" id="quoteAccessPill">견적 상태: 잠금</div>
+          <button id="openQuoteModalBtn" class="upgrade-btn" type="button">견적 확인</button>
         </div>
         <div class="status" id="statusText">준비 중...</div>
       </div>
@@ -114,43 +203,66 @@
       <div id="disqus_thread"></div>
       <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     </section>
+
+    <div id="paymentModal" class="quote-modal-overlay" aria-hidden="true">
+      <div class="quote-modal">
+        <h3>견적 확인 결제</h3>
+        <p>
+          이 단계에서는 선택 인원 수와 관계없이 전체 인플루언서의 견적을 한 번에 확인할 수 있습니다.
+        </p>
+        <p>
+          실제 결제 연동은 마지막 단계에서 진행하고, 현재는 결제창 UI와 잠금 해제 흐름만 먼저 구현합니다.
+        </p>
+
+        <div class="quote-modal-note">
+          현재는 테스트용 결제창입니다.<br>
+          아래 버튼을 누르면 결제가 완료된 것으로 처리되고, 모든 견적이 즉시 공개됩니다.
+        </div>
+
+        <div class="quote-modal-actions">
+          <button id="closeQuoteModalBtn" class="btn" type="button">닫기</button>
+          <button id="confirmQuotePaymentBtn" class="upgrade-btn" type="button">결제 진행</button>
+        </div>
+      </div>
+    </div>
+
     <footer class="footer">
-  <div class="footer-links">
-    <a href="index.html">Home</a>
-    <a href="ranking.html">Ranking</a>
-    <a href="blog.html">Blog</a>
-    <a href="about.html">About</a>
-    <a href="privacy-policy.html#privacy">Privacy Policy</a>
-    <a href="privacy-policy.html#terms">Terms of Service</a>
-    <a href="privacy-policy.html#contact">Contact</a>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="ranking.html">Ranking</a>
+        <a href="blog.html">Blog</a>
+        <a href="about.html">About</a>
+        <a href="privacy-policy.html#privacy">Privacy Policy</a>
+        <a href="privacy-policy.html#terms">Terms of Service</a>
+        <a href="privacy-policy.html#contact">Contact</a>
+      </div>
+
+      <p class="footer-description">
+        Tesari is an influencer marketing platform that helps brands explore Thai influencers with data-driven insights.
+      </p>
+
+      <p class="footer-contact">
+        Contact: gyung9306301@gmail.com
+      </p>
+
+      <p class="footer-copy">
+        © 2026 Tesari. All rights reserved.
+      </p>
+    </footer>
   </div>
 
-  <p class="footer-description">
-    Tesari is an influencer marketing platform that helps brands explore Thai influencers with data-driven insights.
-  </p>
-
-  <p class="footer-contact">
-    Contact: gyung9306301@gmail.com
-  </p>
-
-  <p class="footer-copy">
-    © 2026 Tesari. All rights reserved.
-  </p>
-</footer>
-   </div>
   <script type="module">
-  import { initAuthUI, checkUser } from './auth.js';
+    import { initAuthUI } from './auth.js';
 
-  initAuthUI();
+    initAuthUI();
 
-// 댓글을 눌렀을 때만 Disqus 로드
-window.loadDisqus = function () {
-  const d = document;
-  const s = d.createElement('script');
-  s.src = 'https://thai-influencer.disqus.com/embed.js';
-  s.setAttribute('data-timestamp', String(+new Date()));
-  (d.head || d.body).appendChild(s);
-};
-</script>
+    window.loadDisqus = function () {
+      const d = document;
+      const s = d.createElement('script');
+      s.src = 'https://thai-influencer.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', String(+new Date()));
+      (d.head || d.body).appendChild(s);
+    };
+  </script>
 </body>
 </html>
