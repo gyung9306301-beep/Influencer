@@ -49,20 +49,41 @@ export async function signUp(email, password, extraData = {}) {
     throw new Error('회원가입은 성공했지만 사용자 정보를 가져오지 못했습니다.');
   }
 
-  const { error: profileError } = await supabase.from('profiles').insert([
-    {
-      id: user.id,
-      email: email,
-      role: extraData.role || null,
-      marketer_type: extraData.marketerType || null,
-      industry: extraData.industry || null,
-    },
-  ]);
+ export async function signUp(email, password, extraData = {}) {
+  if (!supabase) throw new Error('Supabase is not initialized.');
 
-  if (profileError) {
-    console.error('profiles 저장 실패:', profileError);
-    throw profileError;
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      emailRedirectTo: `${window.location.origin}/ranking.html`,
+      data: {
+        role: extraData.role || null,
+        marketer_type: extraData.marketerType || null,
+        industry: extraData.industry || null,
+        full_name: extraData.fullName || null,
+        english_name: extraData.englishName || null,
+        nationality: extraData.nationality || null,
+        languages: extraData.languages || null,
+        phone: extraData.phone || null,
+        contact_method: extraData.contactMethod || null,
+        line_id: extraData.lineId || null,
+        kakao_id: extraData.kakaoId || null,
+        whatsapp: extraData.whatsapp || null,
+        experience: extraData.experience || null
+      }
+    },
+  });
+
+  if (error) throw error;
+
+  const user = data.user;
+  if (!user) {
+    throw new Error('회원가입은 성공했지만 사용자 정보를 가져오지 못했습니다.');
   }
+
+  return user;
+}
 
   return user;
 }
