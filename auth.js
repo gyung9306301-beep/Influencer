@@ -29,27 +29,10 @@ export async function login(email, password) {
 }
 
 /**
- * Sign up with email and password and save profile data.
+ * Sign up with email and password only.
+ * Profile data will be saved later in profile-settings.
  */
 export async function signUp(email, password, extraData = {}) {
-  if (!supabase) throw new Error('Supabase is not initialized.');
-
-  const { data, error } = await supabase.auth.signUp({
-    email,
-    password,
-    options: {
-      emailRedirectTo: `${window.location.origin}/ranking.html`,
-    },
-  });
-
-  if (error) throw error;
-
-  const user = data.user;
-  if (!user) {
-    throw new Error('회원가입은 성공했지만 사용자 정보를 가져오지 못했습니다.');
-  }
-
- export async function signUp(email, password, extraData = {}) {
   if (!supabase) throw new Error('Supabase is not initialized.');
 
   const { data, error } = await supabase.auth.signUp({
@@ -81,9 +64,6 @@ export async function signUp(email, password, extraData = {}) {
   if (!user) {
     throw new Error('회원가입은 성공했지만 사용자 정보를 가져오지 못했습니다.');
   }
-
-  return user;
-}
 
   return user;
 }
