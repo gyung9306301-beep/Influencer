@@ -1,4 +1,7 @@
-import { checkUser, showLoginModal, initAuthUI } from './auth.js';
+<script type="module">
+  import { initAuthUI } from './auth.js';
+  initAuthUI();
+</script>
 
 const CONFIG = {
   SHEET_ID: '1WULcOtmX-UoH5huTAr6umW0rs27QeIYrEs8eDszT-JA',
