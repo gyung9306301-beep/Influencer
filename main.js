@@ -7,13 +7,6 @@ const CONFIG = {
   REFRESH_CACHE_BUSTER: false
 };
 
-const CONFIG = {
-  SHEET_ID: '1WULcOtmX-UoH5huTAr6umW0rs27QeIYrEs8eDszT-JA',
-  SHEET_NAME: 'Influencer list',
-  HEADER_ROW: 3,
-  REFRESH_CACHE_BUSTER: false
-};
-
 const columnMap = {
   A: 0,
   B: 1,
